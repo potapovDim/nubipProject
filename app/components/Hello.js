@@ -3,15 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router'
 
 class Hello extends React.Component {
-  state = {
-    userName: ''
-  }
 
-  addUser(e) {
-    this.setState({
-      userName: e.target.value
-    })
-  }
 
   go() {
     console.log(this.refs.userName.value)
@@ -20,13 +12,15 @@ class Hello extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>Hello its HELLO ELEMENT</div>
-        <input type="tex" ref="userName"/>
+      <form >
+        <div className="form-group">
+        <label htmlFor="exampleInputEmail1">Enter your name</label>
+        <input className="form-control" id="exampleInputEmail1"type="tex" ref="userName"/>
         <Link to="app">
-          <button onClick={this.go.bind(this)}>Enter</button>
+          <button className="btn btn-default" onClick={this.go.bind(this)}>Enter</button>
         </Link>
-      </div>
+          </div>
+      </form>
     )
   }
 }
