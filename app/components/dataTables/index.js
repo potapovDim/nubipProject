@@ -20,9 +20,11 @@ class FullTable extends React.Component {
     this.setState(_state)
   }
   showFullTable = ()=> {
-    this.setState({
-      showFullTable: !this.state.showFullTable
-    })
+    let _state={...this.state}
+    _state.showFullTable=!this.state.showFullTable
+    this.setState(
+      _state
+    )
   }
 
   componentWillMount() {
