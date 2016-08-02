@@ -36,8 +36,7 @@ export default(state = initialState, action)=> {
       let addTabl = {[action.key]: update(state[action.key], {$push: [action.data]})}
       return {...state, ...addTabl}
     case REMOVE_FROM_TABLE:
-      let _state={...state}
-      let remTable = {[action.key]:_state[action.key].slice(0,_state[action.key].length-1)}
+      let remTable = {[action.key]:state[action.key].slice(0,state[action.key].length-1)}
       return {...state,...remTable}
     default :
       return state
