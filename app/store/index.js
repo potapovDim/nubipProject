@@ -1,5 +1,7 @@
 import {createStore} from 'redux';
-import {reducer} from '../reducer/';
+import reducer from '../modules/rootReducer'
 
 
-export default createStore(reducer, window.devToolsExtension && window.devToolsExtension())
+const store=createStore(reducer)
+
+export default store;

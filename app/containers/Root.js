@@ -1,17 +1,18 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react'
 import {Provider} from 'react-redux'
+
 import store from '../store/'
 
-import Header from './Header'
-
-
-const Root = (props) =>(
-  <Provider store={store}>
-    <div>
-      <Header {...props}/>
-      <div>{props.children}</div>
-      <footer>FOOTER</footer>
-    </div>
-  </Provider>)
+class Root extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <div>
+          {this.props.children}
+        </div>
+      </Provider>
+    )
+  }
+}
 
 export default Root
