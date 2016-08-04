@@ -10,13 +10,14 @@ class Trigger extends Component{
     let close = () => this.setState({ show: false});
 
     return (
-      <a  style={{height: 200}}>
+      <a >
         <Button
           bsStyle="primary"
           bsSize="large"
           onClick={() => this.setState({ show: true})}
+          style={{color:'#00fd'}}
         >
-          Launch contained modal
+         Show tutorial for page
         </Button>
 
         <Modal
@@ -29,7 +30,14 @@ class Trigger extends Component{
             <Modal.Title id="contained-modal-title">Contained Modal</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-
+            This page is for add your equipment to tables and after from this equipment
+            will choosing optimized equipment for your enterprise
+            <br></br>
+            You have a buttons for management all  tables
+            <br></br>
+            <a style={{color:'blue'}}>Show</a> green button for show all tables
+            <br></br>
+            <a style={{color:'blue'}}>Show>ddl>Hide all tables</a> drop down list button for hide all tables
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={close}>Close</Button>

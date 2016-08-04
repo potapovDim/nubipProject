@@ -12,11 +12,11 @@ class DrinkingbowTable extends React.Component {
         water: water,
         price: price,
       }
-      this.props.addToPumpTable(newPump,'pumptable')
+      this.props.addToPumpTable(newPump,'drinking_bowl')
     }
   }
   handleRemoveData = ()=> {
-    this.props.removeFromPumpTable('pumptable')
+    this.props.removeFromPumpTable('drinking_bowl')
   }
 
   render() {

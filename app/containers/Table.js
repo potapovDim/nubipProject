@@ -6,6 +6,7 @@ import PumpTable from '../components/tables/pumpsTable'
 import TractorTable from '../components/tables/tractorsTable'
 import SternTable from '../components/tables/sternTable'
 import MachineTable from '../components/tables/machineTable'
+import DrinkingbowTable from '../components/tables/drinkingbowTable'
 import Trigger from '../components/tutorialTrigger'
 
 import {addToPumpTable, removeFromPumpTable} from '../modules/tables/actions'
@@ -15,7 +16,8 @@ class Table extends React.Component {
     pump: false,
     tractor: false,
     stern: false,
-    machine: false
+    machine: false,
+    drinking_bowl:false
   }
 
   openClose(key) {
@@ -29,6 +31,8 @@ class Table extends React.Component {
       pump: true,
       tractor: true,
       stern: true,
+      machine:true,
+      drinking_bowl:true
     })
   }
   hideAllTables = ()=> {
@@ -36,6 +40,8 @@ class Table extends React.Component {
       pump: false,
       tractor: false,
       stern: false,
+      machine:false,
+      drinking_bowl:false
     })
   }
 
@@ -50,16 +56,13 @@ class Table extends React.Component {
         <MenuItem onClick={this.openClose.bind(this,'tractor')} eventKey="2">Show/Hide tractors table</MenuItem>
         <MenuItem onClick={this.openClose.bind(this,'stern')} eventKey="3">Show/Hide stern table</MenuItem>
         <MenuItem onClick={this.openClose.bind(this,'machine')} eventKey="3">Show/Hide stern table</MenuItem>
+        <MenuItem onClick={this.openClose.bind(this,'drinking_bowl')} eventKey="3">Show/Hide drinking bowl table</MenuItem>
         <MenuItem divider/>
         <MenuItem onClick={this.hideAllTables} eventKey="1">Hide all tables</MenuItem>
       </Dropdown.Menu>
     </Dropdown>
+    
   )
-
-  componentWillMount() {
-
-  }
-
   render() {
     return (
       <div>
@@ -69,6 +72,7 @@ class Table extends React.Component {
         {this.state.tractor ? <TractorTable {...this.props} /> : <div>Hidden tractors table</div>}
         {this.state.stern ? <SternTable {...this.props} /> : <div>Hidden stern norms of animals table</div>}
         {this.state.machine ? <MachineTable {...this.props} /> : <div>Hidden machines table</div>}
+        {this.state.drinking_bowl?<DrinkingbowTable {...this.props}/>:<div>Hidden drinking bowl table</div>}
       </div>
     )
   }
