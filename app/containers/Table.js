@@ -48,7 +48,7 @@ class Table extends React.Component {
   ddl = (
     <Dropdown id="dropdown-custom-2">
       <Button onClick={this.showAllTables} bsStyle="info">
-        Show
+        Show all tables ...
       </Button>
       <Dropdown.Toggle bsStyle="success"/>
       <Dropdown.Menu className="">
@@ -61,18 +61,20 @@ class Table extends React.Component {
         <MenuItem onClick={this.hideAllTables} eventKey="1">Hide all tables</MenuItem>
       </Dropdown.Menu>
     </Dropdown>
-    
+
   )
   render() {
     return (
       <div>
-        <a><Trigger /></a><a>{this.ddl}</a>
-        <h1>On this page u add your information about your resources,machines</h1>
+        <p className="text-center">On this page u add your information about your resources,machines</p>
+        <Trigger />
+        <div>{this.ddl}</div>
         {this.state.pump ? <PumpTable {...this.props} /> : <div>Hidden pump table</div>}
         {this.state.tractor ? <TractorTable {...this.props} /> : <div>Hidden tractors table</div>}
         {this.state.stern ? <SternTable {...this.props} /> : <div>Hidden stern norms of animals table</div>}
         {this.state.machine ? <MachineTable {...this.props} /> : <div>Hidden machines table</div>}
         {this.state.drinking_bowl?<DrinkingbowTable {...this.props}/>:<div>Hidden drinking bowl table</div>}
+        <footer className="text-center">sdaklal;dk;alskldkaks;kd;kaskdlkas;kd;lasl;kd;las;lkdl;as;ldk;as;lkdl;askld;a;skdl;as</footer>
       </div>
     )
   }

@@ -13,7 +13,6 @@ class Trigger extends Component{
       <a >
         <Button
           bsStyle="primary"
-          bsSize="large"
           onClick={() => this.setState({ show: true})}
           style={{color:'#00fd'}}
         >
