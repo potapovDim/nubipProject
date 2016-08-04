@@ -15,21 +15,22 @@ class TractorTable extends React.Component {
         rotate: rotate,
         pov: pov,
       }
-      this.props.addToPumpTable(newTrac,'machinetable')
+      this.props.addToPumpTable(newTrac,'tractors')
     }
   }
   handleRemoveData=()=>{
-    this.props.removeFromPumpTable('machinetable')
+    this.props.removeFromPumpTable('tractors')
   }
   render() {
-    let {machinetable}=this.props.tables;
-    let table = machinetable.map(function (item, index) {
+    let {tractors}=this.props.tables;
+    let table = tractors.map(function (item, index) {
       return (
         <tr key={index}>
           <td className="active">Field {item.name}</td>
           <td className="active">Field {item.power}</td>
           <td className="active">Field {item.rotate}</td>
           <td className="active">Field {item.pov}</td>
+          <td className="active">Field {item.price}</td>
         </tr>
       )
     })
@@ -38,6 +39,7 @@ class TractorTable extends React.Component {
         <table className="table">
           <thead>
           <tr>
+            <td>header 1</td>
             <td>header 1</td>
             <td>header 1</td>
             <td>header 1</td>
@@ -51,6 +53,7 @@ class TractorTable extends React.Component {
             <td><input ref="power" placeholder="power"></input></td>
             <td><input ref="rotate" placeholder="volume"></input></td>
             <td><input ref="pov" placeholder="hight"></input></td>
+            <td><input ref="price" placeholder="price"></input></td>
           </tr>
           </tbody>
         </table>

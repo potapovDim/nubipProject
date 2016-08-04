@@ -9,13 +9,15 @@ class PumpTable extends React.Component {
     let volume = this.refs.volume.value
     let hight = this.refs.hight.value
     let dop = this.refs.dop.value
-    if (name != '' && power != '' && volume != '' && hight != '' && dop) {
+    let price=this.refs.price.value
+    if (name != '' && power != '' && volume != '' && hight != '' && dop && price!='') {
       let newPump = {
         name: name,
         power: power,
         volume: volume,
         hight: hight,
-        dop: dop
+        dop: dop,
+        price:price
       }
       this.props.addToPumpTable(newPump,'pumptable')
     }
@@ -35,6 +37,7 @@ class PumpTable extends React.Component {
           <td className="active">Field {item.volume}</td>
           <td className="active">Field {item.hight}</td>
           <td className="active">Field {item.dop}</td>
+          <td className="active">Field {item.price}</td>
         </tr>
       )
     })
@@ -43,6 +46,7 @@ class PumpTable extends React.Component {
         <table className="table">
           <thead>
           <tr>
+            <td>header 1</td>
             <td>header 1</td>
             <td>header 1</td>
             <td>header 1</td>
@@ -58,6 +62,7 @@ class PumpTable extends React.Component {
             <td><input ref="volume" placeholder="volume"></input></td>
             <td><input ref="hight" placeholder="hight"></input></td>
             <td><input ref="dop" placeholder="dop"></input></td>
+            <td><input ref="price" placeholder="price"></input></td>
           </tr>
           </tbody>
         </table>
