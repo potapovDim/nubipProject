@@ -1,24 +1,21 @@
-import React,{Component} from 'react'
-import {Button,Modal,} from 'react-bootstrap'
+import React, {Component} from 'react'
+import {Button, Modal,} from 'react-bootstrap'
 
-class Trigger extends Component{
-  state ={
-     show: false 
+class Trigger extends Component {
+  state = {
+    show: false
   }
 
   render() {
-    let close = () => this.setState({ show: false});
-
     return (
-      <a >
+      <a>
         <Button
-          bsStyle="primary"
+          bsStyle="info"
           onClick={() => this.setState({ show: true})}
-          style={{color:'#00fd'}}
+          style={{color:"white"}}
         >
-         Show tutorial for page
+          Show tutorial for page
         </Button>
-
         <Modal
           show={this.state.show}
           onHide={close}
@@ -32,14 +29,14 @@ class Trigger extends Component{
             This page is for add your equipment to tables and after from this equipment
             will choosing optimized equipment for your enterprise
             <br></br>
-            You have a buttons for management all  tables
+            You have a buttons for management all tables
             <br></br>
             <a style={{color:'blue'}}>Show</a> green button for show all tables
             <br></br>
             <a style={{color:'blue'}}>Show>ddl>Hide all tables</a> drop down list button for hide all tables
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={close}>Close</Button>
+            <Button onClick={() => this.setState({show: false})}>Close</Button>
           </Modal.Footer>
         </Modal>
       </a>

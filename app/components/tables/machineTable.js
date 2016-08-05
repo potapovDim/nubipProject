@@ -6,17 +6,15 @@ class MachineTable extends React.Component {
   handleCollectData = ()=> {
     let name = this.refs.name.value
     let power = this.refs.power.value
-    let volume = this.refs.volume.value
-    let hight = this.refs.hight.value
-    let dop = this.refs.dop.value
+    let rotate = this.refs.rotate.value
+    let pov = this.refs.pov.value
     let price=this.refs.price.value
-    if (name != '' && power != '' && volume != '' && hight != '' && dop && price!='') {
+    if (name != '' && power != '' && rotate != '' && pov != ''  && price!='') {
       let newPump = {
         name: name,
         power: power,
-        volume: volume,
-        hight: hight,
-        dop: dop,
+        rotate:rotate,
+        pov:pov,
         price:price
       }
       this.props.addToPumpTable(newPump,'machines')
@@ -32,9 +30,8 @@ class MachineTable extends React.Component {
         <tr key={index}>
           <td className="active">Field {item.name}</td>
           <td className="active">Field {item.power}</td>
-          <td className="active">Field {item.volume}</td>
-          <td className="active">Field {item.hight}</td>
-          <td className="active">Field {item.dop}</td>
+          <td className="active">Field {item.rotate}</td>
+          <td className="active">Field {item.pov}</td>
           <td className="active">Field {item.price}</td>
         </tr>
       )
@@ -49,7 +46,6 @@ class MachineTable extends React.Component {
             <td>header 1</td>
             <td>header 1</td>
             <td>header 1</td>
-            <td>header 1</td>
           </tr>
           </thead>
           <tbody>
@@ -57,10 +53,9 @@ class MachineTable extends React.Component {
           <tr>
             <td><input ref="name" placeholder="name"></input></td>
             <td><input ref="power" placeholder="power"></input></td>
-            <td><input ref="volume" placeholder="volume"></input></td>
-            <td><input ref="hight" placeholder="hight"></input></td>
-            <td><input ref="dop" placeholder="dop"></input></td>
-            <td><input ref="price" placeholder="dop"></input></td>
+            <td><input ref="rotate" placeholder="rotate"></input></td>
+            <td><input ref="pov" placeholder="pov"></input></td>
+            <td><input ref="price" placeholder="price"></input></td>
           </tr>
           </tbody>
         </table>

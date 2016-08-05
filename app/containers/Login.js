@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import Login from '../components/login/login'
 
-import {login} from '../modules/login/actions'
+import {login} from '../reducers/login/actions'
 
 class Log extends Component{
 
