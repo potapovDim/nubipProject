@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Infinity from 'react-infinite'
 
 class DrinkingbowTable extends React.Component {
   handleCollectData = ()=> {
@@ -12,11 +12,11 @@ class DrinkingbowTable extends React.Component {
         water: water,
         price: price,
       }
-      this.props.addToPumpTable(newPump,'drinking_bowl')
+      this.props.addToTable(newPump, 'drinking_bowl')
     }
   }
   handleRemoveData = ()=> {
-    this.props.removeFromPumpTable('drinking_bowl')
+    this.props.removePumpTable('drinking_bowl')
   }
 
   render() {
@@ -25,9 +25,9 @@ class DrinkingbowTable extends React.Component {
       return (
 
         <tr key={index}>
-          <td className="active">Field {item.name}</td>
-          <td className="active">Field {item.water}</td>
-          <td className="active">Field {item.price}</td>
+          <td style={{width:'33%'}} className="active">Field {item.name}</td>
+          <td style={{width:'33%'}} className="active">Field {item.water}</td>
+          <td style={{width:'33%'}} className="active">Field {item.price}</td>
         </tr>
       )
     })
@@ -42,18 +42,26 @@ class DrinkingbowTable extends React.Component {
             <td>header 1</td>
           </tr>
           </thead>
+        </table>
+        <Infinity containerHeight={300} elementHeight={20}>
+          <table className="table">
+            <tbody>
+            {table}
+            </tbody>
+          </table>
+        </Infinity>
+        <table className="table">
           <tbody>
-          {table}
           <tr>
             <td><input ref="name" placeholder="name"></input></td>
             <td><input ref="water" placeholder="water"></input></td>
             <td><input ref="price" placeholder="price"></input></td>
           </tr>
           </tbody>
-        </table>
-        <button onClick={this.handleCollectData}>ADD</button>
-        <button onClick={this.handleRemoveData}>REMOVE</button>
-      </div>
+        </table >
+        <button onClick={this.handleCollectData}>ADD</button >
+        <button onClick={this.handleRemoveData}>REMOVE</button >
+      </div >
     )
   }
 }

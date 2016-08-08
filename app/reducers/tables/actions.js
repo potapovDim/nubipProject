@@ -3,7 +3,7 @@ import {
 } from './action_types';
 
 
-export const addToPumpTable = (data,key)=> {
+export const addToTable = (data,key)=> {
   return {
     type: ADD_TO_TABLE,
     data,
@@ -11,7 +11,7 @@ export const addToPumpTable = (data,key)=> {
   }
 }
 
-export const removeFromPumpTable=(key)=>{
+export const removeFromTable=(key)=>{
   return{
     type:REMOVE_FROM_TABLE,
     key

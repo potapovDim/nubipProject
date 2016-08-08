@@ -1,32 +1,32 @@
 import React from 'react'
-import connect from 'redux'
-
+import Infinity from 'react-infinite'
 
 class SternTable extends React.Component {
   handleCollectData = ()=> {
     let name = this.refs.name.value
     let old = this.refs.old.value
     let young = this.refs.young.value
-    if (name != '' && young != '' && old != '' ) {
+    if (name != '' && young != '' && old != '') {
       let sternNew = {
         name: name,
         old: old,
         young: young,
       }
-      this.props.addToPumpTable(sternNew,'sternnorms')
+      this.props.addToTable(sternNew, 'sternnorms')
     }
   }
-  handleRemoveData=()=>{
-    this.props.removeFromPumpTable('sternnorms')
+  handleRemoveData = ()=> {
+    this.props.removeFromTable('sternnorms')
   }
+
   render() {
     let {sternnorms}=this.props.tables;
     let table = sternnorms.map(function (item, index) {
       return (
         <tr key={index}>
-          <td className="active">Field {item.name}</td>
-          <td className="active">Field {item.old}</td>
-          <td className="active">Field {item.young}</td>
+          <td style={{width:'33%'}} className="active">Field {item.name}</td>
+          <td style={{width:'33%'}} className="active">Field {item.old}</td>
+          <td style={{width:'33%'}} className="active">Field {item.young}</td>
         </tr>
       )
     })
@@ -41,15 +41,23 @@ class SternTable extends React.Component {
             <td>header 1</td>
           </tr>
           </thead>
+        </table>
+        <Infinity containerHeight={300} elementHeight={20}>
+          <table className="table">
+            <tbody>
+            {table}
+            </tbody>
+          </table>
+        </Infinity>
+        <table className="table">
           <tbody>
-          {table}
           <tr>
             <td><input ref="name" placeholder="name"></input></td>
             <td><input ref="old" placeholder="power"></input></td>
             <td><input ref="young" placeholder="volume"></input></td>
           </tr>
           </tbody>
-        </table>
+        </table >
         <button onClick={this.handleCollectData}>ADD</button>
         <button onClick={this.handleRemoveData}>REMOVE</button>
       </div>

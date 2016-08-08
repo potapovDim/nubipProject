@@ -1,5 +1,5 @@
 import React from 'react'
-import connect from 'redux'
+import Infinity from 'react-infinite'
 
 
 class PumpTable extends React.Component {
@@ -9,35 +9,34 @@ class PumpTable extends React.Component {
     let volume = this.refs.volume.value
     let hight = this.refs.hight.value
     let dop = this.refs.dop.value
-    let price=this.refs.price.value
-    if (name != '' && power != '' && volume != '' && hight != '' && dop && price!='') {
+    let price = this.refs.price.value
+    if (name != '' && power != '' && volume != '' && hight != '' && dop && price != '') {
       let newPump = {
         name: name,
         power: power,
         volume: volume,
         hight: hight,
         dop: dop,
-        price:price
+        price: price
       }
-      this.props.addToPumpTable(newPump,'pumptable')
+      this.props.addToTable(newPump, 'pumptable')
     }
   }
   handleRemoveData = ()=> {
-    this.props.removeFromPumpTable('pumptable')
+    this.props.removeFromTable('pumptable')
   }
 
   render() {
     let {pumptable}=this.props.tables;
     let table = pumptable.map(function (item, index) {
       return (
-
         <tr key={index}>
-          <td className="active">Field {item.name}</td>
-          <td className="active">Field {item.power}</td>
-          <td className="active">Field {item.volume}</td>
-          <td className="active">Field {item.hight}</td>
-          <td className="active">Field {item.dop}</td>
-          <td className="active">Field {item.price}</td>
+          <td style={{width:'16%'}} className="active">Field {item.name}</td>
+          <td style={{width:'16%'}} className="active">Field {item.power}</td>
+          <td style={{width:'16%'}} className="active">Field {item.volume}</td>
+          <td style={{width:'16%'}} className="active">Field {item.hight}</td>
+          <td style={{width:'16%'}} className="active">Field {item.dop}</td>
+          <td style={{width:'16%'}} className="active">Field {item.price}</td>
         </tr>
       )
     })
@@ -55,8 +54,16 @@ class PumpTable extends React.Component {
             <td>header 1</td>
           </tr>
           </thead>
+        </table>
+        <Infinity containerHeight={300} elementHeight={20}>
+          <table className="table">
+            <tbody>
+            {table}
+            </tbody>
+          </table>
+        </Infinity>
+        <table className="table">
           <tbody>
-          {table}
           <tr>
             <td><input ref="name" placeholder="name"></input></td>
             <td><input ref="power" placeholder="power"></input></td>

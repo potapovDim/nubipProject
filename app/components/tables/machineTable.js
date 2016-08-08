@@ -1,5 +1,5 @@
 import React from 'react'
-import connect from 'redux'
+import Infinity from 'react-infinite'
 
 
 class MachineTable extends React.Component {
@@ -8,31 +8,32 @@ class MachineTable extends React.Component {
     let power = this.refs.power.value
     let rotate = this.refs.rotate.value
     let pov = this.refs.pov.value
-    let price=this.refs.price.value
-    if (name != '' && power != '' && rotate != '' && pov != ''  && price!='') {
+    let price = this.refs.price.value
+    if (name != '' && power != '' && rotate != '' && pov != '' && price != '') {
       let newPump = {
         name: name,
         power: power,
-        rotate:rotate,
-        pov:pov,
-        price:price
+        rotate: rotate,
+        pov: pov,
+        price: price
       }
-      this.props.addToPumpTable(newPump,'machines')
+      this.props.addToTable(newPump, 'machines')
     }
   }
-  handleRemoveData=()=>{
-    this.props.removeFromPumpTable('machines')
+  handleRemoveData = ()=> {
+    this.props.removeFromTable('machines')
   }
+
   render() {
     let {machines}=this.props.tables;
     let table = machines.map(function (item, index) {
       return (
         <tr key={index}>
-          <td className="active">Field {item.name}</td>
-          <td className="active">Field {item.power}</td>
-          <td className="active">Field {item.rotate}</td>
-          <td className="active">Field {item.pov}</td>
-          <td className="active">Field {item.price}</td>
+          <td style={{width:'20%'}} className="active">Field {item.name}</td>
+          <td style={{width:'20%'}} className="active">Field {item.power}</td>
+          <td style={{width:'20%'}} className="active">Field {item.rotate}</td>
+          <td style={{width:'20%'}} className="active">Field {item.pov}</td>
+          <td style={{width:'20%'}} className="active">Field {item.price}</td>
         </tr>
       )
     })
@@ -49,8 +50,16 @@ class MachineTable extends React.Component {
             <td>header 1</td>
           </tr>
           </thead>
+        </table>
+        <Infinity containerHeight={300} elementHeight={20}>
+          <table className="table">
+            <tbody>
+            {table}
+            </tbody>
+          </table>
+        </Infinity>
+        <table className="table">
           <tbody>
-          {table}
           <tr>
             <td><input ref="name" placeholder="name"></input></td>
             <td><input ref="power" placeholder="power"></input></td>

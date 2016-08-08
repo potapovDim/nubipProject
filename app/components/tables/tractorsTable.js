@@ -1,5 +1,5 @@
 import React from 'react'
-import connect from 'redux'
+import Infinity from 'react-infinite'
 
 
 class TractorTable extends React.Component {
@@ -8,29 +8,30 @@ class TractorTable extends React.Component {
     let power = this.refs.power.value
     let rotate = this.refs.rotate.value
     let pov = this.refs.pov.value
-    if (name != '' && power != '' && rotate != '' && pov != '' ) {
+    if (name != '' && power != '' && rotate != '' && pov != '') {
       let newTrac = {
         name: name,
         power: power,
         rotate: rotate,
         pov: pov,
       }
-      this.props.addToPumpTable(newTrac,'tractors')
+      this.props.addToTable(newTrac, 'tractors')
     }
   }
-  handleRemoveData=()=>{
-    this.props.removeFromPumpTable('tractors')
+  handleRemoveData = ()=> {
+    this.props.removeFromTable('tractors')
   }
+
   render() {
     let {tractors}=this.props.tables;
     let table = tractors.map(function (item, index) {
       return (
         <tr key={index}>
-          <td className="active">Field {item.name}</td>
-          <td className="active">Field {item.power}</td>
-          <td className="active">Field {item.rotate}</td>
-          <td className="active">Field {item.pov}</td>
-          <td className="active">Field {item.price}</td>
+          <td style={{width:'20%'}} className="active">Field {item.name}</td>
+          <td style={{width:'20%'}} className="active">Field {item.power}</td>
+          <td style={{width:'20%'}} className="active">Field {item.rotate}</td>
+          <td style={{width:'20%'}} className="active">Field {item.pov}</td>
+          <td style={{width:'20%'}} className="active">Field {item.price}</td>
         </tr>
       )
     })
@@ -47,8 +48,16 @@ class TractorTable extends React.Component {
             <td>header 1</td>
           </tr>
           </thead>
+        </table>
+        <Infinity containerHeight={300} elementHeight={20}>
+        <table className="table">
           <tbody>
           {table}
+          </tbody>
+        </table>
+        </Infinity>
+        <table className="table">
+          <tbody>
           <tr>
             <td><input ref="name" placeholder="name"></input></td>
             <td><input ref="power" placeholder="power"></input></td>
