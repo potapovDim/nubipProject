@@ -4,15 +4,13 @@ import {Form, FormGroup, Col, ControlLabel, FormControl, Checkbox, Button} from 
 import ReactDOM from 'react-dom'
 
 class Login extends Component {
-
-
+  
   handleLogin = ()=> {
     let name = ReactDOM.findDOMNode(this.refs.formcontrol).value
     if (name != '') {
       this.props.login(name)
     }
   }
-
   render() {
     return (
       <div>
@@ -39,4 +37,5 @@ class Login extends Component {
     )
   }
 }
+
 export default Login
