@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Navbar, MenuItem, NavDropdown, Nav, NavItem,Tabs,Tab} from 'react-bootstrap'
+import {Navbar, MenuItem, NavDropdown, Nav, NavItem, Tabs, Tab} from 'react-bootstrap'
 import {Link} from 'react-router'
 
-import {MainTutorial, TablesTutorial} from '../components/tutorials'
+import {MainTutorial, TablesTutorial, EntriesTutorial} from '../components/tutorials'
 
 class Main extends Component {
   state = {
@@ -14,9 +14,16 @@ class Main extends Component {
   hide = ()=> {
     this.setState({show: false})
   }
-  
+
   render() {
-    console.log('context', this.props)
+    let tutorial
+    if (this.props.location.pathname == '/')
+      tutorial= (<MainTutorial show={this.state.show} hide={this.hide}/>)
+    else if (this.props.location.pathname == '/tables')
+      tutorial=  (<TablesTutorial show={this.state.show} hide={this.hide}/>)
+    else if (this.props.location.pathname == '/entries')
+      tutorial=   (<EntriesTutorial show={this.state.show} hide={this.hide}/>)
+    console.log(tutorial)
     return (
       <div>
         <div style={{height:'850px'}}>
@@ -31,10 +38,8 @@ class Main extends Component {
               <Nav>
                 <NavItem eventKey={2}
                          onClick={() => this.setState({ show: true})}
-                        >Tutorial</NavItem>
-                {this.props.location.pathname == '/' ? <MainTutorial show={this.state.show} hide={this.hide}/> :
-                  <TablesTutorial show={this.state.show} hide={this.hide}/>}
-                {this.props.location.pathname == '/' ? <NavItem eventKey={2} href="#">Link</NavItem> : null}
+                >Tutorial</NavItem>
+                {tutorial}
                 <NavItem >DDL future</NavItem>
                 <NavDropdown eventKey={3} title=' ' id="basic-nav-dropdown">
                   <MenuItem eventKey={3.1}>Action</MenuItem>
@@ -45,8 +50,8 @@ class Main extends Component {
                 </NavDropdown>
               </Nav>
               <Nav pullRight>
-                <NavItem eventKey={1} >Link Right</NavItem>
-                <NavItem eventKey={2} >Link Right</NavItem>
+                <NavItem eventKey={1}>Link Right</NavItem>
+                <NavItem eventKey={2}>Link Right</NavItem>
               </Nav>
             </Navbar.Collapse>
           </Navbar>
@@ -61,3 +66,5 @@ class Main extends Component {
 export default connect(state => {
   return {...state.login}
 })(Main)
+
+//<TablesTutorial show={this.state.show} hide={this.hide}/>

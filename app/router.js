@@ -6,6 +6,7 @@ import Table from './containers/Tables'
 import Log from './containers/Login'
 import Main from './containers/Main'
 import EntryData from './containers/Entries'
+
 export default(
   <Router history={browserHistory}>
     <Route component={Root}>
