@@ -1,10 +1,18 @@
 import {
-  ADD_TO_TABLE, REMOVE_FROM_TABLE
+  ADD_TO_TABLE, REMOVE_FROM_TABLE,SHOW_ALL_TABLES
 } from './action_types';
 
 import update from 'react-addons-update'
 
 const initialState = {
+  tablesShow:{
+    SHOW_ALL: false,
+    pump: false,
+    tractor: false,
+    stern: false,
+    machine: false,
+    drinking_bowl: false
+  },
   pumptable: [
     {name: 'pump_first1_Name', power: '12.4', volume: '5.2', hight: '12', dop: '523',price:"43"},
     {name: 'pump_first2_Name', power: '13.5', volume: '4.2', hight: '22', dop: '123',price:"43"},
@@ -29,14 +37,12 @@ const initialState = {
     {name :'tractor_fourth_Name', old:'36',young:'800',price:"43"},
     {name :'tractor_fifth_Name', old:'37',young:'2800',price:"43"},
   ],
-
   drinking_bowl:[
     {name :'drinking_bowl_Name', water:'34',price:"43"},
     {name :'drinking_bowl_Name', water:'35',price:"43"},
     {name :'drinking_bowl_Name', water:'36',price:"43"},
     {name :'drinking_bowl_Name', water:'37',price:"43"},
   ]
-  
 }
 
 export default(state = initialState, action)=> {
@@ -45,9 +51,10 @@ export default(state = initialState, action)=> {
       let addTabl = {[action.key]: update(state[action.key], {$push: [action.data]})}
       return {...state, ...addTabl}
     case REMOVE_FROM_TABLE:
-      console.log(action)
       let remTable = {[action.key]:state[action.key].slice(0,state[action.key].length-1)}
       return {...state,...remTable}
+    case SHOW_ALL_TABLES:
+      return {...state,tablesShow:{...state.tablesShow,SHOW_ALL:!state.tablesShow.SHOW_ALL}}
     default :
       return state
   }

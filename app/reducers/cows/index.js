@@ -14,7 +14,7 @@ export default(state = initiaState, action)=> {
         cowsQuantity: action.quantity,
       }
     case RESET:
-      return state
+      return {...state, cowsQuantity: 0}
     default:
       return state
   }

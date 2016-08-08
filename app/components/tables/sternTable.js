@@ -32,9 +32,10 @@ class SternTable extends React.Component {
     })
     return (
       <div>
+        <h3 className="text-center">STERN TABLE</h3>
         <table className="table">
           <thead>
-          <tr>
+          <tr className="success">
             <td>header 1</td>
             <td>header 1</td>
             <td>header 1</td>

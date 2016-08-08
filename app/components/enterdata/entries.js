@@ -1,22 +1,26 @@
 import React,{Component} from 'react'
-import {FormControl,ControlLabel,HelpBlock,FormGroup} from 'react-bootstrap'
+import {FormControl,ControlLabel,HelpBlock,FormGroup,Button} from 'react-bootstrap'
 
 class Enties extends Component{
   state={
-      value: ''
+      value:''
   }
 
   getValidationState=()=> {
-    const entrie = this.state.value;
-    if (length > 10) return 'success';
-    else if (length > 5) return 'warning';
-    else if (length > 0) return 'error';
-    //TODO прикрутити валідацію
+    let entrie = this.state.value;
+    if (/^[0-9]+$/.test(entrie)) return 'success';
+    else if (/^[0-9]+$/.test(entrie)==false&&entrie.length!=0) return 'error';
   }
   handleChange=(e)=> {
     this.setState({ value: e.target.value });
   }
-
+  handleAddQuantiy=()=>{
+      let _state=this.state
+      this.props.addCows(_state.value.match(/[0-9]+/)[0].substr(0,4));
+  }
+  handleRemoveQuantity=()=>{
+    this.props.resetAll();
+  }
   render() {
     return (
       <form>
@@ -24,7 +28,7 @@ class Enties extends Component{
           controlId="formBasicText"
           validationState={this.getValidationState()}
         >
-          <ControlLabel>Working example with validation</ControlLabel>
+          <ControlLabel>Enter cows quantity</ControlLabel>
           <FormControl
             type="text"
             value={this.state.value}
@@ -32,10 +36,13 @@ class Enties extends Component{
             onChange={this.handleChange}
           />
           <FormControl.Feedback />
-          <HelpBlock>Validation is based on string length.</HelpBlock>
+          <HelpBlock>Quantity should exist just numbers,from string will take just numbers</HelpBlock>
+          <Button onClick={this.handleAddQuantiy}>Add quantity</Button>
+          <Button onClick={this.handleRemoveQuantity}>Remove quantity</Button>
         </FormGroup>
       </form>
     );
   }
 }
+
 export default Enties

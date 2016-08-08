@@ -33,9 +33,10 @@ class DrinkingbowTable extends React.Component {
     })
     return (
       <div>
+        <h3 className="text-center">DRINKING BOWL TABLE</h3>
         <table className="table">
           <thead>
-          <tr>
+          <tr className="success">
             <td>header 1</td>
             <td>header 1</td>
             <td>header 1</td>

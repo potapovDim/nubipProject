@@ -4,7 +4,6 @@ import store from '../store/'
 
 class Root extends Component {
   render() {
-    console.log(this)
     return (
       <Provider store={store}>
           {this.props.children}
