@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Alert, DropdownButton, ButtonToolbar, MenuItem, SplitButton, Dropdown, Button} from 'react-bootstrap'
+import { MenuItem, Dropdown, Button,Tabs,Tab} from 'react-bootstrap'
 import Infinity from 'react-infinite'
 
 import PumpTable from '../components/tables/pumpsTable'
@@ -35,11 +35,11 @@ class Table extends React.Component {
     })
   }
   ddl = (
-    <Dropdown id="basic-nav-dropdown">
-      <Button onClick={this.showHideAllTables} bsStyle="info">
+    <Dropdown >
+      <Button onClick={this.showHideAllTables} style={{color:'black'}}>
         Show all tables ...
       </Button>
-      <Dropdown.Toggle bsStyle="info"/>
+      <Dropdown.Toggle bsStyle="default"/>
       <Dropdown.Menu className="">
         <MenuItem onClick={this.openClose.bind(this,'pump')} eventKey="1">Show/Hide pump table</MenuItem>
         <MenuItem onClick={this.openClose.bind(this,'tractor')} eventKey="2">Show/Hide tractors table</MenuItem>
@@ -51,6 +51,13 @@ class Table extends React.Component {
       </Dropdown.Menu>
     </Dropdown>
   )
+  tabsInstance = (
+    <Tabs defaultActiveKey={1} animation={false} id="noanim-tab-example">
+      <Tab eventKey={1} title="Tab 1">Tab 1 content</Tab>
+      <Tab eventKey={2} title="Tab 2">Tab 2 content</Tab>
+      <Tab eventKey={3} title="Tab 3" disabled>Tab 3 content</Tab>
+    </Tabs>
+  );
   
   tables = [<PumpTable {...this.props} />, <div></div>,
             <TractorTable {...this.props} />, <div></div>,
