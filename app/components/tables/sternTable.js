@@ -60,6 +60,7 @@ class SternTable extends React.Component {
         </table >
         <button onClick={this.handleCollectData}>ADD</button>
         <button onClick={this.handleRemoveData}>REMOVE</button>
+        <button >FORM STERN REPOSITORIES</button>
       </div>
     )
   }
