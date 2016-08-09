@@ -8,16 +8,13 @@ import TractorTable from '../components/tables/tractorsTable'
 import SternTable from '../components/tables/sternTable'
 import MachineTable from '../components/tables/machineTable'
 import DrinkingbowTable from '../components/tables/drinkingbowTable'
-import MilkingMachinesTable from '../components/tables/milkingMachines'
+import {MilkingMachinesStallTable,MilkingMachinesHallTable} from '../components/tables/milkingMachines'
+
 
 import {addToTable, removeFromTable} from '../reducers/tables/actions'
 
 class Table extends React.Component {
-
-
-
   render() {
-    console.log(this.props)
     return (
       <div>
         <Tabs defaultActiveKey={1} animation={false} id="noanim-tab-example">
@@ -37,7 +34,8 @@ class Table extends React.Component {
             <DrinkingbowTable {...this.props}/>
           </Tab>
           <Tab eventKey={6} title="Доїльні установки">
-            <MilkingMachinesTable {...this.props}/>
+            <MilkingMachinesStallTable {...this.props}/>
+            <MilkingMachinesHallTable {...this.props} />
           </Tab>
         </Tabs>
       </div>

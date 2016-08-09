@@ -42,7 +42,7 @@ const initialState = {
     {brand :"АП-1А", water_volume:'1.8',seats:"1",heads:'2',weight:'0.75',price:"10"},
     {brand :"АП-1А", water_volume:'1.8',seats:"1",heads:'2',weight:'0.75',price:"10"},
   ],
-  milking_machines:[
+  milking_machines_stall:[
     {brand:"",quantity_cows:'',quantity_machines:'',type_brand_apparatus:'',quantity_personal:'',productivity:'',man_productivity_with2:'',man_productivity_with3:'',brand_vacuum_pump:'',vacuum_pump_quantity:"",power:'',weight:"",price:''},
     {brand:"",quantity_cows:'',quantity_machines:'',type_brand_apparatus:'',quantity_personal:'',productivity:'',man_productivity_with2:'',man_productivity_with3:'',brand_vacuum_pump:'',vacuum_pump_quantity:"",power:'',weight:"",price:''},
     {brand:"",quantity_cows:'',quantity_machines:'',type_brand_apparatus:'',quantity_personal:'',productivity:'',man_productivity_with2:'',man_productivity_with3:'',brand_vacuum_pump:'',vacuum_pump_quantity:"",power:'',weight:"",price:''},
@@ -51,7 +51,16 @@ const initialState = {
     {brand:"",quantity_cows:'',quantity_machines:'',type_brand_apparatus:'',quantity_personal:'',productivity:'',man_productivity_with2:'',man_productivity_with3:'',brand_vacuum_pump:'',vacuum_pump_quantity:"",power:'',weight:"",price:''},
     {brand:"",quantity_cows:'',quantity_machines:'',type_brand_apparatus:'',quantity_personal:'',productivity:'',man_productivity_with2:'',man_productivity_with3:'',brand_vacuum_pump:'',vacuum_pump_quantity:"",power:'',weight:"",price:''},
     {brand:"",quantity_cows:'',quantity_machines:'',type_brand_apparatus:'',quantity_personal:'',productivity:'',man_productivity_with2:'',man_productivity_with3:'',brand_vacuum_pump:'',vacuum_pump_quantity:"",power:'',weight:"",price:''}
+  ],
+  milking_machines_parlor:[
+    {brand:"",quantity_cows:'',quantity_personal:'',quantity_operator:'',quantity_apparatus:'',productivity_per_hour:'',power_needed:'',hopper_capacity:'',length_conveyor:"",power_drive:'',vacuum_system_aggregate:'',aggregate_power:'',weight:"",price:''},
+    {brand:"",quantity_cows:'',quantity_personal:'',quantity_operator:'',quantity_apparatus:'',productivity_per_hour:'',power_needed:'',hopper_capacity:'',length_conveyor:"",power_drive:'',vacuum_system_aggregate:'',aggregate_power:'',weight:"",price:''},
+    {brand:"",quantity_cows:'',quantity_personal:'',quantity_operator:'',quantity_apparatus:'',productivity_per_hour:'',power_needed:'',hopper_capacity:'',length_conveyor:"",power_drive:'',vacuum_system_aggregate:'',aggregate_power:'',weight:"",price:''},
+    {brand:"",quantity_cows:'',quantity_personal:'',quantity_operator:'',quantity_apparatus:'',productivity_per_hour:'',power_needed:'',hopper_capacity:'',length_conveyor:"",power_drive:'',vacuum_system_aggregate:'',aggregate_power:'',weight:"",price:''},
+    {brand:"",quantity_cows:'',quantity_personal:'',quantity_operator:'',quantity_apparatus:'',productivity_per_hour:'',power_needed:'',hopper_capacity:'',length_conveyor:"",power_drive:'',vacuum_system_aggregate:'',aggregate_power:'',weight:"",price:''},
+    {brand:"",quantity_cows:'',quantity_personal:'',quantity_operator:'',quantity_apparatus:'',productivity_per_hour:'',power_needed:'',hopper_capacity:'',length_conveyor:"",power_drive:'',vacuum_system_aggregate:'',aggregate_power:'',weight:"",price:''},
   ]
+
   
 }
 

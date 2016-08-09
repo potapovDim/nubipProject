@@ -26,7 +26,7 @@ class Main extends Component {
     console.log(tutorial)
     return (
       <div>
-        <div style={{height:'850px'}}>
+        <div style={{height:'100%'}}>
           <Navbar inverse>
             <Navbar.Header>
               <Navbar.Brand>
@@ -58,7 +58,7 @@ class Main extends Component {
           {this.props.children}
         </div>
 
-        <footer className="text-center">This is footer</footer>
+        <footer style={{clear:'both'}} className="text-center">This is footer</footer>
       </div>
     )
   }
