@@ -43,6 +43,7 @@ class Enties extends Component {
       })
     }
   }
+
   handleAddQuantity = ()=> {
     if ((this.cowsRegEx.test(this.state.cows) && this.moneyRegEx.test(this.state.energyPrice) && this.moneyRegEx.test(
         this.state.fuelPrice) && this.moneyRegEx.test(
@@ -76,6 +77,7 @@ class Enties extends Component {
       </div>
     </Popover>
   );
+
   handleRemoveQuantity = ()=> {
     this.props.resetAll();
   };
@@ -88,8 +90,6 @@ class Enties extends Component {
     console.log(this.props)
     return (
       <div>
-
-
         {this.state.alert ?
           <p style={{clear:'both'}} className="text-center"><Alert bsStyle="danger">{this.state.message}</Alert>
           </p> : null}
@@ -99,8 +99,8 @@ class Enties extends Component {
 
         <form style={{float:"left",width:"40%"}}>
           <InputGroup.Button>
-            <OverlayTrigger trigger="click" placement="bottom" overlay={this.popoverLeft}>
-              <Button style={{color:"red",width:'78%'}}>Інформація по введення данних наступних полів</Button>
+            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.popoverLeft}>
+              <Button style={{color:"red",width:'470px'}}>Інформація по введення данних наступних полів</Button>
             </OverlayTrigger>
           </InputGroup.Button>
           <br/>
@@ -137,8 +137,7 @@ class Enties extends Component {
                            onChange={(e)=>this.handleChange(e,'paymentPrice')} type="text"/>
             </InputGroup>
           </FormGroup>
-
-
+          
           <LoadingButton action={this.handleAddQuantity}/>
           <Link to="/tables">
             <Button type='button'>Перейти до таблиць</Button>
@@ -151,7 +150,6 @@ class Enties extends Component {
         && this.state.paymentPrice != 0) ?
           <form style={{lineHeight: '2.4',float:"right",width:"60%"}}>
             <p>Данні які будуть внесені для розрахунку</p>
-         
             <p>Кількість корів : {this.state.cows}</p>
             <p>Ціна за пальне : {this.state.fuelPrice} грн/л</p>
             <p>Ціна за електроенергію : {this.state.energyPrice} грн/кВт</p>
@@ -163,4 +161,3 @@ class Enties extends Component {
 }
 
 export default Enties
-//<Button onClick={this.handleAddQuantity} type='button'>Додати данні для подальших розрахунків</Button>

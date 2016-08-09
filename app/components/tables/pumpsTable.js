@@ -74,14 +74,14 @@ class PumpTable extends React.Component {
         <table className="table text-center">
           <tbody>
           <tr>
-            <td><input ref="brand" placeholder="марка"></input></td>
-            <td><input ref="innings" placeholder="подача"></input></td>
-            <td><input ref="full_pressure" placeholder="повний напір"></input></td>
-            <td><input ref="speed_rotate" placeholder="швидкість обертання"></input></td>
-            <td><input ref="power" placeholder="потужність"></input></td>
-            <td><input ref="KKD" placeholder="ККД насоса"></input></td>
-            <td><input ref="allowable_height" placeholder="висота всмоктування"></input></td>
-            <td><input ref="price" placeholder="ціна"></input></td>
+            <td><input ref="brand" placeholder="марка"/></td>
+            <td><input ref="innings" placeholder="подача"/></td>
+            <td><input ref="full_pressure" placeholder="повний напір"/></td>
+            <td><input ref="speed_rotate" placeholder="швидкість обертання"/></td>
+            <td><input ref="power" placeholder="потужність"/></td>
+            <td><input ref="KKD" placeholder="ККД насоса"/></td>
+            <td><input ref="allowable_height" placeholder="висота всмоктування"/></td>
+            <td><input ref="price" placeholder="ціна"/></td>
           </tr>
           </tbody>
         </table>

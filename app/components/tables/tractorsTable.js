@@ -59,11 +59,11 @@ class TractorTable extends React.Component {
         <table className="table">
           <tbody>
           <tr>
-            <td><input ref="name" placeholder="name"></input></td>
-            <td><input ref="power" placeholder="power"></input></td>
-            <td><input ref="rotate" placeholder="volume"></input></td>
-            <td><input ref="pov" placeholder="hight"></input></td>
-            <td><input ref="price" placeholder="price"></input></td>
+            <td><input ref="name" placeholder="name"/></td>
+            <td><input ref="power" placeholder="power"/></td>
+            <td><input ref="rotate" placeholder="volume"/></td>
+            <td><input ref="pov" placeholder="hight"/></td>
+            <td><input ref="price" placeholder="price"/></td>
           </tr>
           </tbody>
         </table>

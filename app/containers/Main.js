@@ -18,11 +18,11 @@ class Main extends Component {
   render() {
     let tutorial
     if (this.props.location.pathname == '/')
-      tutorial= (<MainTutorial show={this.state.show} hide={this.hide}/>)
+      tutorial = (<MainTutorial show={this.state.show} hide={this.hide}/>)
     else if (this.props.location.pathname == '/tables')
-      tutorial=  (<TablesTutorial show={this.state.show} hide={this.hide}/>)
+      tutorial = (<TablesTutorial show={this.state.show} hide={this.hide}/>)
     else if (this.props.location.pathname == '/entries')
-      tutorial=   (<EntriesTutorial show={this.state.show} hide={this.hide}/>)
+      tutorial = (<EntriesTutorial show={this.state.show} hide={this.hide}/>)
     console.log(tutorial)
     return (
       <div>
@@ -55,7 +55,9 @@ class Main extends Component {
               </Nav>
             </Navbar.Collapse>
           </Navbar>
-          {this.props.children}
+          <div style={{weight:"80%"}} >
+            {this.props.children}
+          </div>
         </div>
 
         <footer style={{clear:'both'}} className="text-center">This is footer</footer>
