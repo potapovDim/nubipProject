@@ -8,11 +8,12 @@ const initialState = {
 }
 
 export default(state = initialState, action)=> {
+  console.log('action',action)
   switch (action.type) {
     case ADD_TO_ENTRIES:
       let _state=action.quantity
       return {
-        ...state,_state
+        ...state,..._state
       }
     case RESET:
       return {...state, initialState}
