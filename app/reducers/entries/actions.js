@@ -1,9 +1,8 @@
 import {ADD_TO_ENTRIES,RESET} from './action_types'
 
-export const addEntry=(key,quantity)=>{
+export const addEntry=(quantity)=>{
   return{
     type:ADD_TO_ENTRIES,
-    key,
     quantity
   }
 }

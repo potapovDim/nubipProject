@@ -10,8 +10,7 @@ const initialState = {
 export default(state = initialState, action)=> {
   switch (action.type) {
     case ADD_TO_ENTRIES:
-      let _state=state
-      _state[action.key]=action.quantity
+      let _state=action.quantity
       return {
         ...state,_state
       }
