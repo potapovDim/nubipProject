@@ -8,6 +8,7 @@ class Entries extends Component {
   state = {
     alert: false,
     alertSuccess: false,
+    showFarm:false,
     message: '',
     cows: 0,
     fuelPrice: 0,
@@ -18,7 +19,6 @@ class Entries extends Component {
     ill_cows: null,
     cow_before_20days: null
   }
-
 
   moneyRegEx = /(^[0-9]{1,2})$|(^[0-9]{1,2})([.]{1,1})([0-9]{0,2}$)/
   cowsRegEx = /^[0-9]{3,4}$/
@@ -50,12 +50,20 @@ class Entries extends Component {
     }
   }
 
+  message={
+    name:'Інформація по введенню полів ',
+    header:'Поля вводу кількості корів та оплат',
+    message:`Кількість корів повинна містити чила від 3 до 4 знаків (лише цілі числа)
+             `
+  }
+
   hangleCalculateFarm=()=>{
     let _state={...this.state}
     _state.pregrant_cows=parseInt(_state.cows*0.1)
     _state.dry_cows=parseInt(_state.cows*0.1)
     _state.ill_cows=parseInt(_state.cows*0.1)
     _state.cow_before_20days=parseInt(_state.cows*0.9);
+    _state.showFarm=true
     this.setState(_state)
   }
 
@@ -98,7 +106,7 @@ class Entries extends Component {
   };
 
   componentWillMount() {
-    this.setState({alertSuccess: false})
+    this.setState({alertSuccess: false,showFarm:false,})
   }
 
   render() {
@@ -112,7 +120,9 @@ class Entries extends Component {
         {this.state.alertSuccess ?
           <p style={{clear:'both'}} className="text-center"><Alert bsStyle="success">Ваші дані успішно додані</Alert>
           </p> : null}
-        <InformationButton />
+        <InformationButton name={'Інформація полів вводу данних'}>
+          {this.popoverLeft}
+          </InformationButton>
         <div className="entries-data">
           <form className="entries">
 
@@ -163,25 +173,21 @@ class Entries extends Component {
             this.state.fuelPrice) && this.moneyRegEx.test(
             this.state.paymentPrice)) && (this.state.cows != 0 && this.state.energyPrice != 0 && this.state.fuelPrice != 0
           && this.state.paymentPrice != 0) ?
-            <form className="output">
-              <p>Данні які будуть внесені для розрахунку</p>
+            <div className="output-data flash">
+              <h4>Данні які будуть внесені для розрахунку</h4>
               <p>Кількість корів : {this.state.cows}</p>
               <p>Ціна за пальне : {this.state.fuelPrice} грн/л</p>
               <p>Ціна за електроенергію : {this.state.energyPrice} грн/кВт</p>
               <p>Заробітня плата : {this.state.paymentPrice} грн/год</p>
-            </form> : null}
-          {(this.cowsRegEx.test(this.state.cows) && this.moneyRegEx.test(
-            this.state.energyPrice) && this.moneyRegEx.test(
-            this.state.fuelPrice) && this.moneyRegEx.test(
-            this.state.paymentPrice)) && (this.state.cows != 0 && this.state.energyPrice != 0 && this.state.fuelPrice != 0
-          && this.state.paymentPrice != 0) ?
-            <form className="output">
-              <p>Данні які будуть внесені для розрахунку</p>
+            </div> : null}
+          {this.state.showFarm ?
+            <div className="output-cows flash">
+              <h4>Структура ферми</h4>
               <p>Кількість корів : {this.state.cows}</p>
               <p>Ціна за пальне : {this.state.fuelPrice} грн/л</p>
               <p>Ціна за електроенергію : {this.state.energyPrice} грн/кВт</p>
               <p>Заробітня плата : {this.state.paymentPrice} грн/год</p>
-            </form> : null}
+            </div> : null}
         </div>
       </div>
     );

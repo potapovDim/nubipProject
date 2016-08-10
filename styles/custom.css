@@ -9,8 +9,12 @@
     min-height: 620px;
 }
 
-.output {
+.output-data {
     line-height: 2.4;
+    flex-grow: 1;
+}
+.output-cows{
+    line-height: 2.2;
     flex-grow: 1;
 }
 
@@ -26,5 +30,4 @@
     top: 41px;
     left: 10px;
     z-index: 9090;
-    background: whitesmoke;
 }

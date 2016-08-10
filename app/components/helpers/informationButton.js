@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import{Popover} from 'react-bootstrap'
 
 class InfoButton extends Component {
 
@@ -11,15 +10,16 @@ class InfoButton extends Component {
   handleLeave = ()=> {
     this.setState({show: !this.state.show});
   }
-
-
+  
   render() {
     return (
       <div className="info-field">
-        <button onMouseEnter={this.handleEnter} onMouseLeave={this.handleLeave}>
+        <button className="btn btn-default" onMouseEnter={this.handleEnter} onMouseLeave={this.handleLeave}>
           {this.props.name}
         </button>
-        {this.state.show?<p className="info"><h3>{this.props.header}</h3><div>{this.props.message}</div></p>:null}
+        {this.state.show ? <p className="info">
+          {this.props.children}
+        </p> : null}
       </div>
 
     );
