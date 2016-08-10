@@ -1,0 +1,30 @@
+.entries-data {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.entries {
+    flex-grow: 1;
+    flex-basis: 620px;
+    min-height: 620px;
+}
+
+.output {
+    line-height: 2.4;
+    flex-grow: 1;
+}
+
+.info-field {
+    position: relative;
+}
+
+.info {
+    border-radius: 10px;
+    width: 470px;
+    height: 400px;
+    position: absolute;
+    top: 41px;
+    left: 10px;
+    z-index: 9090;
+    background: whitesmoke;
+}

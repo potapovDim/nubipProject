@@ -2,8 +2,9 @@ import React, {Component} from 'react'
 import {InputGroup, Button, FormGroup, FormControl, Alert, OverlayTrigger, Popover, ProgressBar} from 'react-bootstrap'
 import {Link} from 'react-router'
 import LoadingButton from '../helpers/loadingButton'
+import InformationButton from '../helpers/informationButton'
 
-class Enties extends Component {
+class Entries extends Component {
   state = {
     alert: false,
     alertSuccess: false,
@@ -11,8 +12,13 @@ class Enties extends Component {
     cows: 0,
     fuelPrice: 0,
     energyPrice: 0,
-    paymentPrice: 0
+    paymentPrice: 0,
+    pregrant_cows: null,
+    dry_cows: null,
+    ill_cows: null,
+    cow_before_20days: null
   }
+
 
   moneyRegEx = /(^[0-9]{1,2})$|(^[0-9]{1,2})([.]{1,1})([0-9]{0,2}$)/
   cowsRegEx = /^[0-9]{3,4}$/
@@ -44,6 +50,15 @@ class Enties extends Component {
     }
   }
 
+  hangleCalculateFarm=()=>{
+    let _state={...this.state}
+    _state.pregrant_cows=parseInt(_state.cows*0.1)
+    _state.dry_cows=parseInt(_state.cows*0.1)
+    _state.ill_cows=parseInt(_state.cows*0.1)
+    _state.cow_before_20days=parseInt(_state.cows*0.9);
+    this.setState(_state)
+  }
+
   handleAddQuantity = ()=> {
     if ((this.cowsRegEx.test(this.state.cows) && this.moneyRegEx.test(this.state.energyPrice) && this.moneyRegEx.test(
         this.state.fuelPrice) && this.moneyRegEx.test(
@@ -54,7 +69,7 @@ class Enties extends Component {
         energyPrice: this.state.energyPrice,
         paymentPrice: this.state.paymentPrice
       })
-      this.setState({alertSuccess:true})
+      this.setState({alertSuccess: true})
     }
     else
       this.setState({
@@ -83,11 +98,12 @@ class Enties extends Component {
   };
 
   componentWillMount() {
-    this.setState({alertSuccess:false})
+    this.setState({alertSuccess: false})
   }
 
   render() {
-    console.log(this.props)
+    console.log(this.state)
+    let {cows, fuelPrice, energyPrice, paymentPrice}=this.props
     return (
       <div>
         {this.state.alert ?
@@ -96,68 +112,80 @@ class Enties extends Component {
         {this.state.alertSuccess ?
           <p style={{clear:'both'}} className="text-center"><Alert bsStyle="success">Ваші дані успішно додані</Alert>
           </p> : null}
+        <InformationButton />
+        <div className="entries-data">
+          <form className="entries">
 
-        <form style={{float:"left",width:"40%"}}>
-          <InputGroup.Button>
-            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.popoverLeft}>
-              <Button style={{color:"red",width:'470px'}}>Інформація по введення данних наступних полів</Button>
-            </OverlayTrigger>
-          </InputGroup.Button>
-          <br/>
-          <FormGroup style={{width:'78%'}}>
-            <InputGroup>
-              <InputGroup.Addon style={{width:"300px"}}>Кількість корів </InputGroup.Addon>
-              <FormControl onBlur={(e)=>this.handleValidation(e,'cows')} onChange={(e)=>this.handleChange(e,'cows')}
-                           type="text"/>
-              <InputGroup.Button>
-              </InputGroup.Button>
-            </InputGroup>
-          </FormGroup>
+            <br/>
+            <FormGroup >
+              <InputGroup>
+                <InputGroup.Addon style={{width:"300px"}}>Кількість корів </InputGroup.Addon>
+                <FormControl onBlur={(e)=>this.handleValidation(e,'cows')} onChange={(e)=>this.handleChange(e,'cows')}
+                             type="text"/>
+                <InputGroup.Button>
+                </InputGroup.Button>
+              </InputGroup>
+            </FormGroup>
 
-          <FormGroup style={{width:'78%'}}>
-            <InputGroup>
-              <InputGroup.Addon style={{width:"300px"}}>Ціна на пальне ГРН / л</InputGroup.Addon>
-              <FormControl onBlur={(e)=>this.handleValidation(e,'fuelPrice')}
-                           onChange={(e)=>this.handleChange(e,'fuelPrice')} type="text"/>
-            </InputGroup>
-          </FormGroup>
+            <FormGroup >
+              <InputGroup>
+                <InputGroup.Addon style={{width:"300px"}}>Ціна на пальне ГРН / л</InputGroup.Addon>
+                <FormControl onBlur={(e)=>this.handleValidation(e,'fuelPrice')}
+                             onChange={(e)=>this.handleChange(e,'fuelPrice')} type="text"/>
+              </InputGroup>
+            </FormGroup>
 
-          <FormGroup style={{width:'78%'}}>
-            <InputGroup>
-              <InputGroup.Addon style={{width:"300px"}}>Ціна на електроенергію ГРН / кВт</InputGroup.Addon>
-              <FormControl onBlur={(e)=>this.handleValidation(e,'energyPrice')}
-                           onChange={(e)=>this.handleChange(e,'energyPrice')} type="text"/>
-            </InputGroup>
-          </FormGroup>
+            <FormGroup >
+              <InputGroup>
+                <InputGroup.Addon style={{width:"300px"}}>Ціна на електроенергію ГРН / кВт</InputGroup.Addon>
+                <FormControl onBlur={(e)=>this.handleValidation(e,'energyPrice')}
+                             onChange={(e)=>this.handleChange(e,'energyPrice')} type="text"/>
+              </InputGroup>
+            </FormGroup>
 
-          <FormGroup style={{width:'78%'}}>
-            <InputGroup>
-              <InputGroup.Addon style={{width:"300px"}}>Заробітня плата ГРН / год</InputGroup.Addon>
-              <FormControl onBlur={(e)=>this.handleValidation(e,'paymentPrice')}
-                           onChange={(e)=>this.handleChange(e,'paymentPrice')} type="text"/>
-            </InputGroup>
-          </FormGroup>
-          
-          <LoadingButton action={this.handleAddQuantity}/>
-          <Link to="/tables">
-            <Button type='button'>Перейти до таблиць</Button>
-          </Link>
-        </form>
+            <FormGroup >
+              <InputGroup>
+                <InputGroup.Addon style={{width:"300px"}}>Заробітня плата ГРН / год</InputGroup.Addon>
+                <FormControl onBlur={(e)=>this.handleValidation(e,'paymentPrice')}
+                             onChange={(e)=>this.handleChange(e,'paymentPrice')} type="text"/>
+              </InputGroup>
+            </FormGroup>
 
-        {(this.cowsRegEx.test(this.state.cows) && this.moneyRegEx.test(this.state.energyPrice) && this.moneyRegEx.test(
-          this.state.fuelPrice) && this.moneyRegEx.test(
-          this.state.paymentPrice)) && (this.state.cows != 0 && this.state.energyPrice != 0 && this.state.fuelPrice != 0
-        && this.state.paymentPrice != 0) ?
-          <form style={{lineHeight: '2.4',float:"right",width:"60%"}}>
-            <p>Данні які будуть внесені для розрахунку</p>
-            <p>Кількість корів : {this.state.cows}</p>
-            <p>Ціна за пальне : {this.state.fuelPrice} грн/л</p>
-            <p>Ціна за електроенергію : {this.state.energyPrice} грн/кВт</p>
-            <p>Заробітня плата : {this.state.paymentPrice} грн/год</p>
-          </form> : null}
+            <LoadingButton action={this.handleAddQuantity}/>
+            <Button onClick={this.hangleCalculateFarm} type='button'>Розрахувати ферму</Button>
+            <Link to="/tables">
+              <Button disabled={(cows==0&&fuelPrice==0&&paymentPrice==0&&energyPrice==0)} type='button'>Перейти до
+                таблиць</Button>
+            </Link>
+          </form>
+          {(this.cowsRegEx.test(this.state.cows) && this.moneyRegEx.test(
+            this.state.energyPrice) && this.moneyRegEx.test(
+            this.state.fuelPrice) && this.moneyRegEx.test(
+            this.state.paymentPrice)) && (this.state.cows != 0 && this.state.energyPrice != 0 && this.state.fuelPrice != 0
+          && this.state.paymentPrice != 0) ?
+            <form className="output">
+              <p>Данні які будуть внесені для розрахунку</p>
+              <p>Кількість корів : {this.state.cows}</p>
+              <p>Ціна за пальне : {this.state.fuelPrice} грн/л</p>
+              <p>Ціна за електроенергію : {this.state.energyPrice} грн/кВт</p>
+              <p>Заробітня плата : {this.state.paymentPrice} грн/год</p>
+            </form> : null}
+          {(this.cowsRegEx.test(this.state.cows) && this.moneyRegEx.test(
+            this.state.energyPrice) && this.moneyRegEx.test(
+            this.state.fuelPrice) && this.moneyRegEx.test(
+            this.state.paymentPrice)) && (this.state.cows != 0 && this.state.energyPrice != 0 && this.state.fuelPrice != 0
+          && this.state.paymentPrice != 0) ?
+            <form className="output">
+              <p>Данні які будуть внесені для розрахунку</p>
+              <p>Кількість корів : {this.state.cows}</p>
+              <p>Ціна за пальне : {this.state.fuelPrice} грн/л</p>
+              <p>Ціна за електроенергію : {this.state.energyPrice} грн/кВт</p>
+              <p>Заробітня плата : {this.state.paymentPrice} грн/год</p>
+            </form> : null}
+        </div>
       </div>
     );
   }
 }
 
-export default Enties
+export default Entries
