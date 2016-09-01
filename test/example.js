@@ -1,40 +1,32 @@
+import {should, expect} from 'chai'
+import Entries from '../app/components/enterdata/entries'
+import TestUtils from 'react-addons-test-utils'
+import React from 'react'
+describe('Array', function () {
 
-import {should} from 'chai'
+  describe('render into document and assert', () => {
+    it('render component and assert', ()=> {
+      const wrapper = TestUtils.renderIntoDocument(<Entries />)
+      expect(1).to.eql(1)
+    })
 
-describe('Array', function(){
+  })
+  describe('#indexOf()', function () {
 
-  before(function(){
-    console.log('this called in before all');
-  });
-  beforeEach(function(){
-    console.log('invoke before each method');
-  });
-
-  afterEach(function(){
-    console.log('invoke after each method');
-  });
-  after(function(){
-    console.log('this called in after all');
-  });
-
-
-
-  describe('#indexOf()', function(){
-
-    it('should return -1 when the value is not present', function(){
+    it('should return -1 when the value is not present', function () {
       console.log('invoke one assert');
-      assert.equal(-1, [1,2,3].indexOf(5));
-      assert.equal(-1, [1,2,3].indexOf(0));
+      assert.equal(-1, [1, 2, 3].indexOf(5));
+      assert.equal(-1, [1, 2, 3].indexOf(0));
 
     });
   });
 
-  describe('#indexOf()', function(){
+  describe('#indexOf()', function () {
 
-    it('should return -1 when the value is not present', function(){
+    it('should return -1 when the value is not present', function () {
       console.log('invoke second should');
-      [1,2,3].indexOf(5).should.equal(-1);
-      [1,2,3].indexOf(0).should.equal(-1);
+      [1, 2, 3].indexOf(5).should.equal(-1);
+      [1, 2, 3].indexOf(0).should.equal(-1);
     });
   });
 });
