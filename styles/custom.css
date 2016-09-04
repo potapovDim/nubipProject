@@ -63,10 +63,16 @@
     line-height: 2.5;
     flex-grow: 1;
 }
+<<<<<<< HEAD
 
 .output-cows {
     line-height: 1.9;
     flex-grow: 1;
+=======
+.output-cows{
+    line-height: 1.9;
+    flex-grow: 3;
+>>>>>>> fix style and add farm structure
 }
 
 .tbinp {

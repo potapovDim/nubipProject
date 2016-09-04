@@ -86,6 +86,7 @@ class Entries extends Component {
       })
   }
 
+<<<<<<< HEAD
   initData = () => {
     const {dispatch} = this.props
     if (this.state.pregrant_cows === null) {
@@ -98,6 +99,8 @@ class Entries extends Component {
       dispatch(addEntry(_.omit(this.state, ['alert', 'alertSuccess', 'showFarm', 'message', 'buildingsADD'])))
     }
   }
+=======
+>>>>>>> fix style and add farm structure
 
   handleCalculateFarm = () => {
     let _state = {...this.state }
@@ -169,6 +172,7 @@ chooseWayMaintenance = type =>
   this.state.type === type ? this.setState({ type: null }) : this.setState({ type })
 
 
+<<<<<<< HEAD
 farmDirection = farm_direction =>
   this.state.farm_direction === farm_direction ? this.setState({ farm_direction: null }) : this.setState({ farm_direction })
 
@@ -301,6 +305,89 @@ render() {
             <p>Кількість телят: {calves}голів</p>
             <p>Спосіб утримання тварин : {type === 'attachable' ? "прив'зний" : "безприв'язний"}</p>
           </div> : null}
+=======
+  render() {
+    console.log(this.state)
+    let {cows, fuelPrice, energyPrice, paymentPrice}=this.props
+    return (
+      <div>
+        {this.state.alert ?
+          <p style={{clear:'both'}} className="text-center"><Alert bsStyle="danger">{this.state.message}</Alert>
+          </p> : null}
+        {this.state.alertSuccess ?
+          <p style={{clear:'both'}} className="text-center"><Alert bsStyle="success">Ваші дані успішно додані</Alert>
+          </p> : null}
+        <InformationButton name={'Інформація полів вводу данних'}>
+          {this.popoverLeft}
+          </InformationButton>
+        <div className="entries-data">
+          <form className="entries">
+
+            <br/>
+            <FormGroup >
+              <InputGroup>
+                <InputGroup.Addon style={{width:"300px"}}>Кількість корів </InputGroup.Addon>
+                <FormControl onBlur={(e)=>this.handleValidation(e,'cows')} onChange={(e)=>this.handleChange(e,'cows')}
+                             type="text"/>
+                <InputGroup.Button>
+                </InputGroup.Button>
+              </InputGroup>
+            </FormGroup>
+
+            <FormGroup >
+              <InputGroup>
+                <InputGroup.Addon style={{width:"300px"}}>Ціна на пальне ГРН / л</InputGroup.Addon>
+                <FormControl onBlur={(e)=>this.handleValidation(e,'fuelPrice')}
+                             onChange={(e)=>this.handleChange(e,'fuelPrice')} type="text"/>
+              </InputGroup>
+            </FormGroup>
+
+            <FormGroup >
+              <InputGroup>
+                <InputGroup.Addon style={{width:"300px"}}>Ціна на електроенергію ГРН / кВт</InputGroup.Addon>
+                <FormControl onBlur={(e)=>this.handleValidation(e,'energyPrice')}
+                             onChange={(e)=>this.handleChange(e,'energyPrice')} type="text"/>
+              </InputGroup>
+            </FormGroup>
+
+            <FormGroup >
+              <InputGroup>
+                <InputGroup.Addon style={{width:"300px"}}>Заробітня плата ГРН / год</InputGroup.Addon>
+                <FormControl onBlur={(e)=>this.handleValidation(e,'paymentPrice')}
+                             onChange={(e)=>this.handleChange(e,'paymentPrice')} type="text"/>
+              </InputGroup>
+            </FormGroup>
+
+            <LoadingButton action={this.handleAddQuantity}/>
+            <Button onClick={this.hangleCalculateFarm} type='button'>Розрахувати ферму</Button>
+            <Link to="/tables">
+              <Button disabled={(cows==0&&fuelPrice==0&&paymentPrice==0&&energyPrice==0)} type='button'>Перейти до
+                таблиць</Button>
+            </Link>
+          </form>
+          {(this.cowsRegEx.test(this.state.cows) && this.moneyRegEx.test(
+            this.state.energyPrice) && this.moneyRegEx.test(
+            this.state.fuelPrice) && this.moneyRegEx.test(
+            this.state.paymentPrice)) && (this.state.cows != 0 && this.state.energyPrice != 0 && this.state.fuelPrice != 0
+          && this.state.paymentPrice != 0) ?
+            <div className="output-data flash">
+              <h4>Данні які будуть внесені для розрахунку</h4>
+              <p>Кількість корів : {this.state.cows}</p>
+              <p>Ціна за пальне : {this.state.fuelPrice} грн/л</p>
+              <p>Ціна за електроенергію : {this.state.energyPrice} грн/кВт</p>
+              <p>Заробітня плата : {this.state.paymentPrice} грн/год</p>
+            </div> : null}
+          {this.state.showFarm ?
+            <div className="output-cows flash">
+              <h4>Структура ферми</h4>
+              <p>Кількість корів : {this.state.cows} голів</p>
+              <p>Кількість сухостійних корів : {this.state.dry_cows} голів </p>
+              <p>Кількість вагітних корів : {this.state.pregrant_cows} голів</p>
+              <p>Кількість хворих корів : {this.state.ill_cows} голів</p>
+              <p>Корови до 20ти днів: {this.state.cow_before_20days} голів</p>
+            </div> : null}
+        </div>
+>>>>>>> fix style and add farm structure
       </div>
       {this.state.showFarm &&
         <div>
