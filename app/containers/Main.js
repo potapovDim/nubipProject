@@ -23,7 +23,6 @@ class Main extends Component {
       tutorial = (<TablesTutorial show={this.state.show} hide={this.hide}/>)
     else if (this.props.location.pathname == '/entries')
       tutorial = (<EntriesTutorial show={this.state.show} hide={this.hide}/>)
-    console.log(tutorial)
     return (
       <div>
         <div style={{height:'100%'}}>

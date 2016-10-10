@@ -2,24 +2,22 @@ import {ADD_TO_ENTRIES, RESET} from './action_types'
 
 const initialState = {
   cows: 0,
-  fuelPrice:0,
-  energyPrice:0,
-  paymentPrice:0,
-  pregrant_cows:null,
-  dry_cows:null,
-  ill_cow:null,
-  cow_before_20days:null
-
-
+  fuelPrice: 0,
+  energyPrice: 0,
+  paymentPrice: 0,
+  pregrant_cows: null,
+  dry_cows: null,
+  ill_cows: null,
+  cow_before_20days: null
 }
 
 export default(state = initialState, action)=> {
-  console.log('action',action,state)
+  console.log('action', action, state)
   switch (action.type) {
     case ADD_TO_ENTRIES:
-      let _state=action.quantity
+      let _state = action.quantity
       return {
-        ...state,..._state
+        ...state, ..._state
       }
     case RESET:
       return {...state, initialState}

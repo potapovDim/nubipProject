@@ -7,7 +7,6 @@ import {login} from '../reducers/login/actions'
 class Log extends Component{
 
   render(){
-    console.log(this.props)
     return(
       <div>
         <Login {...this.props} />
