@@ -74,23 +74,23 @@ export class MilkingMachinesStallTable extends React.Component {
     })
     return (
       <div>
-        <h3 className="text-center">Техніко-економічні показники доїльних установок</h3>
+        <h3 className="text-center">Техніко-економічні показники доїльних установок (Установки для доїння у стійлах)</h3>
         <table style={{width:'100%'}} className="table-bordered text-center">
           <thead>
           <tr className="success">
             <td style={{width:'6%',height:'40px'}}>Марка</td>
-            <td style={{width:'8%'}}>Поголів'я корів</td>
-            <td style={{width:'8%'}}>Кількість доїльних апаратів</td>
-            <td style={{width:'8%'}}>Тип і марка доїльного апарату</td>
-            <td style={{width:'8%'}}>Кількість майстрів машинного доїння</td>
-            <td style={{width:'8%'}}>Продуктивність за одну годину ,голів корів</td>
-            <td style={{width:'8%'}}>Продуктивність майстра з двома апаратами</td>
-            <td style={{width:'8%'}}>Продуктивність майстра з трьома апаратами</td>
-            <td style={{width:'8%'}}>Марка вакуумного насоса</td>
-            <td style={{width:'8%'}}>Кількість вакуумних насосів</td>
-            <td style={{width:'8%'}}>Потужність привода ,кВт</td>
-            <td style={{width:'8%'}}>Маса установки ,кг</td>
-            <td style={{width:'8%'}}>Ціна</td>
+            <td style={{width:'7%'}}>Поголів'я корів</td>
+            <td style={{width:'7%'}}>Кількість доїльних апаратів</td>
+            <td style={{width:'7%'}}>Тип і марка доїльного апарату</td>
+            <td style={{width:'7%'}}>Кількість майстрів машинного доїння</td>
+            <td style={{width:'7%'}}>Продуктивність за одну годину ,голів корів</td>
+            <td style={{width:'7%'}}>Продуктивність майстра з двома апаратами</td>
+            <td style={{width:'7%'}}>Продуктивність майстра з трьома апаратами</td>
+            <td style={{width:'7%'}}>Марка вакуумного насоса</td>
+            <td style={{width:'7%'}}>Кількість вакуумних насосів</td>
+            <td style={{width:'7%'}}>Потужність привода ,кВт</td>
+            <td style={{width:'7%'}}>Маса установки ,кг</td>
+            <td style={{width:'7%'}}>Ціна</td>
           </tr>
           </thead>
         </table>
@@ -105,27 +105,27 @@ export class MilkingMachinesStallTable extends React.Component {
           <tbody >
           <tr>
             <td style={{width:'6%'}}><input style={{width:'100%'}} ref="brand" placeholder="марка"/></td>
-            <td style={{width:'8%'}}><input style={{width:'100%'}} ref="quantity_cows" placeholder="поголів'я корів"/>
+            <td style={{width:'7%'}}><input style={{width:'100%'}} ref="quantity_cows" placeholder="поголів'я корів"/>
             </td>
-            <td style={{width:'8%'}}><input style={{width:'100%'}} ref="quantity_machines"
+            <td style={{width:'7%'}}><input style={{width:'100%'}} ref="quantity_machines"
                                             placeholder="кількість апаратів"/></td>
-            <td style={{width:'8%'}}><input style={{width:'100%'}} ref="type_brand_apparatus"
+            <td style={{width:'7%'}}><input style={{width:'100%'}} ref="type_brand_apparatus"
                                             placeholder="тип і марка"/></td>
-            <td style={{width:'8%'}}><input style={{width:'100%'}} ref="quantity_personal"
+            <td style={{width:'7%'}}><input style={{width:'100%'}} ref="quantity_personal"
                                             placeholder="кількість майстрів"/></td>
-            <td style={{width:'8%'}}><input style={{width:'100%'}} ref="productivity"
+            <td style={{width:'7%'}}><input style={{width:'100%'}} ref="productivity"
                                             placeholder="продуктивність за год"/></td>
-            <td style={{width:'8%'}}><input style={{width:'100%'}} ref="man_productivity_with2"
+            <td style={{width:'7%'}}><input style={{width:'100%'}} ref="man_productivity_with2"
                                             placeholder="з двома апаратами "/></td>
-            <td style={{width:'8%'}}><input style={{width:'100%'}} ref="man_productivity_with3"
+            <td style={{width:'7%'}}><input style={{width:'100%'}} ref="man_productivity_with3"
                                             placeholder="з трьома апаратами "/></td>
-            <td style={{width:'8%'}}><input style={{width:'100%'}} ref="brand_vacuum_pump"
+            <td style={{width:'7%'}}><input style={{width:'100%'}} ref="brand_vacuum_pump"
                                             placeholder="марка насоса  "/></td>
-            <td style={{width:'8%'}}><input style={{width:'100%'}} ref="vacuum_pump_quantity"
+            <td style={{width:'7%'}}><input style={{width:'100%'}} ref="vacuum_pump_quantity"
                                             placeholder="кількість насосів "/></td>
-            <td style={{width:'8%'}}><input style={{width:'100%'}} ref="power" placeholder="потужність привода "/></td>
-            <td style={{width:'8%'}}><input style={{width:'100%'}} ref="weight" placeholder="маса установки "/></td>
-            <td style={{width:'8%'}}><input style={{width:'100%'}} ref="price" placeholder="ціна "/></td>
+            <td style={{width:'7%'}}><input style={{width:'100%'}} ref="power" placeholder="потужність привода "/></td>
+            <td style={{width:'7%'}}><input style={{width:'100%'}} ref="weight" placeholder="маса установки "/></td>
+            <td style={{width:'7%'}}><input style={{width:'100%'}} ref="price" placeholder="ціна "/></td>
           </tr>
           </tbody>
         </table >
@@ -213,7 +213,7 @@ export class MilkingMachinesHallTable extends React.Component {
     })
     return (
       <div>
-        <h3 className="text-center">Техніко-економічні показники доїльних установок(Установки для доїння у доїльному залі)</h3>
+        <h3 className="text-center">Техніко-економічні показники доїльних установок (Установки для доїння у доїльному залі)</h3>
         <table style={{width:'100%'}} className="table-bordered text-center">
           <thead>
           <tr className="success">
@@ -225,10 +225,10 @@ export class MilkingMachinesHallTable extends React.Component {
             <td style={{width:'7%'}}>Продуктивність за годину,голів</td>
             <td style={{width:'7%'}}>Потужність установки</td>
             <td style={{width:'7%'}}>Місткість бункера (Механізм роздавання кормів)</td>
-            <td style={{width:'7%'}}>Довжина транспортера(Механізм роздавання кормів)</td>
-            <td style={{width:'7%'}}>Потужність привода(Механізм роздавання кормів)</td>
+            <td style={{width:'7%'}}>Довжина транспортера (Механізм роздавання кормів)</td>
+            <td style={{width:'7%'}}>Потужність привода (Механізм роздавання кормів)</td>
             <td style={{width:'7%'}}>Вакуумно-силовий агрегат(Вакуумна система)</td>
-            <td style={{width:'7%'}}>Потужність привода(Вакуумна система)</td>
+            <td style={{width:'7%'}}>Потужність привода (Вакуумна система)</td>
             <td style={{width:'7%'}}>Вага</td>
             <td style={{width:'7%'}}>Ціна</td>
           </tr>
@@ -241,7 +241,7 @@ export class MilkingMachinesHallTable extends React.Component {
             </tbody>
           </table>
         </Infinity>
-        <table style={{width:'100%'}} className="table text-center">
+        <table style={{width:'100%'}} className="table text-left">
           <tbody >
           <tr>
             <td style={{width:'6%'}}><input style={{width:'100%'}} ref="brand" placeholder="марка"/></td>

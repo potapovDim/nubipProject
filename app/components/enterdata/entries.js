@@ -4,6 +4,7 @@ import {Link} from 'react-router'
 import LoadingButton from '../helpers/loadingButton'
 import InformationButton from '../helpers/informationButton'
 import {connect} from 'react-redux'
+import {addEntry, resetAll} from '../../reducers/entries/actions'
 
 class Entries extends Component {
   state = {
@@ -49,6 +50,20 @@ class Entries extends Component {
     header: 'Поля вводу кількості корів та оплат',
     message: `Кількість корів повинна містити чила від 3 до 4 знаків (лише цілі числа)
              `
+  }
+  initData = () => {
+    const {dispatch} = this.props
+    const quantity = {
+      cows: this.state.cows,
+      fuelPrice: this.state.fuelPrice,
+      energyPrice: this.state.energyPrice,
+      paymentPrice: this.state.paymentPrice,
+      pregrant_cows: this.state.pregrant_cows,
+      dry_cows: this.state.dry_cows,
+      ill_cows: this.state.ill_cows,
+      cow_before_20days: this.state.cow_before_20days
+    }
+    dispatch(addEntry(quantity))
   }
 
   hangleCalculateFarm = ()=> {
@@ -177,7 +192,9 @@ class Entries extends Component {
             <LoadingButton action={this.handleAddQuantity}/>
             <Button onClick={this.hangleCalculateFarm} type='button'>Розрахувати ферму</Button>
             <Link to="/tables">
-              <Button disabled={(cows == 0 && fuelPrice == 0 && paymentPrice == 0 && energyPrice == 0)} type='button'>Перейти
+              <Button onClick={this.initData}
+                      disabled={(cows == 0 && fuelPrice == 0 && paymentPrice == 0 && energyPrice == 0)}
+                      type='button'>Перейти
                 до
                 таблиць</Button>
             </Link>
