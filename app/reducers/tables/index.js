@@ -5,11 +5,25 @@ import {
 import update from 'react-addons-update'
 
 const initialState = {
-  pumps: [
-    {brand: '123', innings: '12.4', full_pressure: '5.2', speed_rotate: '12', power: '523',KKD:'44',allowable_height:"as",price:"12"},
-    {brand: '321', innings: '13.5', full_pressure: '4.2', speed_rotate: '22', power: '123',KKD:'44',allowable_height:"dsa",price:"12"},
-    {brand: '321', innings: '16.5', full_pressure: '2.2', speed_rotate: '4', power: '323',KKD:'44',allowable_height:"dsa",price:"12"},
-    {brand: '312', innings: '24.5', full_pressure: '3.2', speed_rotate: '21', power: '223',KKD:'44',allowable_height:"dsa",price:"12"},
+  pumps_rotary: [
+    {brand: '1,5К-6', innings: '11', full_pressure: '0.174', speed_rotate: '2900', power: '1.5',KKD:'44',allowable_height:"6.6",price:"12"},
+    {brand: '2К-6', innings: '20', full_pressure: '0.308', speed_rotate: '2900', power: '4.5',KKD:'64',allowable_height:"7.2",price:"12"},
+    {brand: '2К-6А', innings: '30', full_pressure: '0.2', speed_rotate: '2900', power: '2.8',KKD:'64.1',allowable_height:"5.7",price:"12"},
+    {brand: '2К-6Б', innings: '25', full_pressure: '0.164', speed_rotate: '2900', power: '2.8',KKD:'64',allowable_height:"5.7",price:"12"},
+    {brand: '2К-9', innings: '20', full_pressure: '0.185', speed_rotate: '2900', power: '2.8',KKD:'58',allowable_height:"6.8",price:"12"},
+    {brand: '2К-9А', innings: '17', full_pressure: '0.150', speed_rotate: '2900', power: '1.5',KKD:'65',allowable_height:"7.3",price:"12"},
+    {brand: '2К-9Б', innings: '15', full_pressure: '0.120', speed_rotate: '2900', power: '1.5',KKD:'60',allowable_height:"7",price:"12"},
+    {brand: '3К-9', innings: '45', full_pressure: '0.310', speed_rotate: '2900', power: '7.0',KKD:'71',allowable_height:"6",price:"12"},
+    {brand: '3К-9А', innings: '35', full_pressure: '0.225', speed_rotate: '2900', power: '4.5',KKD:'70',allowable_height:"6.9",price:"12"},
+  ],
+  pumps_submersible: [
+    {brand: 'ЄЦВА-2-10', innings: '2.5', full_pressure: '0.4', speed_rotate: '2775', power: '0.75',diameter_hole:'100',diameter_pipe:'32',quantity_whiles:'14',prise:''},
+    {brand: 'ЄЦВА-1.6-65', innings: '2.2', full_pressure: '0.6', speed_rotate: '2775', power: '0.75',diameter_hole:'100',diameter_pipe:'32',quantity_whiles:'13',prise:''},
+    {brand: 'ЄЦВА-7.2-75', innings: '7', full_pressure: '0.8', speed_rotate: '2880', power: '2.5',diameter_hole:'150',diameter_pipe:'50',quantity_whiles:'10',prise:''},
+    {brand: 'ЄЦВА-7.2-120', innings: '9', full_pressure: '0.6', speed_rotate: '2835', power: '4.5',diameter_hole:'150',diameter_pipe:'50',quantity_whiles:'16',prise:''},
+    {brand: '6АПВ 9х7', innings: '10', full_pressure: '0.5', speed_rotate: '2950', power: '2.5',diameter_hole:'150',diameter_pipe:'40',quantity_whiles:'7',prise:''},
+    {brand: '6АПВ 9х12', innings: '8', full_pressure: '0.75', speed_rotate: '2950', power: '4',diameter_hole:'150',diameter_pipe:'40',quantity_whiles:'12'},
+    {brand: 'ЄПН-6-16-50', innings: '20', full_pressure: '0.8', speed_rotate: '290', power: '7.5',diameter_hole:'150',diameter_pipe:'60',quantity_whiles:'10',prise:''},
   ],
   machines:[
     {name :'tractor_first_Name', power:'32',rotate:'1800',pov:"32",price:"43"},
@@ -59,8 +73,6 @@ const initialState = {
     {brand:"УДА-100",quantity_cows:'400',quantity_personal:'2',quantity_operator:'1',quantity_apparatus:'16',productivity_per_hour:'100',power_needed:'22',hopper_capacity:'2',length_conveyor:"-",power_drive:'0.8',vacuum_system_aggregate:'2',aggregate_power:'4',weight:"12800",price:''},
     {brand:"УДС-3(Б)",quantity_cows:'100',quantity_personal:'2',quantity_operator:'-',quantity_apparatus:'8',productivity_per_hour:'45',power_needed:'5.5',hopper_capacity:'1',length_conveyor:"-",power_drive:'-',vacuum_system_aggregate:'1',aggregate_power:'4',weight:"3150",price:''},
   ]
-
-
 }
 
 export default(state = initialState, action)=> {

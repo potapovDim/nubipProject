@@ -17,7 +17,12 @@
     line-height: 1.6;
     flex-grow: 1;
 }
-
+.tbinp{
+    width: 25px;
+}
+.width-bl{
+    width: 11%
+}
 .info-field {
     position: relative;
 }

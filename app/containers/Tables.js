@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Tabs, Tab} from 'react-bootstrap'
 
 
-import PumpTable from '../components/tables/pumpsTable'
+import {PumpRotateTable,PumpSubmersibleTable} from '../components/tables/pumpsTable'
 import TractorTable from '../components/tables/tractorsTable'
 import SternTable from '../components/tables/sternTable'
 import MachineTable from '../components/tables/machineTable'
@@ -19,7 +19,8 @@ class Table extends React.Component {
       <div>
         <Tabs defaultActiveKey={1} animation={false} id="noanim-tab-example">
           <Tab eventKey={1} title="Насоси ">
-            <PumpTable {...this.props} />
+            <PumpRotateTable {...this.props} />
+            <PumpSubmersibleTable {...this.props} />
           </Tab>
           <Tab eventKey={2} title="Трактори">
             <TractorTable {...this.props} />
