@@ -53,20 +53,35 @@ class Entries extends Component {
   }
   initData = () => {
     const {dispatch} = this.props
-    const quantity = {
-      cows: this.state.cows,
-      fuelPrice: this.state.fuelPrice,
-      energyPrice: this.state.energyPrice,
-      paymentPrice: this.state.paymentPrice,
-      pregrant_cows: this.state.pregrant_cows,
-      dry_cows: this.state.dry_cows,
-      ill_cows: this.state.ill_cows,
-      cow_before_20days: this.state.cow_before_20days
+    if (this.state.pregrant_cows === null) {
+      this.handleCalculateFarm()
+      const quantity = {
+        cows: this.state.cows,
+        fuelPrice: this.state.fuelPrice,
+        energyPrice: this.state.energyPrice,
+        paymentPrice: this.state.paymentPrice,
+        pregrant_cows: this.state.pregrant_cows,
+        dry_cows: this.state.dry_cows,
+        ill_cows: this.state.ill_cows,
+        cow_before_20days: this.state.cow_before_20days
+      }
+      dispatch(addEntry(quantity))
+    } else {
+      const quantity = {
+        cows: this.state.cows,
+        fuelPrice: this.state.fuelPrice,
+        energyPrice: this.state.energyPrice,
+        paymentPrice: this.state.paymentPrice,
+        pregrant_cows: this.state.pregrant_cows,
+        dry_cows: this.state.dry_cows,
+        ill_cows: this.state.ill_cows,
+        cow_before_20days: this.state.cow_before_20days
+      }
+      dispatch(addEntry(quantity))
     }
-    dispatch(addEntry(quantity))
   }
 
-  hangleCalculateFarm = ()=> {
+  handleCalculateFarm = ()=> {
     let _state = {...this.state}
     if (_state.cows === 0) {
       this.setState({
@@ -190,7 +205,7 @@ class Entries extends Component {
             </FormGroup>
 
             <LoadingButton action={this.handleAddQuantity}/>
-            <Button onClick={this.hangleCalculateFarm} type='button'>Розрахувати ферму</Button>
+            <Button onClick={this.hanDleCalculateFarm} type='button'>Розрахувати ферму</Button>
             <Link to="/tables">
               <Button onClick={this.initData}
                       disabled={(cows == 0 && fuelPrice == 0 && paymentPrice == 0 && energyPrice == 0)}

@@ -3,12 +3,12 @@ import {connect} from 'react-redux'
 import {Tabs, Tab} from 'react-bootstrap'
 
 
-import {PumpRotateTable,PumpSubmersibleTable} from '../components/tables/pumpsTable'
-import TractorTable from '../components/tables/tractorsTable'
-import SternTable from '../components/tables/sternTable'
-import MachineTable from '../components/tables/machineTable'
-import DrinkingbowTable from '../components/tables/drinkingbowTable'
-import {MilkingMachinesStallTable,MilkingMachinesHallTable} from '../components/tables/milkingMachines'
+import {PumpRotateTable,PumpSubmersibleTable} from '../components/tables/entriesTabses/pumpsTable'
+import TractorTable from '../components/tables/entriesTabses/tractorsTable'
+import SternTable from '../components/tables/staticTables/sternTable'
+import MachineTable from '../components/tables/entriesTabses/machineTable'
+import {DrinkingbowCalvesTable,DrinkingbowCowsTable} from '../components/tables/entriesTabses/drinkingbowTable'
+import {MilkingMachinesStallTable,MilkingMachinesHallTable} from '../components/tables/entriesTabses/milkingMachines'
 
 
 import {addToTable, removeFromTable} from '../reducers/tables/actions'
@@ -32,7 +32,8 @@ class Table extends React.Component {
             <MachineTable {...this.props} />
           </Tab>
           <Tab eventKey={5} title="Автонапувалки">
-            <DrinkingbowTable {...this.props}/>
+            <DrinkingbowCowsTable {...this.props}/>
+            <DrinkingbowCalvesTable {...this.props}/>
           </Tab>
           <Tab eventKey={6} title="Доїльні установки">
             <MilkingMachinesStallTable {...this.props}/>

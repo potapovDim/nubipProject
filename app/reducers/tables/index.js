@@ -37,24 +37,33 @@ const initialState = {
     {name :'tractor_third_Name', power:'35',rotate:'1400',pov:"32",price:"43"},
     {name :'tractor_fourth_Name', power:'36',rotate:'800',pov:"32",price:"43"},
   ],
-  stern_norms:[
-    {view_feed :'Cіно', get_milk_year2000:'34',get_milk_year3000:'1200',get_milk_year4000:"43",price:'1'},
-    {view_feed :'Солома', get_milk_year2000:'34',get_milk_year3000:'1200',get_milk_year4000:"43",price:'1'},
-    {view_feed :'Силос', get_milk_year2000:'34',get_milk_year3000:'1200',get_milk_year4000:"43",price:'1'},
-    {view_feed :'Коренеплоди', get_milk_year2000:'34',get_milk_year3000:'1200',get_milk_year4000:"43",price:'1'},
-    {view_feed :'Концентровані корми', get_milk_year2000:'34',get_milk_year3000:'1200',get_milk_year4000:"43",price:'1'},
-    {view_feed :'Карбамід ,г', get_milk_year2000:'34',get_milk_year3000:'1200',get_milk_year4000:"43",price:'1'},
-    {view_feed :'Сіль кухонна ,г', get_milk_year2000:'34',get_milk_year3000:'1200',get_milk_year4000:"43",price:'1'},
-    {view_feed :'Мінеральні корми', get_milk_year2000:'34',get_milk_year3000:'1200',get_milk_year4000:"43",price:'1'},
+  water_norms:[
+    {kind_of_animal:'Корови дійні',norm_per_day:'100'},
+    {kind_of_animal:'Бики і нетелі',norm_per_day:'60'},
+    {kind_of_animal:'Молодняк ВРХ',norm_per_day:'30'},
+    {kind_of_animal:'Телята',norm_per_day:'20'},
   ],
-  drinking_bowl:[
+  stern_norms:[
+    {view_feed :'Cіно', get_milk_year2000:'4',get_milk_year3000:'4.5',get_milk_year4000:"6",price:'1'},
+    {view_feed :'Солома', get_milk_year2000:'1',get_milk_year3000:'1',get_milk_year4000:"1",price:'1'},
+    {view_feed :'Силос', get_milk_year2000:'24',get_milk_year3000:'24',get_milk_year4000:"26",price:'1'},
+    {view_feed :'Коренеплоди', get_milk_year2000:'3',get_milk_year3000:'7',get_milk_year4000:"8",price:'1'},
+    {view_feed :'Концентровані корми', get_milk_year2000:'1',get_milk_year3000:'2',get_milk_year4000:"3",price:'1'},
+    {view_feed :'Карбамід ,г', get_milk_year2000:'0.06',get_milk_year3000:'0.06',get_milk_year4000:"0.08",price:'1'},
+    {view_feed :'Сіль кухонна ,г', get_milk_year2000:'0.05',get_milk_year3000:'0.5',get_milk_year4000:"0.08",price:'1'},
+    {view_feed :'Мінеральні корми', get_milk_year2000:'0.17',get_milk_year3000:'0.18',get_milk_year4000:"0.18",price:'1'},
+  ],
+  drinking_bowl_cows:[
     {brand :"АП-1А", water_volume:'1.8',seats:"1",heads:'2',weight:'0.75',price:"10"},
-    {brand :"АП-1А", water_volume:'1.8',seats:"1",heads:'2',weight:'0.75',price:"10"},
-    {brand :"АП-1А", water_volume:'1.8',seats:"1",heads:'2',weight:'0.75',price:"10"},
-    {brand :"АП-1А", water_volume:'1.8',seats:"1",heads:'2',weight:'0.75',price:"10"},
-    {brand :"АП-1А", water_volume:'1.8',seats:"1",heads:'2',weight:'0.75',price:"10"},
-    {brand :"АП-1А", water_volume:'1.8',seats:"1",heads:'2',weight:'0.75',price:"10"},
-    {brand :"АП-1А", water_volume:'1.8',seats:"1",heads:'2',weight:'0.75',price:"10"},
+    {brand :"ПА-1А", water_volume:'2',seats:"1",heads:'2',weight:'6',price:"10"},
+    {brand :"ПА-1Б", water_volume:'2.1',seats:"1",heads:'2',weight:'5.1',price:"10"},
+    {brand :"АГК-4Б", water_volume:'40',seats:"4",heads:'100',weight:'30.7',price:"10"},
+    {brand :"АГК-12", water_volume:'40',seats:"8",heads:'200',weight:'46',price:"10"},
+  ],
+  drinking_bowl_calves:[
+    {brand :"АГП-Ф-200", water_volume:'4',seats:"20",heads:'200',weight:'200',price:"10"},
+    {brand :"ОПТ-Ф-200", water_volume:'2',seats:"20",heads:'200',weight:'375',price:"10"},
+    {brand :"ОПК-Ф-200", water_volume:'4',seats:"20",heads:'200',weight:'415',price:"10"},
   ],
   milking_machines_stall:[
     {brand:"АД-100А",quantity_cows:'100',quantity_machines:'10',type_brand_apparatus:'Тритактний "Волга" АДУ-1-04',quantity_personal:'4',productivity:'55',man_productivity_with2:'12',man_productivity_with3:'18',brand_vacuum_pump:'РВН-40/350',vacuum_pump_quantity:"1",power:'3',weight:"870",price:''},
@@ -72,6 +81,16 @@ const initialState = {
     {brand:"УДА-16А",quantity_cows:'190',quantity_personal:'1',quantity_operator:'1',quantity_apparatus:'16',productivity_per_hour:'70',power_needed:'22',hopper_capacity:'0.53',length_conveyor:"46",power_drive:'1',vacuum_system_aggregate:'2',aggregate_power:'4',weight:"4300",price:''},
     {brand:"УДА-100",quantity_cows:'400',quantity_personal:'2',quantity_operator:'1',quantity_apparatus:'16',productivity_per_hour:'100',power_needed:'22',hopper_capacity:'2',length_conveyor:"-",power_drive:'0.8',vacuum_system_aggregate:'2',aggregate_power:'4',weight:"12800",price:''},
     {brand:"УДС-3(Б)",quantity_cows:'100',quantity_personal:'2',quantity_operator:'-',quantity_apparatus:'8',productivity_per_hour:'45',power_needed:'5.5',hopper_capacity:'1',length_conveyor:"-",power_drive:'-',vacuum_system_aggregate:'1',aggregate_power:'4',weight:"3150",price:''},
+  ],
+  building_for_stern:[
+    {kind_of_building:'Траншея для сінажу',volume:'250',B:'6',L:'15',H:'3',lost_stern:'5',KKD:'0.98'},
+    {kind_of_building:'Траншея для сінажу',volume:'500',B:'9',L:'31.5',H:'3',lost_stern:'5',KKD:'0.98'},
+    {kind_of_building:'Траншея для сінажу',volume:'750',B:'12',L:'31.5',H:'3',lost_stern:'5',KKD:'0.98'},
+    {kind_of_building:'Траншея для сінажу',volume:'1500',B:'12',L:'49.5',H:'3',lost_stern:'5',KKD:'0.98'},
+    {kind_of_building:'Коронебульбоплодні сховища',volume:'4000',B:'27',L:'78',H:'3.6',lost_stern:'3',KKD:'0.98'},
+    {kind_of_building:'Гноєсховища',volume:'300',B:'28',L:'30',H:'3.6',lost_stern:'0',KKD:'1'},
+    {kind_of_building:'Гноєсховища',volume:'500',B:'28',L:'42',H:'3.6',lost_stern:'0',KKD:'1'},
+    {kind_of_building:'Гноєсховища',volume:'2000',B:'25',L:'65',H:'3.6',lost_stern:'0',KKD:'1'},
   ]
 }
 
