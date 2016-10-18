@@ -1,3 +1,4 @@
+//величина резервного запасу
 const sternStocks = (k, D, a, m) => {
   //к - коефіцієнт == 1.05
   //D - кількість днів , на який період буде зберігатися корм
@@ -5,13 +6,20 @@ const sternStocks = (k, D, a, m) => {
   //m - кількість тварин в групі
   return k * D * a * m
 }
+
+//sternStocks - об'єм корму в метрах кубічних
 const sternStore = (G, p) => {
-  //G - необхідна кількість корму в кг
+  //G - необхідна кількість корму в кг - sternStocks
   //р - об'ємна маса корму
   return G / p
 }
-const quantityStors = (sternType,sternQuantity,storeVolume) => {
-  switch (sternType){
+const quantityStores = (sternQuantity, storeVolume) => {
+  //sternQuantity - кількість корму в метрах кубічних
+  //storeVolume - об'єм одного сховища
+}
 
-  }
+module.exports = {
+  sternStocks,
+  sternStore,
+  quantityStores
 }
