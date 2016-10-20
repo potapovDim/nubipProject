@@ -53,6 +53,15 @@ const initialState = {
     {view_feed :'Сіль кухонна ,г', get_milk_year2000:'0.05',get_milk_year3000:'0.5',get_milk_year4000:"0.08",price:'1'},
     {view_feed :'Мінеральні корми', get_milk_year2000:'0.17',get_milk_year3000:'0.18',get_milk_year4000:"0.18",price:'1'},
   ],
+  stern_norms_feeding:[
+    {view_feed:'Сіно', many_components:'2' ,intensive:'0'},
+    {view_feed:'Солома', many_components:'2' ,intensive:'0'},
+    {view_feed:'Силос', many_components:'8' ,intensive:'0'},
+    {view_feed:'Сінаж', many_components:'6' ,intensive:'13'},
+    {view_feed:'Коренеплоди', many_components:'5' ,intensive:'0'},
+    {view_feed:'Концентровані корми', many_components:'2.5' ,intensive:'3.5'},
+    {view_feed:'Сіль', many_components:'0.04' ,intensive:'0.04'},
+  ],
   drinking_bowl_cows:[
     {brand :"АП-1А", water_volume:'1.8',seats:"1",heads:'2',weight:'0.75',price:"10"},
     {brand :"ПА-1А", water_volume:'2',seats:"1",heads:'2',weight:'6',price:"10"},
@@ -91,7 +100,8 @@ const initialState = {
     {kind_of_building:'Гноєсховища',volume:'300',B:'28',L:'30',H:'3.6',lost_stern:'0',KKD:'1'},
     {kind_of_building:'Гноєсховища',volume:'500',B:'28',L:'42',H:'3.6',lost_stern:'0',KKD:'1'},
     {kind_of_building:'Гноєсховища',volume:'2000',B:'25',L:'65',H:'3.6',lost_stern:'0',KKD:'1'},
-  ]
+  ],
+
 }
 
 export default(state = initialState, action)=> {

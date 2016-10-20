@@ -1,5 +1,5 @@
 //величина резервного запасу
-const sternStocks = (k, D, a, m) => {
+const sternNeed = (k = 1.05, D, a, m) => {
   //к - коефіцієнт == 1.05
   //D - кількість днів , на який період буде зберігатися корм
   //а - добова норма для тварини
@@ -19,7 +19,7 @@ const quantityStores = (sternQuantity, storeVolume) => {
 }
 
 module.exports = {
-  sternStocks,
+  sternNeed,
   sternStore,
   quantityStores
 }
