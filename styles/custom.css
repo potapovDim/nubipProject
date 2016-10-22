@@ -9,6 +9,19 @@
     min-height: 620px;
 }
 
+.stern-first-table {
+    flex-grow: 1;
+    width: 55%;
+}
+.stern-second-table {
+    flex-grow: 1;
+    width: 40%;
+}
+.stern-separator {
+    flex-grow: 1;
+    width: 5%;
+}
+
 .output-data {
     line-height: 2.4;
     flex-grow: 1;

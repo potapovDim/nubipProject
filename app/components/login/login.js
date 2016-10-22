@@ -25,7 +25,7 @@ class Login extends Component {
           </FormGroup>
           <FormGroup>
             <Col smOffset={2} sm={8}>
-              <Link to="/entries">
+              <Link to="/stern">
                 <Button onClick={this.handleLogin} type="submit">
                   Login
                 </Button>

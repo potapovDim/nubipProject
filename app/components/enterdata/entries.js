@@ -4,9 +4,8 @@ import {Link} from 'react-router'
 import LoadingButton from '../helpers/loadingButton'
 import InformationButton from '../helpers/informationButton'
 import {connect} from 'react-redux'
-import {addEntry, resetAll} from '../../reducers/entries/actions'
 
-class Entries extends Component {
+export class Entries extends Component {
   state = {
     alert: false,
     alertSuccess: false,

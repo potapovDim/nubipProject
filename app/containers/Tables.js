@@ -25,9 +25,9 @@ class Table extends React.Component {
           <Tab eventKey={2} title="Трактори">
             <TractorTable {...this.props} />
           </Tab>
-          <Tab eventKey={3} title="Кормові норми">
-            <SternTable {...this.props} />
-          </Tab>
+          {/*<Tab eventKey={3} title="Кормові норми">*/}
+            {/*<SternTable {...this.props} />*/}
+          {/*</Tab>*/}
           <Tab eventKey={4} title="Сг машини">
             <MachineTable {...this.props} />
           </Tab>
