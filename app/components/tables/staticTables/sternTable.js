@@ -1,5 +1,6 @@
 import React from 'react'
 import Infinity from 'react-infinite'
+
 class SternTable extends React.Component {
   handleCollectData = ()=> {
     let view_feed = this.refs.view_feed.value
@@ -77,6 +78,7 @@ class SternTable extends React.Component {
 }
 
 class SternTableFeeding extends React.Component {
+
   handleCollectData = ()=> {
     let view_feed = this.refs.view_feed.value
     let many_components = this.refs.many_components.value
@@ -92,9 +94,11 @@ class SternTableFeeding extends React.Component {
       this.props.addToTable(sternNew, 'stern_norms_feeding')
     }
   }
+
   handleRemoveData = ()=> {
     this.props.removeFromTable('stern_norms_feeding')
   }
+
 
   render() {
     let {stern_norms_feeding}=this.props;

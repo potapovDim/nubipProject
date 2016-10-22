@@ -5,6 +5,7 @@ const initialState = {
   fuelPrice: 0,
   energyPrice: 0,
   paymentPrice: 0,
+  season_stall: null,
   pregrant_cows: null,
   dry_cows: null,
   ill_cows: null,
@@ -12,7 +13,6 @@ const initialState = {
 }
 
 export default(state = initialState, action)=> {
-  console.log('action', action, state)
   switch (action.type) {
     case ADD_TO_ENTRIES:
       let _state = action.quantity

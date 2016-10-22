@@ -13,29 +13,35 @@
     flex-grow: 1;
     width: 55%;
 }
+
 .stern-second-table {
     flex-grow: 1;
     width: 40%;
 }
+
 .stern-separator {
     flex-grow: 1;
     width: 5%;
 }
 
 .output-data {
-    line-height: 2.4;
+    line-height: 2.5;
     flex-grow: 1;
 }
-.output-cows{
-    line-height: 1.6;
+
+.output-cows {
+    line-height: 2.5;
     flex-grow: 1;
 }
-.tbinp{
+
+.tbinp {
     width: 25px;
 }
-.width-bl{
+
+.width-bl {
     width: 11%
 }
+
 .info-field {
     position: relative;
 }
