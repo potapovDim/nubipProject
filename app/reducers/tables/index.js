@@ -458,15 +458,7 @@ const initialState = {
     {kind_of_building: 'Траншея для сінажу', volume: '500', B: '9', L: '31.5', H: '3', lost_stern: '5', KKD: '0.98'},
     {kind_of_building: 'Траншея для сінажу', volume: '750', B: '12', L: '31.5', H: '3', lost_stern: '5', KKD: '0.98'},
     {kind_of_building: 'Траншея для сінажу', volume: '1500', B: '12', L: '49.5', H: '3', lost_stern: '5', KKD: '0.98'},
-    {
-      kind_of_building: 'Коронебульбоплодні сховища',
-      volume: '4000',
-      B: '27',
-      L: '78',
-      H: '3.6',
-      lost_stern: '3',
-      KKD: '0.98'
-    },
+    {kind_of_building: 'Коронебульбоплодні сховища', volume: '4000', B: '27',L: '78', H: '3.6', lost_stern: '3', KKD: '0.98'},
     {kind_of_building: 'Гноєсховища', volume: '300', B: '28', L: '30', H: '3.6', lost_stern: '0', KKD: '1'},
     {kind_of_building: 'Гноєсховища', volume: '500', B: '28', L: '42', H: '3.6', lost_stern: '0', KKD: '1'},
     {kind_of_building: 'Гноєсховища', volume: '2000', B: '25', L: '65', H: '3.6', lost_stern: '0', KKD: '1'},
