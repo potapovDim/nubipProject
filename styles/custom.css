@@ -2,6 +2,10 @@
     display: flex;
     justify-content: flex-start;
 }
+.inputs input {
+    width: 100%;
+    box-sizing: border-box;
+}
 
 .entries {
     flex-grow: 1;
@@ -11,17 +15,17 @@
 
 .stern-first-table {
     flex-grow: 1;
-    width: 55%;
+    width: 47%;
 }
 
 .stern-second-table {
     flex-grow: 1;
-    width: 40%;
+    width: 47%;
 }
 
 .stern-separator {
     flex-grow: 1;
-    width: 5%;
+    width: 6%;
 }
 
 .output-data {

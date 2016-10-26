@@ -194,47 +194,47 @@ const initialState = {
     {kind_of_animal: 'Телята', norm_per_day: '20'},
   ],
   stern_norms: [
-    {view_feed: 'Cіно', get_milk_year2000: '4', get_milk_year3000: '4.5', get_milk_year4000: "6", price: '1'},
-    {view_feed: 'Солома', get_milk_year2000: '1', get_milk_year3000: '1', get_milk_year4000: "1", price: '1'},
-    {view_feed: 'Силос', get_milk_year2000: '24', get_milk_year3000: '24', get_milk_year4000: "26", price: '1'},
-    {view_feed: 'Коренеплоди', get_milk_year2000: '3', get_milk_year3000: '7', get_milk_year4000: "8", price: '1'},
+    {view_feed: 'Cіно', get_milk_year2000: 4, get_milk_year3000: 4.5, get_milk_year4000: 6, price: 1},
+    {view_feed: 'Солома', get_milk_year2000: 1, get_milk_year3000: 1, get_milk_year4000: 1, price: 1},
+    {view_feed: 'Силос', get_milk_year2000: 24, get_milk_year3000: 24, get_milk_year4000: 26, price: 1},
+    {view_feed: 'Коренеплоди', get_milk_year2000: 3, get_milk_year3000: 7, get_milk_year4000: 8, price: 1},
     {
       view_feed: 'Концентровані корми',
-      get_milk_year2000: '1',
-      get_milk_year3000: '2',
-      get_milk_year4000: "3",
-      price: '1'
+      get_milk_year2000: 1,
+      get_milk_year3000: 2,
+      get_milk_year4000: 3,
+      price: 1
     },
     {
-      view_feed: 'Карбамід ,г',
-      get_milk_year2000: '0.06',
-      get_milk_year3000: '0.06',
-      get_milk_year4000: "0.08",
-      price: '1'
+      view_feed: 'Карбамід ,кг',
+      get_milk_year2000: 0.06,
+      get_milk_year3000: 0.06,
+      get_milk_year4000: 0.08,
+      price: 1
     },
     {
-      view_feed: 'Сіль кухонна ,г',
-      get_milk_year2000: '0.05',
-      get_milk_year3000: '0.5',
-      get_milk_year4000: "0.08",
-      price: '1'
+      view_feed: 'Сіль кухонна ,кг',
+      get_milk_year2000: 0.05,
+      get_milk_year3000: 0.05,
+      get_milk_year4000: 0.08,
+      price: 1
     },
     {
       view_feed: 'Мінеральні корми',
-      get_milk_year2000: '0.17',
-      get_milk_year3000: '0.18',
-      get_milk_year4000: "0.18",
-      price: '1'
+      get_milk_year2000: 0.17,
+      get_milk_year3000: .18,
+      get_milk_year4000: 0.18,
+      price: 1
     },
   ],
   stern_norms_feeding: [
-    {view_feed: 'Сіно', many_components: '2', intensive: '0', price: ''},
-    {view_feed: 'Солома', many_components: '2', intensive: '0', price: ''},
-    {view_feed: 'Силос', many_components: '8', intensive: '0', price: ''},
-    {view_feed: 'Сінаж', many_components: '6', intensive: '13', price: ''},
-    {view_feed: 'Коренеплоди', many_components: '5', intensive: '0', price: ''},
-    {view_feed: 'Концентровані корми', many_components: '2.5', intensive: '3.5', price: ''},
-    {view_feed: 'Сіль', many_components: '0.04', intensive: '0.04', price: ''},
+    {view_feed: 'Сіно', many_components: 2, intensive: 0, price: ''},
+    {view_feed: 'Солома', many_components: 2, intensive: 0, price: ''},
+    {view_feed: 'Силос', many_components: 8, intensive: 0, price: ''},
+    {view_feed: 'Сінаж', many_components: 6, intensive: 13, price: ''},
+    {view_feed: 'Коренеплоди', many_components: 5, intensive: 0, price: ''},
+    {view_feed: 'Концентровані корми', many_components: 2.5, intensive: 3.5, price: ''},
+    {view_feed: 'Сіль', many_components: 0.04, intensive: 0.04, price: ''},
   ],
   drinking_bowl_cows: [
     {brand: "АП-1А", water_volume: '1.8', seats: "1", heads: '2', weight: '0.75', price: "10"},

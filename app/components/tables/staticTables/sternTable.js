@@ -59,7 +59,7 @@ class SternTable extends React.Component {
         </Infinity>
         <table className="table text-center">
           <tbody>
-          <tr style={{width: '100%'}}>
+          <tr style={{width: '100%'}} className="inputs">
             <td><input ref="view_feed" placeholder="вид корму"/></td>
             <td><input ref="get_milk_year2000" placeholder="надій 2000 кг"/></td>
             <td><input ref="get_milk_year3000" placeholder="надій 3000 кг"/></td>
@@ -134,7 +134,7 @@ class SternTableFeeding extends React.Component {
         </Infinity>
         <table className="table text-center">
           <tbody>
-          <tr style={{width: '100%'}}>
+          <tr style={{width: '100%'}} className="inputs">
             <td style={{width: '25%'}}><input ref="view_feed" placeholder="вид корму"/></td>
             <td style={{width: '25%'}}><input ref="many_components" placeholder="багатокомпонентний"/></td>
             <td style={{width: '25%'}}><input ref="intensive" placeholder="інтенсивний"/></td>

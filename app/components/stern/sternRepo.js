@@ -8,11 +8,12 @@ import {
 import InformationButton from '../helpers/informationButton'
 import {Popover} from 'react-bootstrap'
 import {SternTable, SternTableFeeding} from '../tables/staticTables/sternTable'
+import _ from 'lodash'
 
 export class SternRepo extends Component {
   state = {
     getMilkPerYear: null,
-    typeFeeding: null,
+    typeFeeding: null
   }
 
 
@@ -33,26 +34,40 @@ export class SternRepo extends Component {
   );
 
   choosePlan = (type, value) => {
-    type == 'typeFeeding' ? (this.state[type] == value ? this.setState({typeFeeding: null}) : this.setState({typeFeeding: value}))
+    type == 'typeFeeding' ? (this.state[type] == value ? this.setState({typeFeeding: null}) : this.setState(
+      {typeFeeding: value}))
       : (this.state[type] == value ? this.setState({getMilkPerYear: null}) : this.setState({getMilkPerYear: value}))
+
   }
 
   componentWillMount() {
-    console.log(this.props)
     const {cows, cow_before_20days, building_for_stern, stern_norms, stern_norms_feeding, season_stall} = this.props
+    console.log(cows, cow_before_20days, building_for_stern, stern_norms, stern_norms_feeding, season_stall)
     this.setState({cows, cow_before_20days, building_for_stern, stern_norms, stern_norms_feeding, season_stall})
+  }
+
+  calculateFullNeedingOfStern = () => {
+    const {sternFeeding, sternCows} = this.state
+    const allStern = _.reduce(sternFeeding, (result, value, key) => {
+        result.hasOwnProperty(key) ? null : result[key] = value
+        return result
+      },
+      _.reduce(sternCows, (result, value, key) => {
+        sternFeeding.hasOwnProperty(key) ? result[key] = sternFeeding[key] + sternCows[key] : result[key] = value
+        return result
+      }, {}))
+    this.setState({allStern})
   }
 
   calculateSternFeeding = () => {
     const sternFeeding = {}
     const {cow_before_20days, stern_norms_feeding, typeFeeding} = this.state
-    console.log(cow_before_20days)
     typeFeeding === 'intensive' ? stern_norms_feeding.map(value => {
       sternFeeding[value.view_feed] = cow_before_20days * parseFloat(value.intensive)
     }) : stern_norms_feeding.map(value => {
       sternFeeding[value.view_feed] = cow_before_20days * parseFloat(value.many_components)
     })
-    console.log(sternFeeding)
+    this.setState({sternFeeding})
   }
 
   calculateSternNeedCows = () => {
@@ -75,8 +90,7 @@ export class SternRepo extends Component {
         })
         break
     }
-    console.log(sternCows)
-    return sternCows
+    this.setState({sternCows})
   }
   renderSternNorms = ()=> {
     return (<SternTable {...this.props} />)
@@ -92,52 +106,52 @@ export class SternRepo extends Component {
         <InformationButton name="Користування">
           {this.popoverLeft}
         </InformationButton>
-
-        {(typeFeeding == null && getMilkPerYear == null)
-        && <div className="entries-data">
-          <div className="stern-first-table">{this.renderSternNorms()}</div>
-          <div className="stern-separator"></div>
-          <div className="stern-second-table">{this.renderSternNormsFeeding()}</div>
-        </div>}
-        <div className="entries-data">
-          <div className="stern-first-table  btn-group">
-            <h3>Виберіть перспективний середньорічний надій</h3>
-            <button
-              className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== '2000'}, {'btn-success': this.state.getMilkPerYear === '2000'})}
-              onClick={()=>this.choosePlan('getMilkPerYear', '2000')}>
-              2000
-            </button>
-            <button
-              className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== '3000'}, {'btn-success': this.state.getMilkPerYear === '3000'})}
-              onClick={()=>this.choosePlan('getMilkPerYear', '3000')}>
-              3000
-            </button>
-            <button
-              className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== '4000'}, {'btn-success': this.state.getMilkPerYear === '4000'})}
-              onClick={()=>this.choosePlan('getMilkPerYear', '4000')}>
-              4000
-            </button>
-            <button className="btn btn-default" disabled={this.state.getMilkPerYear === null}
-                    onClick={this.calculateSternNeedCows}>Розрахувати основну
-              потребу в кормі
-            </button>
-          </div>
-          <div className="stern-separator"></div>
-          <div className="stern-second-table btn-group">
-            <h3>Виберіть вид відгодівлі молодняку</h3>
-            <button className={
+        <div className="btn-group">
+          <h3>Виберіть перспективний середньорічний надій</h3>
+          <button
+            className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 2000}, {'btn-success': this.state.getMilkPerYear === 2000})}
+            onClick={()=>this.choosePlan('getMilkPerYear', 2000)}>
+            2000
+          </button>
+          <button
+            className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 3000}, {'btn-success': this.state.getMilkPerYear === 3000})}
+            onClick={()=>this.choosePlan('getMilkPerYear', 3000)}>
+            3000
+          </button>
+          <button
+            className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 4000}, {'btn-success': this.state.getMilkPerYear === 4000})}
+            onClick={()=>this.choosePlan('getMilkPerYear', 4000)}>
+            4000
+          </button>
+          <button className="btn btn-default" disabled={this.state.getMilkPerYear === null}
+                  onClick={this.calculateSternNeedCows}>Розрахувати основну
+            потребу в кормі
+          </button>
+        </div>
+        <div className="btn-group">
+          <h3>Виберіть вид відгодівлі молодняку</h3>
+          <button className={
               classNames('btn ', {'btn-default': this.state.typeFeeding !== 'intensive'}, {'btn-success': this.state.typeFeeding === 'intensive'})}
-                    onClick={()=>this.choosePlan('typeFeeding', 'intensive')}>інтенсивна
-            </button>
-            <button className={
+                  onClick={()=>this.choosePlan('typeFeeding', 'intensive')}>інтенсивна
+          </button>
+          <button className={
               classNames('btn ', {'btn-default': this.state.typeFeeding !== 'many_components'}, {'btn-success': this.state.typeFeeding === 'many_components'})}
-                    onClick={()=>this.choosePlan('typeFeeding', 'many_components')}>багатокомпонентна
-            </button>
-            <button className="btn btn-default" disabled={this.state.typeFeeding === null}
-                    onClick={()=>this.calculateSternFeeding()}>Розрахувати потребу в кормах
-              на відгодівлі
-            </button>
-          </div>
+                  onClick={()=>this.choosePlan('typeFeeding', 'many_components')}>багатокомпонентна
+          </button>
+          <button className="btn btn-default" disabled={this.state.typeFeeding === null}
+                  onClick={()=>this.calculateSternFeeding()}>Розрахувати потребу в кормах
+            на відгодівлі
+          </button>
+        </div>
+        <button onClick={this.calculateFullNeedingOfStern}>КОНСОЛОГОГОГО</button>
+        <div className="entries-data">
+        </div>
+        <div className="entries-data">
+          {getMilkPerYear === null ? <div className="stern-first-table">{this.renderSternNorms()}</div> :
+            <div className="stern-first-table"></div>}
+          <div className="stern-separator"></div>
+          {typeFeeding === null ? <div className="stern-second-table">{this.renderSternNormsFeeding()}</div> :
+            <div className="stern-second-table"></div>}
         </div>
       </div>
     )
