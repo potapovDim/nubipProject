@@ -10,7 +10,7 @@ class LoadingButton extends Component {
     setTimeout(() => {
       this.props.action()
       this.setState({isLoading: false});
-    }, 1000);
+    }, 250);
   }
 
   render = ()=> {
