@@ -56,8 +56,6 @@ export class SternRepo extends Component {
 
   calculateFullNeedingOfStern = () => {
     const {sternFeeding, sternCows} = this.state
-    console.log(sternCows)
-    console.log(sternFeeding)
     const allStern = _.reduce(sternFeeding, (result, value, key) => {
         result.hasOwnProperty(key) ? null : result[key] = value
         return result
