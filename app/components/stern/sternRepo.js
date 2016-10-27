@@ -11,6 +11,7 @@ import {SternTable, SternTableFeeding} from '../tables/staticTables/sternTable'
 import _ from 'lodash'
 import {Fedding} from './tables/fedding-stern'
 import {CowStern} from './tables/cow-stern'
+import {FullStern} from './tables/full-stern'
 
 export class SternRepo extends Component {
   state = {
@@ -55,12 +56,15 @@ export class SternRepo extends Component {
 
   calculateFullNeedingOfStern = () => {
     const {sternFeeding, sternCows} = this.state
+    console.log(sternCows)
+    console.log(sternFeeding)
     const allStern = _.reduce(sternFeeding, (result, value, key) => {
         result.hasOwnProperty(key) ? null : result[key] = value
         return result
       },
       _.reduce(sternCows, (result, value, key) => {
-        sternFeeding.hasOwnProperty(key) ? result[key] = sternFeeding[key] + sternCows[key] : result[key] = value
+        sternFeeding.hasOwnProperty(key) ? result[key] = parseFloat(sternFeeding[key]) + parseFloat(sternCows[key])
+          : result[key] = parseFloat(value)
         return result
       }, {}))
     this.setState({allStern})
@@ -107,7 +111,7 @@ export class SternRepo extends Component {
   }
 
   render() {
-    const {typeFeeding, getMilkPerYear, sternFeeding, sternCows} =this.state
+    const {typeFeeding, getMilkPerYear, sternFeeding, sternCows, allStern} =this.state
     console.log(sternCows)
     return (
       <div>
@@ -131,10 +135,6 @@ export class SternRepo extends Component {
             onClick={()=>this.choosePlan('getMilkPerYear', 4000)}>
             4000
           </button>
-          {/*<button className="btn btn-default" disabled={this.state.getMilkPerYear === null}*/}
-          {/*onClick={this.calculateSternNeedCows}>Розрахувати основну*/}
-          {/*потребу в кормі*/}
-          {/*</button>*/}
         </div>
         <div className="btn-group">
           <h3>Виберіть вид відгодівлі молодняку</h3>
@@ -146,10 +146,6 @@ export class SternRepo extends Component {
             classNames('btn ', {'btn-default': this.state.typeFeeding !== 'many_components'}, {'btn-success': this.state.typeFeeding === 'many_components'})}
                   onClick={()=>this.choosePlan('typeFeeding', 'many_components')}>багатокомпонентна
           </button>
-          {/*<button className="btn btn-default" disabled={this.state.typeFeeding === null}*/}
-          {/*onClick={()=>this.calculateSternFeeding()}>Розрахувати потребу в кормах*/}
-          {/*на відгодівлі*/}
-          {/*</button>*/}
         </div>
         <button onClick={this.calculateFullNeedingOfStern}>КОНСОЛОГОГОГО</button>
         <div className="entries-data">
@@ -162,9 +158,15 @@ export class SternRepo extends Component {
           <div className="stern-separator"></div>
           {typeFeeding === null ? <div className="stern-second-table">{this.renderSternNormsFeeding()}</div> :
             <div className="stern-second-table">
-              {/*{sternFeeding ? <Fedding stern={sternFeeding}/> : null}*/}
+              {sternFeeding ? <Fedding stern={sternFeeding}/> : null}
             </div>}
         </div>
+
+        <div>{(typeFeeding !== null && getMilkPerYear !== null && allStern) ?
+          <div>
+            <h1>ЗАГАЛЬНА ПОТРЕБА В КОРМАХ</h1>
+            <FullStern stern={allStern}/>
+          </div> : null}</div>
       </div>
     )
   }

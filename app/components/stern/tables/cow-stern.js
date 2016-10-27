@@ -1,14 +1,11 @@
 import React from 'react'
-import _ from 'lodash'
 
 export const CowStern = ({stern}) => {
-  const table = _.mapKeys(stern, (key, value)=> {
+  const table = Object.keys(stern).map((value) => {
     return <tr>
-      <td style={{width: '20%'}} className="active">{key}</td>
       <td style={{width: '20%'}} className="active">{value}</td>
+      <td style={{width: '20%'}} className="active">{stern[value]} кг</td>
     </tr>
   })
-  console.log(table)
-  return <div>safaskfalsklgaslsgja;g;jsaljga;lgjsa;l
-  </div>
+  return <div>{table}</div>
 }

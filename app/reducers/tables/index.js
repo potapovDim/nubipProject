@@ -194,7 +194,7 @@ const initialState = {
     {kind_of_animal: 'Телята', norm_per_day: '20'},
   ],
   stern_norms: [
-    {view_feed: 'Cіно', get_milk_year2000: 4, get_milk_year3000: 4.5, get_milk_year4000: 6, price: 1},
+    {view_feed: 'Сіно', get_milk_year2000: 4, get_milk_year3000: 4.5, get_milk_year4000: 6, price: 1},
     {view_feed: 'Солома', get_milk_year2000: 1, get_milk_year3000: 1, get_milk_year4000: 1, price: 1},
     {view_feed: 'Силос', get_milk_year2000: 24, get_milk_year3000: 24, get_milk_year4000: 26, price: 1},
     {view_feed: 'Коренеплоди', get_milk_year2000: 3, get_milk_year3000: 7, get_milk_year4000: 8, price: 1},
@@ -213,7 +213,7 @@ const initialState = {
       price: 1
     },
     {
-      view_feed: 'Сіль кухонна ,кг',
+      view_feed: 'Сіль',
       get_milk_year2000: 0.05,
       get_milk_year3000: 0.05,
       get_milk_year4000: 0.08,
