@@ -5,6 +5,7 @@ import LoadingButton from '../helpers/loadingButton'
 import InformationButton from '../helpers/informationButton'
 import {connect} from 'react-redux'
 import _ from 'lodash'
+import {EntrieTutorial} from '../tutorials/entrieToturial'
 
 export class Entries extends Component {
   state = {
@@ -19,7 +20,7 @@ export class Entries extends Component {
 
   handleChange = (e, key)=> {
     e.preventDefault()
-    this.setState({alert: false,showFarm: false})
+    this.setState({alert: false, showFarm: false})
     let _state = {...this.state}
     _state[key] = +e.target.value
     this.setState(_state)
@@ -53,7 +54,8 @@ export class Entries extends Component {
         cow_before_20days: this.state.cow_before_20days
       }
       dispatch(addEntry(quantity))
-    } else {
+    }
+    else {
       const quantity = {
         cows: this.state.cows,
         fuelPrice: this.state.fuelPrice,
@@ -77,7 +79,8 @@ export class Entries extends Component {
         message: 'Ви не заповнили основні поля , для вводу скористайтесь підказкою (Інформація полів вводу данних)',
         showFarm: false
       })
-    } else {
+    }
+    else {
       _state.pregrant_cows = parseInt(_state.cows * 0.1)
       _state.dry_cows = parseInt(_state.cows * 0.1)
       _state.ill_cows = parseInt(_state.cows * 0.1)
@@ -103,23 +106,6 @@ export class Entries extends Component {
         message: 'Ви намагаєтесь додати пусте поле, введіть будь-ласка валідні дані, для підказки скористайтесть інформацією'
       })
   }
-  popoverLeft = (
-    <Popover id="popover-positioned-left" title="Підказка для введення поля">
-      <div><strong>Кількість корів</strong> кількість корів повинна бути лише ціле число від трьох до чотирьох символів
-      </div>
-      <div><strong>Ціна на пальне</strong> ціна на пальне повинна бути ціле число або десятковий дріб (приклад 20.14 чи
-        20) ціла частина не більше двох знаків
-      </div>
-      <div><strong>Ціна на електроенергію</strong> ціна на пальне повинна бути ціле число або десятковий дріб (приклад
-        20.14 чи 20) ціла частина не більше двох знаків
-      </div>
-      <div><strong>Заробітня плата</strong> ціна на пальне повинна бути ціле число або десятковий дріб (приклад 20.14 чи
-        20) ціла частина не більше двох знаків
-      </div>
-      <div><strong>Стійловий період</strong> стійловий період повинен містити лише цілі числа не більше 365 і не менше 0
-      </div>
-    </Popover>
-  );
 
   handleRemoveQuantity = ()=> {
     this.props.resetAll();
@@ -136,7 +122,7 @@ export class Entries extends Component {
           <p style={{clear: 'both'}} className="text-center"><Alert bsStyle="success">Ваші дані успішно додані</Alert>
           </p> : null}
         <InformationButton name={'Інформація полів вводу данних'}>
-          {this.popoverLeft}
+          <EntrieTutorial/>
         </InformationButton>
         <div className="entries-data">
           <form className="entries">

@@ -198,20 +198,8 @@ const initialState = {
     {view_feed: 'Солома', get_milk_year2000: 1, get_milk_year3000: 1, get_milk_year4000: 1, price: 1},
     {view_feed: 'Силос', get_milk_year2000: 24, get_milk_year3000: 24, get_milk_year4000: 26, price: 1},
     {view_feed: 'Коренеплоди', get_milk_year2000: 3, get_milk_year3000: 7, get_milk_year4000: 8, price: 1},
-    {
-      view_feed: 'Концентровані корми',
-      get_milk_year2000: 1,
-      get_milk_year3000: 2,
-      get_milk_year4000: 3,
-      price: 1
-    },
-    {
-      view_feed: 'Карбамід ,кг',
-      get_milk_year2000: 0.06,
-      get_milk_year3000: 0.06,
-      get_milk_year4000: 0.08,
-      price: 1
-    },
+    {view_feed: 'Концентровані корми', get_milk_year2000: 1, get_milk_year3000: 2, get_milk_year4000: 3, price: 1},
+    {view_feed: 'Карбамід ,кг', get_milk_year2000: 0.06, get_milk_year3000: 0.06, get_milk_year4000: 0.08, price: 1},
     {
       view_feed: 'Сіль',
       get_milk_year2000: 0.05,
@@ -237,11 +225,11 @@ const initialState = {
     {view_feed: 'Сіль', many_components: 0.04, intensive: 0.04, price: ''},
   ],
   drinking_bowl_cows: [
-    {brand: "АП-1А", water_volume: '1.8', seats: "1", heads: '2', weight: '0.75', price: "10"},
-    {brand: "ПА-1А", water_volume: '2', seats: "1", heads: '2', weight: '6', price: "10"},
-    {brand: "ПА-1Б", water_volume: '2.1', seats: "1", heads: '2', weight: '5.1', price: "10"},
-    {brand: "АГК-4Б", water_volume: '40', seats: "4", heads: '100', weight: '30.7', price: "10"},
-    {brand: "АГК-12", water_volume: '40', seats: "8", heads: '200', weight: '46', price: "10"},
+    {brand: "АП-1А", water_volume: 1.8, seats: 1, heads: 2, weight: 0.75, price: "10"},
+    {brand: "ПА-1А", water_volume: 2, seats: 1, heads: 2, weight: '6', price: "10"},
+    {brand: "ПА-1Б", water_volume: 2.1, seats: 1, heads: 2, weight: '5.1', price: "10"},
+    {brand: "АГК-4Б", water_volume: 40, seats: 4, heads: 100, weight: '30.7', price: "10"},
+    {brand: "АГК-12", water_volume: 40, seats: 8, heads: 200, weight: '46', price: "10"},
   ],
   drinking_bowl_calves: [
     {brand: "АГП-Ф-200", water_volume: '4', seats: "20", heads: '200', weight: '200', price: "10"},
@@ -458,7 +446,7 @@ const initialState = {
     {kind_of_building: 'Траншея для сінажу', volume: '500', B: '9', L: '31.5', H: '3', lost_stern: '5', KKD: '0.98'},
     {kind_of_building: 'Траншея для сінажу', volume: '750', B: '12', L: '31.5', H: '3', lost_stern: '5', KKD: '0.98'},
     {kind_of_building: 'Траншея для сінажу', volume: '1500', B: '12', L: '49.5', H: '3', lost_stern: '5', KKD: '0.98'},
-    {kind_of_building: 'Коронебульбоплодні сховища', volume: '4000', B: '27',L: '78', H: '3.6', lost_stern: '3', KKD: '0.98'},
+    {kind_of_building: 'Коронебульбоплодні сховища', volume: '4000', B: '27', L: '78', H: '3.6', lost_stern: '3', KKD: '0.98'},
     {kind_of_building: 'Гноєсховища', volume: '300', B: '28', L: '30', H: '3.6', lost_stern: '0', KKD: '1'},
     {kind_of_building: 'Гноєсховища', volume: '500', B: '28', L: '42', H: '3.6', lost_stern: '0', KKD: '1'},
     {kind_of_building: 'Гноєсховища', volume: '2000', B: '25', L: '65', H: '3.6', lost_stern: '0', KKD: '1'},

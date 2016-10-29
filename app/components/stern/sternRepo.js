@@ -6,12 +6,13 @@ import {
   sternNeed
 } from '../../calculations/planFarm'
 import InformationButton from '../helpers/informationButton'
-import {Popover} from 'react-bootstrap'
 import {SternTable, SternTableFeeding} from '../tables/staticTables/sternTable'
 import _ from 'lodash'
 import {Fedding} from './tables/fedding-stern'
 import {CowStern} from './tables/cow-stern'
 import {FullStern} from './tables/full-stern'
+import BuildingsForStern from '../tables/staticTables/sternBuildings'
+import {SternTutorial} from '../tutorials/sternTutorial'
 
 export class SternRepo extends Component {
   state = {
@@ -19,21 +20,6 @@ export class SternRepo extends Component {
     typeFeeding: null
   }
 
-  popoverLeft = (
-    <Popover id="popover-positioned-left" title="Підказка для введення поля">
-      <div><strong>Кількість корів</strong> кількість корів повинна бути лише ціле число від трьох до чотирьох символів
-      </div>
-      <div><strong>Ціна на пальне</strong> ціна на пальне повинна бути ціле число або десятковий дріб (приклад 20.14 чи
-        20) ціла частина не більше двох знаків
-      </div>
-      <div><strong>Ціна на електроенергію</strong> ціна на пальне повинна бути ціле число або десятковий дріб (приклад
-        20.14 чи 20) ціла частина не більше двох знаків
-      </div>
-      <div><strong>Заробітня плата</strong> ціна на пальне повинна бути ціле число або десятковий дріб (приклад 20.14 чи
-        20) ціла частина не більше двох знаків
-      </div>
-    </Popover>
-  );
 
   choosePlan = (type, value) => {
     switch (type) {
@@ -50,14 +36,13 @@ export class SternRepo extends Component {
 
   componentWillMount() {
     const {cows, cow_before_20days, building_for_stern, stern_norms, stern_norms_feeding, season_stall} = this.props
-    console.log(cows, cow_before_20days, building_for_stern, stern_norms, stern_norms_feeding, season_stall)
     this.setState({cows, cow_before_20days, building_for_stern, stern_norms, stern_norms_feeding, season_stall})
   }
 
   calculateFullNeedingOfStern = () => {
     const {sternFeeding, sternCows} = this.state
     const allStern = _.reduce(sternFeeding, (result, value, key) => {
-        result.hasOwnProperty(key) ? null : result[key] = value
+        result.hasOwnProperty(key) ? null : result[key] = parseFloat(value)
         return result
       },
       _.reduce(sternCows, (result, value, key) => {
@@ -70,18 +55,19 @@ export class SternRepo extends Component {
 
   calculateSternFeeding = (typeFeeding) => {
     const sternFeeding = {}
-    const {cow_before_20days, stern_norms_feeding, season_stall} = this.state
+    const {cow_before_20days, stern_norms_feeding, season_stall} = this.props
     typeFeeding === 'intensive' ? stern_norms_feeding.map(value => {
       sternFeeding[value.view_feed] = sternNeed(undefined, parseFloat(value.intensive), cow_before_20days, season_stall)
     }) : stern_norms_feeding.map(value => {
-      sternFeeding[value.view_feed] = sternNeed(undefined, parseFloat(value.many_components), cow_before_20days, season_stall)
+      sternFeeding[value.view_feed] = sternNeed(undefined, parseFloat(value.many_components), cow_before_20days,
+        season_stall)
     })
     this.setState({sternFeeding})
   }
 
   calculateSternNeedCows = (getMilkPerYear) => {
     const sternCows = {}
-    const {cows, stern_norms, season_stall} = this.state
+    const {cows, stern_norms, season_stall} = this.props
     switch (getMilkPerYear) {
       case 2000:
         stern_norms.map(value => {
@@ -110,61 +96,77 @@ export class SternRepo extends Component {
 
   render() {
     const {typeFeeding, getMilkPerYear, sternFeeding, sternCows, allStern} =this.state
-    console.log(sternCows)
+    const disabled = (sternFeeding === undefined && sternCows === undefined && allStern === undefined)
+    console.log(disabled)
     return (
       <div>
         <InformationButton name="Користування">
-          {this.popoverLeft}
+          <SternTutorial />
         </InformationButton>
         <div className="btn-group">
-          <h3>Виберіть перспективний середньорічний надій</h3>
-          <button
-            className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 2000}, {'btn-success': this.state.getMilkPerYear === 2000})}
-            onClick={()=>this.choosePlan('getMilkPerYear', 2000)}>
-            2000
-          </button>
-          <button
-            className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 3000}, {'btn-success': this.state.getMilkPerYear === 3000})}
-            onClick={()=>this.choosePlan('getMilkPerYear', 3000)}>
-            3000
-          </button>
-          <button
-            className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 4000}, {'btn-success': this.state.getMilkPerYear === 4000})}
-            onClick={()=>this.choosePlan('getMilkPerYear', 4000)}>
-            4000
-          </button>
+          {this.state.showSternBuildings ?
+            <button className="btn btn-primary" onClick={()=>::this.setState({showSternBuildings:false})}>Повернутися до
+              розрахунку потреби
+            </button>
+            : <button className="btn btn-primary" onClick={()=>::this.setState({showSternBuildings:true})}
+                      disabled={disabled}>Перейти до
+            розрахунку потреби
+          </button >}
         </div>
-        <div className="btn-group">
-          <h3>Виберіть вид відгодівлі молодняку</h3>
-          <button className={
+        {!this.state.showSternBuildings ? <div>
+          <div>Вибір середньорічного надою молока</div>
+          <div className="btn-group">
+            <button
+              className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 2000}, {'btn-success': this.state.getMilkPerYear === 2000})}
+              onClick={()=>this.choosePlan('getMilkPerYear', 2000)}>
+              4000
+            </button>
+            <button
+              className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 3000}, {'btn-success': this.state.getMilkPerYear === 3000})}
+              onClick={()=>this.choosePlan('getMilkPerYear', 3000)}>
+              5000
+            </button>
+            <button
+              className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 4000}, {'btn-success': this.state.getMilkPerYear === 4000})}
+              onClick={()=>this.choosePlan('getMilkPerYear', 4000)}>
+              6000
+            </button>
+          </div>
+          <div>Вибір відгодівлі молодняку</div>
+          <div className="btn-group">
+            <button className={
             classNames('btn ', {'btn-default': this.state.typeFeeding !== 'intensive'}, {'btn-success': this.state.typeFeeding === 'intensive'})}
-                  onClick={()=>this.choosePlan('typeFeeding', 'intensive')}>інтенсивна
-          </button>
-          <button className={
+                    onClick={()=>this.choosePlan('typeFeeding', 'intensive')}>інтенсивна
+            </button>
+            <button className={
             classNames('btn ', {'btn-default': this.state.typeFeeding !== 'many_components'}, {'btn-success': this.state.typeFeeding === 'many_components'})}
-                  onClick={()=>this.choosePlan('typeFeeding', 'many_components')}>багатокомпонентна
+                    onClick={()=>this.choosePlan('typeFeeding', 'many_components')}>багатокомпонентна
+            </button>
+          </div>
+          <div >Розрахувати загальну потребу в кормах</div>
+          <button className="btn btn-default" onClick={this.calculateFullNeedingOfStern}>Розрахувати загальну потребу
           </button>
-        </div>
-        <button onClick={this.calculateFullNeedingOfStern}>КОНСОЛОГОГОГО</button>
-        <div className="entries-data">
-        </div>
-        <div className="entries-data">
-          {getMilkPerYear === null ? <div className="stern-first-table">{this.renderSternNorms()}</div> :
-            <div className="stern-first-table">
-              {sternCows ? <CowStern stern={sternCows}/> : null}
-            </div>}
-          <div className="stern-separator"></div>
-          {typeFeeding === null ? <div className="stern-second-table">{this.renderSternNormsFeeding()}</div> :
-            <div className="stern-second-table">
-              {sternFeeding ? <Fedding stern={sternFeeding}/> : null}
-            </div>}
-        </div>
-
-        <div>{(typeFeeding !== null && getMilkPerYear !== null && allStern) ?
-          <div>
-            <h1>ЗАГАЛЬНА ПОТРЕБА В КОРМАХ</h1>
-            <FullStern stern={allStern}/>
-          </div> : null}</div>
+          <div className="entries-data">
+          </div>
+          <div className="entries-data">
+            {getMilkPerYear === null ? <div className="stern-first-table">{this.renderSternNorms()}</div> :
+              <div className="stern-first-table">
+                {sternCows ? <CowStern stern={sternCows}/> : null}
+              </div>}
+            <div className="stern-separator"></div>
+            {typeFeeding === null ? <div className="stern-second-table">{this.renderSternNormsFeeding()}</div> :
+              <div className="stern-second-table">
+                {sternFeeding ? <Fedding stern={sternFeeding}/> : null}
+              </div>}
+          </div>
+          <div>{(typeFeeding !== null && getMilkPerYear !== null && allStern) ?
+            <div>
+              <h1>ЗАГАЛЬНА ПОТРЕБА В КОРМАХ</h1>
+              <FullStern stern={allStern}/>
+            </div> : null}</div>
+        </div> : <div>
+          <BuildingsForStern {...this.props}/>
+        </div>}
       </div>
     )
   }
