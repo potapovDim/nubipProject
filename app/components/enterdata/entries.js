@@ -4,8 +4,10 @@ import {Link} from 'react-router'
 import LoadingButton from '../helpers/loadingButton'
 import InformationButton from '../helpers/informationButton'
 import {connect} from 'react-redux'
+import _ from 'lodash'
+import {EntrieTutorial} from '../tutorials/entrieToturial'
 
-class Entries extends Component {
+export class Entries extends Component {
   state = {
     alert: false,
     alertSuccess: false,
@@ -14,44 +16,62 @@ class Entries extends Component {
   }
 
   moneyRegEx = /(^[0-9]{1,2})$|(^[0-9]{1,2})([.]{1,1})([0-9]{0,2}$)/
-  cowsRegEx = /^[0-9]{3,4}$/
+  cowsRegEx = /^[0-9]{2,4}$/
 
   handleChange = (e, key)=> {
     e.preventDefault()
-    this.setState({alert: false})
-    console.log(this.state.showFarm)
+    this.setState({alert: false, showFarm: false})
     let _state = {...this.state}
-    _state.alert = false
-    _state.showFarm = false
     _state[key] = +e.target.value
     this.setState(_state)
   }
 
-  handleValidation = (e, key)=> {
-    if (key == 'cows') {
-      !this.cowsRegEx.test(this.state[key]) &&
-      this.setState({
-        alert: true,
-        message: 'Кількість корів повинна містити лише цілі числа від трьох до чотирьох знаків , без спец символів , чи букв , введіть поле коректно'
-      })
+  handleValidation = (key)=> {
+    key == 'cows' || key == 'season_stall' ?
+    !this.cowsRegEx.test(this.state[key]) &&
+    this.setState({
+      alert: true,
+      message: 'Кількість корів повинна містити лише цілі числа від трьох до чотирьох знаків , без спец символів , чи букв , введіть поле коректно'
+    }) : !this.moneyRegEx.test(this.state[key]) &&
+    this.setState({
+      alert: true,
+      message: "Поля вводу цін на енергетичні носії чи оплату праці повині містити лише цілі числа або десяткові дроби , без спец символів чи букв , введіть поле коректно "
+    })
+  }
+
+  initData = () => {
+    const {dispatch} = this.props
+    if (this.state.pregrant_cows === null) {
+      this.handleCalculateFarm()
+      const quantity = {
+        cows: this.state.cows,
+        fuelPrice: this.state.fuelPrice,
+        energyPrice: this.state.energyPrice,
+        paymentPrice: this.state.paymentPrice,
+        pregrant_cows: this.state.pregrant_cows,
+        dry_cows: this.state.dry_cows,
+        ill_cows: this.state.ill_cows,
+        cow_before_20days: this.state.cow_before_20days
+      }
+      dispatch(addEntry(quantity))
     }
     else {
-      !this.moneyRegEx.test(this.state[key]) &&
-      this.setState({
-        alert: true,
-        message: "Поля вводу цін на енергетичні носії чи оплату праці повині містити лише цілі числа або десяткові дроби , без спец символів чи букв , введіть поле коректно "
-      })
+      const quantity = {
+        cows: this.state.cows,
+        fuelPrice: this.state.fuelPrice,
+        energyPrice: this.state.energyPrice,
+        paymentPrice: this.state.paymentPrice,
+        pregrant_cows: this.state.pregrant_cows,
+        dry_cows: this.state.dry_cows,
+        ill_cows: this.state.ill_cows,
+        cow_before_20days: this.state.cow_before_20days
+      }
+      dispatch(addEntry(quantity))
     }
   }
 
-  message = {
-    name: 'Інформація по введенню полів ',
-    header: 'Поля вводу кількості корів та оплат',
-    message: `Кількість корів повинна містити чила від 3 до 4 знаків (лише цілі числа)
-             `
-  }
-
-  hangleCalculateFarm = ()=> {
+  handleCalculateFarm = ()=> {
+    console.log('00--00-00-0-')
     let _state = {...this.state}
     if (_state.cows === 0) {
       this.setState({
@@ -59,7 +79,8 @@ class Entries extends Component {
         message: 'Ви не заповнили основні поля , для вводу скористайтесь підказкою (Інформація полів вводу данних)',
         showFarm: false
       })
-    } else {
+    }
+    else {
       _state.pregrant_cows = parseInt(_state.cows * 0.1)
       _state.dry_cows = parseInt(_state.cows * 0.1)
       _state.ill_cows = parseInt(_state.cows * 0.1)
@@ -73,11 +94,9 @@ class Entries extends Component {
     if ((this.cowsRegEx.test(this.state.cows) && this.moneyRegEx.test(this.state.energyPrice) && this.moneyRegEx.test(
         this.state.fuelPrice) && this.moneyRegEx.test(
         this.state.paymentPrice)) && (this.state.cows != 0 && this.state.energyPrice != 0 && this.state.fuelPrice != 0 && this.state.paymentPrice != 0)) {
+      const entry = _.omit(this.state, ['alert', 'alertSuccess', 'showFarm', 'message'])
       this.props.addEntry({
-        cows: this.state.cows,
-        fuelPrice: this.state.fuelPrice,
-        energyPrice: this.state.energyPrice,
-        paymentPrice: this.state.paymentPrice
+        ...entry
       })
       this.setState({alertSuccess: true})
     }
@@ -87,44 +106,13 @@ class Entries extends Component {
         message: 'Ви намагаєтесь додати пусте поле, введіть будь-ласка валідні дані, для підказки скористайтесть інформацією'
       })
   }
-  popoverLeft = (
-    <Popover id="popover-positioned-left" title="Підказка для введення поля">
-      <div><strong>Кількість корів</strong> кількість корів повинна бути лише ціле число від трьох до чотирьох символів
-      </div>
-      <div><strong>Ціна на пальне</strong> ціна на пальне повинна бути ціле число або десятковий дріб (приклад 20.14 чи
-        20) ціла частина не більше двох знаків
-      </div>
-      <div><strong>Ціна на електроенергію</strong> ціна на пальне повинна бути ціле число або десятковий дріб (приклад
-        20.14 чи 20) ціла частина не більше двох знаків
-      </div>
-      <div><strong>Заробітня плата</strong> ціна на пальне повинна бути ціле число або десятковий дріб (приклад 20.14 чи
-        20) ціла частина не більше двох знаків
-      </div>
-    </Popover>
-  );
 
   handleRemoveQuantity = ()=> {
     this.props.resetAll();
   };
 
-  componentWillMount() {
-    this.setState({
-      alertSuccess: false,
-      showFarm: false,
-      cows: this.props.cows,
-      fuelPrice: this.props.fuelPrice,
-      energyPrice: this.props.energyPrice,
-      paymentPrice: this.props.paymentPrice,
-      pregrant_cows: this.props.pregrant_cows,
-      dry_cows: this.props.dry_cows,
-      ill_cows: this.props.ill_cows,
-      cow_before_20days: this.props.cow_before_20days
-
-    })
-  }
-
   render() {
-    let {cows, fuelPrice, energyPrice, paymentPrice}=this.props
+    let {cows, fuelPrice, energyPrice, paymentPrice} = this.props
     return (
       <div>
         {this.state.alert ?
@@ -134,7 +122,7 @@ class Entries extends Component {
           <p style={{clear: 'both'}} className="text-center"><Alert bsStyle="success">Ваші дані успішно додані</Alert>
           </p> : null}
         <InformationButton name={'Інформація полів вводу данних'}>
-          {this.popoverLeft}
+          <EntrieTutorial/>
         </InformationButton>
         <div className="entries-data">
           <form className="entries">
@@ -142,8 +130,19 @@ class Entries extends Component {
             <br/>
             <FormGroup >
               <InputGroup>
+                <InputGroup.Addon style={{width: "300px"}}>Стійловий період корів </InputGroup.Addon>
+                <FormControl onBlur={(e)=>this.handleValidation('season_stall')}
+                             onChange={(e)=>this.handleChange(e, 'season_stall')}
+                             type="text"/>
+                <InputGroup.Button>
+                </InputGroup.Button>
+              </InputGroup>
+            </FormGroup>
+
+            <FormGroup >
+              <InputGroup>
                 <InputGroup.Addon style={{width: "300px"}}>Кількість корів </InputGroup.Addon>
-                <FormControl onBlur={(e)=>this.handleValidation(e, 'cows')} onChange={(e)=>this.handleChange(e, 'cows')}
+                <FormControl onBlur={(e)=>this.handleValidation('cows')} onChange={(e)=>this.handleChange(e, 'cows')}
                              type="text"/>
                 <InputGroup.Button>
                 </InputGroup.Button>
@@ -153,7 +152,7 @@ class Entries extends Component {
             <FormGroup >
               <InputGroup>
                 <InputGroup.Addon style={{width: "300px"}}>Ціна на пальне ГРН / л</InputGroup.Addon>
-                <FormControl onBlur={(e)=>this.handleValidation(e, 'fuelPrice')}
+                <FormControl onBlur={(e)=>this.handleValidation('fuelPrice')}
                              onChange={(e)=>this.handleChange(e, 'fuelPrice')} type="text"/>
               </InputGroup>
             </FormGroup>
@@ -161,7 +160,7 @@ class Entries extends Component {
             <FormGroup >
               <InputGroup>
                 <InputGroup.Addon style={{width: "300px"}}>Ціна на електроенергію ГРН / кВт</InputGroup.Addon>
-                <FormControl onBlur={(e)=>this.handleValidation(e, 'energyPrice')}
+                <FormControl onBlur={(e)=>this.handleValidation('energyPrice')}
                              onChange={(e)=>this.handleChange(e, 'energyPrice')} type="text"/>
               </InputGroup>
             </FormGroup>
@@ -169,15 +168,17 @@ class Entries extends Component {
             <FormGroup >
               <InputGroup>
                 <InputGroup.Addon style={{width: "300px"}}>Заробітня плата ГРН / год</InputGroup.Addon>
-                <FormControl onBlur={(e)=>this.handleValidation(e, 'paymentPrice')}
+                <FormControl onBlur={(e)=>this.handleValidation('paymentPrice')}
                              onChange={(e)=>this.handleChange(e, 'paymentPrice')} type="text"/>
               </InputGroup>
             </FormGroup>
 
             <LoadingButton action={this.handleAddQuantity}/>
-            <Button onClick={this.hangleCalculateFarm} type='button'>Розрахувати ферму</Button>
-            <Link to="/tables">
-              <Button disabled={(cows == 0 && fuelPrice == 0 && paymentPrice == 0 && energyPrice == 0)} type='button'>Перейти
+            <Button onClick={this.handleCalculateFarm} type='button'>Розрахувати ферму</Button>
+            <Link to="/stern">
+              <Button onClick={this.initData}
+                      disabled={(cows == 0 && fuelPrice == 0 && paymentPrice == 0 && energyPrice == 0)}
+                      type='button'>Перейти
                 до
                 таблиць</Button>
             </Link>
@@ -189,6 +190,7 @@ class Entries extends Component {
           && this.state.paymentPrice != 0) ?
             <div className="output-data flash">
               <h4>Данні які будуть внесені для розрахунку</h4>
+              <p>Стійловий період : {this.state.season_stall}</p>
               <p>Кількість корів : {this.state.cows}</p>
               <p>Ціна за пальне : {this.state.fuelPrice} грн/л</p>
               <p>Ціна за електроенергію : {this.state.energyPrice} грн/кВт</p>

@@ -14,7 +14,7 @@ class InfoButton extends Component {
   render() {
     return (
       <div className="info-field">
-        <button className="btn btn-default" onMouseEnter={this.handleEnter} onMouseLeave={this.handleLeave}>
+        <button className="btn btn-warning" onMouseEnter={this.handleEnter} onMouseLeave={this.handleLeave}>
           {this.props.name}
         </button>
         {this.state.show ? <p className="info">
