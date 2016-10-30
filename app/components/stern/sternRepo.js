@@ -11,8 +11,9 @@ import _ from 'lodash'
 import {Fedding} from './tables/fedding-stern'
 import {CowStern} from './tables/cow-stern'
 import {FullStern} from './tables/full-stern'
-import BuildingsForStern from '../tables/staticTables/sternBuildings'
 import {SternTutorial} from '../tutorials/sternTutorial'
+import {SternCalculation} from './sternCalculate'
+
 
 export class SternRepo extends Component {
   state = {
@@ -165,7 +166,7 @@ export class SternRepo extends Component {
               <FullStern stern={allStern}/>
             </div> : null}</div>
         </div> : <div>
-          <BuildingsForStern {...this.props}/>
+          <SternCalculation {...this.props} allStern={allStern}/>
         </div>}
       </div>
     )
