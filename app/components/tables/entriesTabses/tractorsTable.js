@@ -1,5 +1,6 @@
 import React from 'react'
 import Infinity from 'react-infinite'
+import {addToTable, removeFromTable} from '../../../reducers/tables/actions'
 
 
 class TractorTable extends React.Component {
@@ -13,13 +14,13 @@ class TractorTable extends React.Component {
         name: name,
         power: power,
         rotate: rotate,
-        pov: pov,
+        pov: pov
       }
-      this.props.addToTable(newTrac, 'tractors')
+      this.props.dispatch(addToTable(newTrac, 'tractors'))
     }
   }
   handleRemoveData = ()=> {
-    this.props.removeFromTable('tractors')
+    this.props.dispatch(removeFromTable('tractors'))
   }
 
   render() {

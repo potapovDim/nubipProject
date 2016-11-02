@@ -1,19 +1,18 @@
-import React,{Component} from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Login from '../components/login/login'
 
-import {login} from '../reducers/login/actions'
+class Log extends Component {
 
-class Log extends Component{
-
-  render(){
-    return(
+  render() {
+    return (
       <div>
-        <Login {...this.props} />
+        <Login {...this.props}/>
       </div>
     )
   }
 }
 
-export default connect(state=>state,
-  {login})(Log)
+export default connect(state=> {
+  return {...state.login}
+})(Log)

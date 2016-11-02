@@ -1,5 +1,6 @@
 import React from 'react'
 import Infinity from 'react-infinite'
+import {addToTable, removeFromTable} from '../../../reducers/tables/actions'
 
 class SternTable extends React.Component {
   handleCollectData = ()=> {
@@ -16,11 +17,11 @@ class SternTable extends React.Component {
         get_milk_year4000: get_milk_year4000,
         price: price
       }
-      this.props.addToTable(sternNew, 'stern_norms')
+      this.props.dispatch(addToTable(sternNew, 'stern_norms'))
     }
   }
   handleRemoveData = ()=> {
-    this.props.removeFromTable('stern_norms')
+    this.props.dispatch(removeFromTable('stern_norms'))
   }
 
   render() {
@@ -91,12 +92,12 @@ class SternTableFeeding extends React.Component {
         intensive: intensive,
         price: price
       }
-      this.props.addToTable(sternNew, 'stern_norms_feeding')
+      this.props.dispatch(addToTable(sternNew, 'stern_norms_feeding'))
     }
   }
 
   handleRemoveData = ()=> {
-    this.props.removeFromTable('stern_norms_feeding')
+    this.props.dispatch(removeFromTable('stern_norms_feeding'))
   }
 
 

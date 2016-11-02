@@ -1,5 +1,6 @@
 import React from 'react'
 import Infinity from 'react-infinite'
+import {addToTable, removeFromTable} from '../../../reducers/tables/actions'
 
 
 export class PumpRotateTable extends React.Component {
@@ -24,11 +25,11 @@ export class PumpRotateTable extends React.Component {
         price: price
 
       }
-      this.props.addToTable(newPump, 'pumps_rotary')
+      this.props.dispatch(addToTable(newPump, 'pumps_rotary'))
     }
   }
   handleRemoveData = ()=> {
-    this.props.removeFromTable('pumps_rotary')
+    this.props.dispatch(removeFromTable('pumps_rotary'))
   }
 
   render() {

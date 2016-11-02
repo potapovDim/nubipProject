@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Entries from '../components/enterdata/entries'
-import {addEntry,resetAll} from '../reducers/entries/actions'
 
 class EntryData extends Component{
   render(){
@@ -15,4 +14,4 @@ class EntryData extends Component{
 
 export default connect(state=>{
   return{...state.entries}
-},{addEntry,resetAll})(EntryData)
+})(EntryData)

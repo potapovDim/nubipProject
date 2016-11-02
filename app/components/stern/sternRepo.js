@@ -5,6 +5,7 @@ import {
   quantityStores,
   sternNeed
 } from '../../calculations/planFarm'
+import {addSternParameters} from '../../reducers/calculation/stern/actions'
 import InformationButton from '../helpers/informationButton'
 import {SternTable, SternTableFeeding} from '../tables/staticTables/sternTable'
 import _ from 'lodash'
@@ -35,11 +36,6 @@ export class SternRepo extends Component {
 
   }
 
-  componentWillMount() {
-    const {cows, cow_before_20days, building_for_stern, stern_norms, stern_norms_feeding, season_stall} = this.props
-    this.setState({cows, cow_before_20days, building_for_stern, stern_norms, stern_norms_feeding, season_stall})
-  }
-
   calculateFullNeedingOfStern = () => {
     const {sternFeeding, sternCows} = this.state
     const allStern = _.reduce(sternFeeding, (result, value, key) => {
@@ -52,6 +48,10 @@ export class SternRepo extends Component {
         return result
       }, {}))
     this.setState({allStern})
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(addSternParameters({...this.state}))
   }
 
   calculateSternFeeding = (typeFeeding) => {
@@ -98,7 +98,6 @@ export class SternRepo extends Component {
   render() {
     const {typeFeeding, getMilkPerYear, sternFeeding, sternCows, allStern} =this.state
     const disabled = (sternFeeding === undefined && sternCows === undefined && allStern === undefined)
-    console.log(disabled)
     return (
       <div>
         <InformationButton name="Користування">

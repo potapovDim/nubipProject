@@ -67,5 +67,3 @@ class Main extends Component {
 export default connect(state => {
   return {...state.login}
 })(Main)
-
-//<TablesTutorial show={this.state.show} hide={this.hide}/>

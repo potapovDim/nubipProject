@@ -1,6 +1,8 @@
 import React from 'react'
 import Infinity from 'react-infinite'
 import {sternStore, quantityStores} from '../../../calculations/planFarm'
+import {addToTable, removeFromTable} from '../../../reducers/tables/actions'
+import {Link} from 'react-router'
 
 export default class extends React.Component {
   handleCollectData = ()=> {
@@ -21,15 +23,15 @@ export default class extends React.Component {
         lost_stern: lost_stern,
         KKD: KKD
       }
-      this.props.addToTable(sternNew, 'building_for_stern')
+      this.props.dispatch(addToTable(sternNew, 'building_for_stern'))
     }
   }
   handleRemoveData = ()=> {
-    this.props.removeFromTable('building_for_stern')
+    this.props.dispatch(removeFromTable('building_for_stern'))
   }
 
-  render() {
-    const {building_for_stern, allStern}=this.props;
+  componentWillMount() {
+    const {allStern}=this.props;
     const stern = {}
     stern['Силос'] = allStern['Силос'] + allStern['Сінаж']
     stern['Сіно та солома'] = allStern['Сіно'] + allStern['Солома']
@@ -37,8 +39,12 @@ export default class extends React.Component {
     stern["Об'ем силосу"] = sternStore(stern['Силос'], 1100)
     stern["Об'ем солома"] = sternStore(stern['Сіно та солома'], 40)
     stern["Об'ем Коренеплоди"] = sternStore(stern['Коренеплоди'], 650)
+    this.setState({stern})
+  }
 
-
+  render() {
+    const {stern} = this.state
+    const {building_for_stern} = this.props
     const table = building_for_stern.map(function (item, index) {
       return (
         <tr key={index}>
@@ -122,6 +128,9 @@ export default class extends React.Component {
             </table>
           </div>
         </div>
+        <Link to="/coocking">
+          <button className="btn btn-lg">Перейти до кормоприготування</button>
+        </Link>
       </div>
     )
   }

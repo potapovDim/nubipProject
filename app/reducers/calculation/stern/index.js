@@ -1,7 +1,8 @@
 import {
   ADD_STERN_STORE,
   REMOVE_STERN_STORE,
-  RESET_STORE_STATE
+  RESET_STORE_STATE,
+  ADD_STERN_PARAMS
 } from './action_types'
 
 const initialState = {
@@ -12,6 +13,9 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case ADD_STERN_PARAMS:{
+      return {...state,params :action.params}
+    }
     case ADD_STERN_STORE: {
       let addTabl = {[action.key]: update(state[action.key], {$push: [action.data]})}
       return {...state, ...addTabl}

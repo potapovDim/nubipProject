@@ -1,5 +1,6 @@
 import React from 'react'
 import Infinity from 'react-infinite'
+import {addToTable, removeFromTable} from '../../../reducers/tables/actions'
 
 export class MilkingMachinesStallTable extends React.Component {
   handleCollectData = ()=> {
@@ -44,11 +45,11 @@ export class MilkingMachinesStallTable extends React.Component {
         weight: weight,
         price: price
       }
-      this.props.addToTable(milking_machine, 'milking_machines_stall')
+      this.props.dispatch(addToTable(milking_machine, 'milking_machines_stall'))
     }
   }
   handleRemoveData = ()=> {
-    this.props.removeFromTable('milking_machines_stall')
+    this.props.dispatch(removeFromTable('milking_machines_stall'))
   }
 
   render() {
@@ -182,11 +183,11 @@ export class MilkingMachinesHallTable extends React.Component {
         weight: weight,
         price: price
       }
-      this.props.addToTable(milking_machine, 'milking_machines_parlor')
+      this.props.dispatch(addToTable(milking_machine, 'milking_machines_parlor'))
     }
   }
   handleRemoveData = ()=> {
-    this.props.removeFromTable('milking_machines_parlor')
+    this.props.dispatch(removeFromTable('milking_machines_parlor'))
   }
 
   render() {
