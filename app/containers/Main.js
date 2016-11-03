@@ -29,7 +29,7 @@ class Main extends Component {
           <Navbar inverse>
             <Navbar.Header>
               <Navbar.Brand>
-                {this.props.name == '' ? <Link to="/">Main</Link> : <Link to="/">User name : {this.props.name}</Link>}
+                {this.props.name == '' ? <Link to="/">Головна сторінка</Link> : <Link to="/">Ім'я користувача : {this.props.name}</Link>}
               </Navbar.Brand>
               <Navbar.Toggle />
             </Navbar.Header>
@@ -37,20 +37,20 @@ class Main extends Component {
               <Nav>
                 <NavItem eventKey={2}
                          onClick={() => this.setState({ show: true})}
-                >Tutorial</NavItem>
+                >Підказка по користуванню</NavItem>
                 {tutorial}
                 <NavItem >DDL future</NavItem>
                 <NavDropdown eventKey={3} title=' ' id="basic-nav-dropdown">
-                  <MenuItem eventKey={3.1}>Action</MenuItem>
-                  <MenuItem eventKey={3.2}>Another action</MenuItem>
-                  <MenuItem eventKey={3.3}>Something else here</MenuItem>
+                  <MenuItem eventKey={3.1}>Дія 1</MenuItem>
+                  <MenuItem eventKey={3.2}>Дія 2</MenuItem>
+                  <MenuItem eventKey={3.3}>Дія 3</MenuItem>
                   <MenuItem divider/>
-                  <MenuItem eventKey={3.3}>Separated link</MenuItem>
+                  <MenuItem eventKey={3.3}>Головна</MenuItem>
                 </NavDropdown>
               </Nav>
               <Nav pullRight>
-                <NavItem eventKey={1}>Link Right</NavItem>
-                <NavItem eventKey={2}>Link Right</NavItem>
+                <NavItem eventKey={1}>На данний момент нічого</NavItem>
+                <NavItem eventKey={2}>На данний момент нічого</NavItem>
               </Nav>
             </Navbar.Collapse>
           </Navbar>
@@ -59,7 +59,10 @@ class Main extends Component {
           </div>
         </div>
 
-        <footer style={{clear:'both'}} className="text-center">This is footer</footer>
+        <footer style={{clear:'both'}} className="text-center">
+          <h1>Потапов Дмитро</h1>
+          <h2>Моделювання технологічних процесів для МТФ з долслідженням операції приготування кормів</h2>
+        </footer>
       </div>
     )
   }

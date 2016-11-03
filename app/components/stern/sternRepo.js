@@ -70,17 +70,17 @@ export class SternRepo extends Component {
     const sternCows = {}
     const {cows, stern_norms, season_stall} = this.props
     switch (getMilkPerYear) {
-      case 2000:
+      case 'get_milk_year2000':
         stern_norms.map(value => {
           sternCows[value.view_feed] = sternNeed(undefined, parseFloat(value.get_milk_year2000), cows, season_stall)
         })
         break
-      case 3000:
+      case 'get_milk_year3000':
         stern_norms.map(value => {
           sternCows[value.view_feed] = sternNeed(undefined, parseFloat(value.get_milk_year3000), cows, season_stall)
         })
         break
-      case 4000:
+      case 'get_milk_year4000':
         stern_norms.map(value => {
           sternCows[value.view_feed] = sternNeed(undefined, value.get_milk_year4000, cows, season_stall)
         })
@@ -117,18 +117,18 @@ export class SternRepo extends Component {
           <div>Вибір середньорічного надою молока</div>
           <div className="btn-group">
             <button
-              className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 2000}, {'btn-success': this.state.getMilkPerYear === 2000})}
-              onClick={()=>this.choosePlan('getMilkPerYear', 2000)}>
+              className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 'get_milk_year2000'}, {'btn-success': this.state.getMilkPerYear === 'get_milk_year2000'})}
+              onClick={()=>this.choosePlan('getMilkPerYear', 'get_milk_year2000')}>
               4000
             </button>
             <button
-              className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 3000}, {'btn-success': this.state.getMilkPerYear === 3000})}
-              onClick={()=>this.choosePlan('getMilkPerYear', 3000)}>
+              className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 'get_milk_year3000'}, {'btn-success': this.state.getMilkPerYear === 'get_milk_year3000'})}
+              onClick={()=>this.choosePlan('getMilkPerYear', 'get_milk_year3000')}>
               5000
             </button>
             <button
-              className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 4000}, {'btn-success': this.state.getMilkPerYear === 4000})}
-              onClick={()=>this.choosePlan('getMilkPerYear', 4000)}>
+              className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 'get_milk_year4000'}, {'btn-success': this.state.getMilkPerYear === 'get_milk_year4000'})}
+              onClick={()=>this.choosePlan('getMilkPerYear', 'get_milk_year4000')}>
               6000
             </button>
           </div>

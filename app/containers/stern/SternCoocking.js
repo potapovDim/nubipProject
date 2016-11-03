@@ -11,5 +11,10 @@ class SternCoocking extends Component {
 
 
 export default connect(state => {
-  return {...state.tables, ...state.entries,...state.sternStocks.params}
+  return {
+    sternNormCows: state.tables.stern_norms,
+    sternNormCalves: state.tables.stern_norms_feeding,
+    entries:state.entries,
+    params:state.sternStocks.params
+  }
 })(SternCoocking)
