@@ -1,6 +1,6 @@
 import React from 'react'
 import Infinity from 'react-infinite'
-
+import {addToTable, removeFromTable} from '../../../reducers/tables/actions'
 
 class MachineTable extends React.Component {
   handleCollectData = ()=> {
@@ -17,15 +17,15 @@ class MachineTable extends React.Component {
         pov: pov,
         price: price
       }
-      this.props.addToTable(newPump, 'machines')
+      this.props.dispatch(addToTable(newPump, 'machines'))
     }
   }
   handleRemoveData = ()=> {
-    this.props.removeFromTable('machines')
+    this.props.dispatch(removeFromTable('machines'))
   }
 
   render() {
-    let {machines}=this.props.tables;
+    let {machines}=this.props;
     let table = machines.map(function (item, index) {
       return (
         <tr key={index}>

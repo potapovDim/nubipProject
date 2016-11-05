@@ -5,6 +5,7 @@ import {
   quantityStores,
   sternNeed
 } from '../../calculations/planFarm'
+import {addSternParameters} from '../../reducers/calculation/stern/actions'
 import InformationButton from '../helpers/informationButton'
 import {SternTable, SternTableFeeding} from '../tables/staticTables/sternTable'
 import _ from 'lodash'
@@ -35,11 +36,6 @@ export class SternRepo extends Component {
 
   }
 
-  componentWillMount() {
-    const {cows, cow_before_20days, building_for_stern, stern_norms, stern_norms_feeding, season_stall} = this.props
-    this.setState({cows, cow_before_20days, building_for_stern, stern_norms, stern_norms_feeding, season_stall})
-  }
-
   calculateFullNeedingOfStern = () => {
     const {sternFeeding, sternCows} = this.state
     const allStern = _.reduce(sternFeeding, (result, value, key) => {
@@ -52,6 +48,10 @@ export class SternRepo extends Component {
         return result
       }, {}))
     this.setState({allStern})
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(addSternParameters({...this.state}))
   }
 
   calculateSternFeeding = (typeFeeding) => {
@@ -70,17 +70,17 @@ export class SternRepo extends Component {
     const sternCows = {}
     const {cows, stern_norms, season_stall} = this.props
     switch (getMilkPerYear) {
-      case 2000:
+      case 'get_milk_year2000':
         stern_norms.map(value => {
           sternCows[value.view_feed] = sternNeed(undefined, parseFloat(value.get_milk_year2000), cows, season_stall)
         })
         break
-      case 3000:
+      case 'get_milk_year3000':
         stern_norms.map(value => {
           sternCows[value.view_feed] = sternNeed(undefined, parseFloat(value.get_milk_year3000), cows, season_stall)
         })
         break
-      case 4000:
+      case 'get_milk_year4000':
         stern_norms.map(value => {
           sternCows[value.view_feed] = sternNeed(undefined, value.get_milk_year4000, cows, season_stall)
         })
@@ -98,7 +98,6 @@ export class SternRepo extends Component {
   render() {
     const {typeFeeding, getMilkPerYear, sternFeeding, sternCows, allStern} =this.state
     const disabled = (sternFeeding === undefined && sternCows === undefined && allStern === undefined)
-    console.log(disabled)
     return (
       <div>
         <InformationButton name="Користування">
@@ -118,18 +117,18 @@ export class SternRepo extends Component {
           <div>Вибір середньорічного надою молока</div>
           <div className="btn-group">
             <button
-              className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 2000}, {'btn-success': this.state.getMilkPerYear === 2000})}
-              onClick={()=>this.choosePlan('getMilkPerYear', 2000)}>
+              className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 'get_milk_year2000'}, {'btn-success': this.state.getMilkPerYear === 'get_milk_year2000'})}
+              onClick={()=>this.choosePlan('getMilkPerYear', 'get_milk_year2000')}>
               4000
             </button>
             <button
-              className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 3000}, {'btn-success': this.state.getMilkPerYear === 3000})}
-              onClick={()=>this.choosePlan('getMilkPerYear', 3000)}>
+              className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 'get_milk_year3000'}, {'btn-success': this.state.getMilkPerYear === 'get_milk_year3000'})}
+              onClick={()=>this.choosePlan('getMilkPerYear', 'get_milk_year3000')}>
               5000
             </button>
             <button
-              className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 4000}, {'btn-success': this.state.getMilkPerYear === 4000})}
-              onClick={()=>this.choosePlan('getMilkPerYear', 4000)}>
+              className={classNames('btn ', {'btn-default': this.state.getMilkPerYear !== 'get_milk_year4000'}, {'btn-success': this.state.getMilkPerYear === 'get_milk_year4000'})}
+              onClick={()=>this.choosePlan('getMilkPerYear', 'get_milk_year4000')}>
               6000
             </button>
           </div>

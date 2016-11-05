@@ -3,11 +3,11 @@ import {InputGroup, Button, FormGroup, FormControl, Alert, OverlayTrigger, Popov
 import {Link} from 'react-router'
 import LoadingButton from '../helpers/loadingButton'
 import InformationButton from '../helpers/informationButton'
-import {connect} from 'react-redux'
 import _ from 'lodash'
 import {EntrieTutorial} from '../tutorials/entrieToturial'
+import {addEntry,resetAll} from '../../reducers/entries/actions'
 
-export class Entries extends Component {
+class Entries extends Component {
   state = {
     alert: false,
     alertSuccess: false,
@@ -17,7 +17,7 @@ export class Entries extends Component {
 
   moneyRegEx = /(^[0-9]{1,2})$|(^[0-9]{1,2})([.]{1,1})([0-9]{0,2}$)/
   cowsRegEx = /^[0-9]{2,4}$/
-
+  assertDayValue = value => _.min([value || 0, 255])
   handleChange = (e, key)=> {
     e.preventDefault()
     this.setState({alert: false, showFarm: false})
@@ -71,7 +71,6 @@ export class Entries extends Component {
   }
 
   handleCalculateFarm = ()=> {
-    console.log('00--00-00-0-')
     let _state = {...this.state}
     if (_state.cows === 0) {
       this.setState({
@@ -95,9 +94,9 @@ export class Entries extends Component {
         this.state.fuelPrice) && this.moneyRegEx.test(
         this.state.paymentPrice)) && (this.state.cows != 0 && this.state.energyPrice != 0 && this.state.fuelPrice != 0 && this.state.paymentPrice != 0)) {
       const entry = _.omit(this.state, ['alert', 'alertSuccess', 'showFarm', 'message'])
-      this.props.addEntry({
+      this.props.dispatch(addEntry({
         ...entry
-      })
+      }))
       this.setState({alertSuccess: true})
     }
     else
@@ -211,6 +210,4 @@ export class Entries extends Component {
   }
 }
 
-export default connect(state => {
-  return {...state.entries}
-})(Entries)
+export default Entries
