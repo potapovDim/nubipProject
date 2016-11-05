@@ -25,7 +25,7 @@ class MachineTable extends React.Component {
   }
 
   render() {
-    let {machines}=this.props.tables;
+    let {machines}=this.props;
     let table = machines.map(function (item, index) {
       return (
         <tr key={index}>

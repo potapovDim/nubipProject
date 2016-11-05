@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {Link} from 'react-router'
 
 class SternPerDay extends React.Component {
 
@@ -7,8 +7,7 @@ class SternPerDay extends React.Component {
   calculateSternCowPerDay = () => {
 
   }
-
-
+  
   calculation = () =>(
     <div className="flex-wrap">
       <div>dsamf;lajfajs;fj;las;</div>
@@ -22,7 +21,7 @@ class SternPerDay extends React.Component {
       entries:{cow_before_20days, cows, season_stall},
       sternNormCows,
       sternNormCalves
-    }= this.props
+    } = this.props
     const tableCows = sternNormCows.map((value) =>
       (<div className="flex-wrap">
         <div>{value.view_feed}</div>

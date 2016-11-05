@@ -24,7 +24,7 @@ class TractorTable extends React.Component {
   }
 
   render() {
-    let {tractors}=this.props.tables;
+    let {tractors}=this.props;
     let table = tractors.map(function (item, index) {
       return (
         <tr key={index}>

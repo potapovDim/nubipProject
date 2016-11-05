@@ -5,11 +5,11 @@ const initialState = {
   fuelPrice: 0,
   energyPrice: 0,
   paymentPrice: 0,
-  season_stall: null,
-  pregrant_cows: null,
-  dry_cows: null,
-  ill_cows: null,
-  cow_before_20days: null
+  season_stall: 0,
+  pregrant_cows: 0,
+  dry_cows: 0,
+  ill_cows: 0,
+  cow_before_20days: 0
 }
 
 export default(state = initialState, action)=> {

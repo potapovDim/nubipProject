@@ -100,13 +100,13 @@ const initialState = {
   pumps_submersible: [
     {
       brand: 'ЄЦВА-2-10',
-      innings: '2.5',
-      full_pressure: '0.4',
-      speed_rotate: '2775',
-      power: '0.75',
-      diameter_hole: '100',
-      diameter_pipe: '32',
-      quantity_whiles: '14',
+      innings: 2.5,
+      full_pressure: 0.4,
+      speed_rotate: 2775,
+      power: 0.75,
+      diameter_hole: 100,
+      diameter_pipe: 32,
+      quantity_whiles: 14,
       prise: ''
     },
     {
@@ -133,10 +133,10 @@ const initialState = {
     },
     {
       brand: 'ЄЦВА-7.2-120',
-      innings: '9',
-      full_pressure: '0.6',
-      speed_rotate: '2835',
-      power: '4.5',
+      innings: 9,
+      full_pressure: 0.6,
+      speed_rotate: 2835,
+      power: 4.5,
       diameter_hole: '150',
       diameter_pipe: '50',
       quantity_whiles: '16',
@@ -459,6 +459,15 @@ const initialState = {
     {kind_of_building: 'Гноєсховища', volume: '300', B: '28', L: 30, H: '3.6', lost_stern: '0', KKD: '1'},
     {kind_of_building: 'Гноєсховища', volume: '500', B: '28', L: 42, H: '3.6', lost_stern: '0', KKD: '1'},
     {kind_of_building: 'Гноєсховища', volume: '2000', B: '25', L: 65, H: '3.6', lost_stern: '0', KKD: '1'},
+  ],
+  tubes_specifications: [
+    {supply_of_water: '0.75-1', D: 0.04, V: 0.35},
+    {supply_of_water: '1.5-2', D: 0.05, V: 0.45},
+    {supply_of_water: '2-4', D: 0.08, V: 0.55},
+    {supply_of_water: '4-8', D: 0.1, V: 0.65},
+    {supply_of_water: '8-12', D: 0.125, V: 0.8},
+    {supply_of_water: '12-20', D: 0.15, V: 1},
+    {supply_of_water: '20-30', D: 0.2, V: 1.2},
   ]
 }
 
@@ -476,7 +485,3 @@ export default(state = initialState, action)=> {
       return state
   }
 }
-
-
-
-

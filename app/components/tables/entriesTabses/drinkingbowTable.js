@@ -27,7 +27,7 @@ export class DrinkingbowCowsTable extends React.Component {
   }
 
   render() {
-    let {drinking_bowl_cows}=this.props.tables;
+    let {drinking_bowl_cows}=this.props;
     let table = drinking_bowl_cows.map(function (item, index) {
       return (
 
@@ -99,15 +99,15 @@ export class DrinkingbowCalvesTable extends React.Component {
         weight: weight,
         price: price,
       }
-      this.props.addToTable(newPump, 'drinking_bowl_calves')
+      this.props.dispatch(addToTable(newPump, 'drinking_bowl_calves'))
     }
   }
   handleRemoveData = ()=> {
-    this.props.removeFromTable('drinking_bowl_calves')
+    this.props.dispatch(removeFromTable('drinking_bowl_calves'))
   }
 
   render() {
-    let {drinking_bowl_calves}=this.props.tables;
+    let {drinking_bowl_calves}=this.props;
     let table = drinking_bowl_calves.map(function (item, index) {
       return (
 

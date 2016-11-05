@@ -53,7 +53,7 @@ export class MilkingMachinesStallTable extends React.Component {
   }
 
   render() {
-    let {milking_machines_stall}=this.props.tables;
+    let {milking_machines_stall}=this.props;
     let table = milking_machines_stall.map(function (item, index) {
       return (
         <tr key={index}>
@@ -191,7 +191,7 @@ export class MilkingMachinesHallTable extends React.Component {
   }
 
   render() {
-    let {milking_machines_parlor}=this.props.tables;
+    let {milking_machines_parlor}=this.props;
     let table = milking_machines_parlor.map(function (item, index) {
       return (
         <tr key={index}>

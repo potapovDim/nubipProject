@@ -29,7 +29,8 @@ class Main extends Component {
           <Navbar inverse>
             <Navbar.Header>
               <Navbar.Brand>
-                {this.props.name == '' ? <Link to="/">Головна сторінка</Link> : <Link to="/">Ім'я користувача : {this.props.name}</Link>}
+                {this.props.name === '' ? <Link to="/">Головна сторінка</Link> :
+                  <Link to="/">Ім'я користувача : {this.props.name}</Link>}
               </Navbar.Brand>
               <Navbar.Toggle />
             </Navbar.Header>
@@ -39,9 +40,8 @@ class Main extends Component {
                          onClick={() => this.setState({ show: true})}
                 >Підказка по користуванню</NavItem>
                 {tutorial}
-                <NavItem >DDL future</NavItem>
-                <NavDropdown eventKey={3} title=' ' id="basic-nav-dropdown">
-                  <MenuItem eventKey={3.1}>Дія 1</MenuItem>
+                <NavDropdown eventKey={3} title='НАВІГАЦІЯ ПО ПРОЕКТУ' id="basic-nav-dropdown">
+                  <MenuItem eventKey={3.1}><Link to="/water">ВОДОПОСТАЧАННЯ</Link></MenuItem>
                   <MenuItem eventKey={3.2}>Дія 2</MenuItem>
                   <MenuItem eventKey={3.3}>Дія 3</MenuItem>
                   <MenuItem divider/>
@@ -54,7 +54,7 @@ class Main extends Component {
               </Nav>
             </Navbar.Collapse>
           </Navbar>
-          <div style={{weight:"80%"}} >
+          <div style={{weight:"80%"}}>
             {this.props.children}
           </div>
         </div>

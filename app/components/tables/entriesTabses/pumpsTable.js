@@ -33,7 +33,7 @@ export class PumpRotateTable extends React.Component {
   }
 
   render() {
-    let {pumps_rotary}=this.props.tables;
+    let {pumps_rotary}=this.props;
     let table = pumps_rotary.map(function (item, index) {
       return (
         <tr key={index}>
@@ -117,16 +117,15 @@ export class PumpSubmersibleTable extends React.Component {
         price: price
 
       }
-      console.log('------------------1111')
-      this.props.addToTable(newPump, 'pumps_submersible')
+      this.dispatch(addToTable(newPump, 'pumps_submersible'))
     }
   }
   handleRemoveData = ()=> {
-    this.props.removeFromTable('pumps_submersible')
+    this.dispatch(removeFromTable('pumps_submersible'))
   }
 
   render() {
-    let {pumps_submersible}=this.props.tables;
+    let {pumps_submersible}=this.props;
     let table = pumps_submersible.map(function (item, index) {
       return (
         <tr key={index}>

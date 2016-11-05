@@ -17,7 +17,7 @@ class Entries extends Component {
 
   moneyRegEx = /(^[0-9]{1,2})$|(^[0-9]{1,2})([.]{1,1})([0-9]{0,2}$)/
   cowsRegEx = /^[0-9]{2,4}$/
-
+  assertDayValue = value => _.min([value || 0, 255])
   handleChange = (e, key)=> {
     e.preventDefault()
     this.setState({alert: false, showFarm: false})
@@ -71,7 +71,6 @@ class Entries extends Component {
   }
 
   handleCalculateFarm = ()=> {
-    console.log('00--00-00-0-')
     let _state = {...this.state}
     if (_state.cows === 0) {
       this.setState({
