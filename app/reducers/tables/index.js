@@ -468,7 +468,9 @@ const initialState = {
     {supply_of_water: '8-12', D: 0.125, V: 0.8},
     {supply_of_water: '12-20', D: 0.15, V: 1},
     {supply_of_water: '20-30', D: 0.2, V: 1.2},
-  ]
+  ],
+  building_for_cows:[],
+  
 }
 
 export default(state = initialState, action)=> {

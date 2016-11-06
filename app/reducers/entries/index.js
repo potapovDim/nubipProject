@@ -9,7 +9,8 @@ const initialState = {
   pregrant_cows: 0,
   dry_cows: 0,
   ill_cows: 0,
-  cow_before_20days: 0
+  cow_before_20days: 0,
+  type: 'without_attachable'
 }
 
 export default(state = initialState, action)=> {

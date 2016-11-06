@@ -1,23 +1,42 @@
 import React, {Component} from 'react'
-import {InputGroup, Button, FormGroup, FormControl, Alert, OverlayTrigger, Popover, ProgressBar} from 'react-bootstrap'
+import {
+  InputGroup,
+  Button,
+  FormGroup,
+  FormControl,
+  Alert,
+  OverlayTrigger,
+  Popover,
+  ProgressBar,
+  Checkbox
+} from 'react-bootstrap'
 import {Link} from 'react-router'
 import LoadingButton from '../helpers/loadingButton'
 import InformationButton from '../helpers/informationButton'
 import _ from 'lodash'
 import {EntrieTutorial} from '../tutorials/entrieToturial'
-import {addEntry,resetAll} from '../../reducers/entries/actions'
+import {addEntry, resetAll} from '../../reducers/entries/actions'
 
 class Entries extends Component {
   state = {
     alert: false,
     alertSuccess: false,
     showFarm: false,
-    message: ''
+    message: '',
+    type: null,
+    cows: null,
+    fuelPrice: null,
+    energyPrice: null,
+    paymentPrice: null,
+    pregrant_cows: null,
+    dry_cows: null,
+    ill_cows: null,
+    cow_before_20days: null,
+    season_stall:null
   }
 
   moneyRegEx = /(^[0-9]{1,2})$|(^[0-9]{1,2})([.]{1,1})([0-9]{0,2}$)/
   cowsRegEx = /^[0-9]{2,4}$/
-  assertDayValue = value => _.min([value || 0, 255])
   handleChange = (e, key)=> {
     e.preventDefault()
     this.setState({alert: false, showFarm: false})
@@ -43,6 +62,8 @@ class Entries extends Component {
     const {dispatch} = this.props
     if (this.state.pregrant_cows === null) {
       this.handleCalculateFarm()
+      setTimeout(()=> {
+      }, 500)
       const quantity = {
         cows: this.state.cows,
         fuelPrice: this.state.fuelPrice,
@@ -51,7 +72,9 @@ class Entries extends Component {
         pregrant_cows: this.state.pregrant_cows,
         dry_cows: this.state.dry_cows,
         ill_cows: this.state.ill_cows,
-        cow_before_20days: this.state.cow_before_20days
+        cow_before_20days: this.state.cow_before_20days,
+        type: this.state.type,
+        season_stall:this.state.season_stall
       }
       dispatch(addEntry(quantity))
     }
@@ -64,7 +87,9 @@ class Entries extends Component {
         pregrant_cows: this.state.pregrant_cows,
         dry_cows: this.state.dry_cows,
         ill_cows: this.state.ill_cows,
-        cow_before_20days: this.state.cow_before_20days
+        cow_before_20days: this.state.cow_before_20days,
+        type: this.state.type,
+        season_stall:this.state.season_stall
       }
       dispatch(addEntry(quantity))
     }
@@ -106,12 +131,17 @@ class Entries extends Component {
       })
   }
 
+  chooseWayMaintenance = type => {
+    this.state.type === type ? this.setState({type: null}) : this.setState({type})
+  }
+
   handleRemoveQuantity = ()=> {
     this.props.resetAll();
   };
 
   render() {
-    let {cows, fuelPrice, energyPrice, paymentPrice} = this.props
+    const {cows, fuelPrice, energyPrice, paymentPrice, pregrant_cows, dry_cows, ill_cows, cow_before_20days, type} = this.state
+    console.log(cows && fuelPrice && energyPrice && paymentPrice)
     return (
       <div>
         {this.state.alert ?
@@ -172,11 +202,25 @@ class Entries extends Component {
               </InputGroup>
             </FormGroup>
 
+            <FormGroup >
+              <InputGroup>
+                <InputGroup.Addon style={{width: "300px"}}>Спосіб утримання</InputGroup.Addon>
+                <Checkbox inline onChange={()=>this.chooseWayMaintenance('attachable')}
+                          disabled={this.state.type!==null}>
+                  Прив'язний
+                </Checkbox>
+                <Checkbox inline onChange={()=>this.chooseWayMaintenance('without_attachable')}
+                          disabled={this.state.type!==null}>
+                  Безприв'зний
+                </Checkbox>
+              </InputGroup>
+            </FormGroup>
             <LoadingButton action={this.handleAddQuantity}/>
-            <Button onClick={this.handleCalculateFarm} type='button'>Розрахувати ферму</Button>
+            <Button onClick={this.handleCalculateFarm} type='button'
+                    disabled={(cows && fuelPrice && energyPrice && paymentPrice&&type)===null}>Розрахувати ферму</Button>
             <Link to="/stern">
               <Button onClick={this.initData}
-                      disabled={(cows == 0 && fuelPrice == 0 && paymentPrice == 0 && energyPrice == 0)}
+                      disabled={this.state.alertSuccess !== true}
                       type='button'>Перейти
                 до
                 таблиць</Button>
@@ -203,6 +247,7 @@ class Entries extends Component {
               <p>Кількість сухостійних корів : {this.state.dry_cows} голів</p>
               <p>Кількість хворих корів : {this.state.ill_cows} голів</p>
               <p>Кількість телят : {this.state.cow_before_20days} голів</p>
+              <p>Спосіб утримання тварин : {this.state.type === 'attachable' ? "прив'зний" : "безприв'язний" }</p>
             </div> : null}
         </div>
       </div>

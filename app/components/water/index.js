@@ -3,6 +3,7 @@ import {PumpRotateTable, PumpSubmersibleTable} from '../tables/entriesTabses/pum
 import classNames from 'classnames'
 import {addTubes, addWaterNorm} from '../../reducers/water/actions'
 import {CalculateWaterPerDay} from './calculateWaterPerDay'
+import {Link} from 'react-router'
 class WaterCalculations extends React.Component {
   state = {
     pumpType: null
@@ -15,19 +16,21 @@ class WaterCalculations extends React.Component {
     this.state.pumpType === type ?
       this.setState({pumpType: null}) : this.setState({pumpType: type})
   }
+
+  componentWillUnmount() {
+    this.props.dispatch(addWaterNorm(this.state.water))
+  }
+
   calculateWater = () => {
-    console.log('dslkdsakjdsakjkjdlas')
-    const {cow_before_20days,cows}= this.props.entries
+    const {cow_before_20days, cows}= this.props.entries
     const pureNeed = cow_before_20days * 30 + cows * 100
     const maxNeed = pureNeed * 1.3
     const needPerHour = maxNeed * 2.3 / 24
     const water = {pureNeed, maxNeed, needPerHour}
-    console.log(water)
     this.setState({water})
   }
 
   render() {
-    console.log(this.state.water)
     return (<div>
       <div className="btn-group">
         <button className={
@@ -53,7 +56,12 @@ class WaterCalculations extends React.Component {
         </div>
       }
       {(this.state.water && this.state.pumpType !== null) &&
+      <div>
         <CalculateWaterPerDay props={{...this.props.entries, ...this.state}}/>
+        <Link to="/tubes">
+          <button className="btn btn-default">Перейти до розрахунку водонапірної мережі</button>
+        </Link>
+      </div>
       }
     </div>)
   }
