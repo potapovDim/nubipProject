@@ -32,7 +32,7 @@ class Entries extends Component {
     dry_cows: null,
     ill_cows: null,
     cow_before_20days: null,
-    season_stall:null
+    season_stall: null
   }
 
   moneyRegEx = /(^[0-9]{1,2})$|(^[0-9]{1,2})([.]{1,1})([0-9]{0,2}$)/
@@ -74,7 +74,7 @@ class Entries extends Component {
         ill_cows: this.state.ill_cows,
         cow_before_20days: this.state.cow_before_20days,
         type: this.state.type,
-        season_stall:this.state.season_stall
+        season_stall: this.state.season_stall
       }
       dispatch(addEntry(quantity))
     }
@@ -89,7 +89,7 @@ class Entries extends Component {
         ill_cows: this.state.ill_cows,
         cow_before_20days: this.state.cow_before_20days,
         type: this.state.type,
-        season_stall:this.state.season_stall
+        season_stall: this.state.season_stall
       }
       dispatch(addEntry(quantity))
     }
@@ -140,7 +140,7 @@ class Entries extends Component {
   };
 
   render() {
-    const {cows, fuelPrice, energyPrice, paymentPrice, pregrant_cows, dry_cows, ill_cows, cow_before_20days, type} = this.state
+    const {cows, fuelPrice, energyPrice, paymentPrice, pregrant_cows, dry_cows, ill_cows, cow_before_20days, type, season_stall} = this.state
     console.log(cows && fuelPrice && energyPrice && paymentPrice)
     return (
       <div>
@@ -217,7 +217,8 @@ class Entries extends Component {
             </FormGroup>
             <LoadingButton action={this.handleAddQuantity}/>
             <Button onClick={this.handleCalculateFarm} type='button'
-                    disabled={(cows && fuelPrice && energyPrice && paymentPrice&&type)===null}>Розрахувати ферму</Button>
+                    disabled={(cows && fuelPrice && energyPrice && paymentPrice&&type)===null}>Розрахувати
+              ферму</Button>
             <Link to="/stern">
               <Button onClick={this.initData}
                       disabled={this.state.alertSuccess !== true}
@@ -226,28 +227,24 @@ class Entries extends Component {
                 таблиць</Button>
             </Link>
           </form>
-          {(this.cowsRegEx.test(this.state.cows) && this.moneyRegEx.test(
-            this.state.energyPrice) && this.moneyRegEx.test(
-            this.state.fuelPrice) && this.moneyRegEx.test(
-            this.state.paymentPrice)) && (this.state.cows != 0 && this.state.energyPrice != 0 && this.state.fuelPrice != 0
-          && this.state.paymentPrice != 0) ?
+          {((cows && fuelPrice && energyPrice && paymentPrice && type) !== null) ?
             <div className="output-data flash">
               <h4>Данні які будуть внесені для розрахунку</h4>
-              <p>Стійловий період : {this.state.season_stall}</p>
-              <p>Кількість корів : {this.state.cows}</p>
-              <p>Ціна за пальне : {this.state.fuelPrice} грн/л</p>
-              <p>Ціна за електроенергію : {this.state.energyPrice} грн/кВт</p>
-              <p>Заробітня плата : {this.state.paymentPrice} грн/год</p>
+              <p>Стійловий період : {season_stall}</p>
+              <p>Кількість корів : {cows}</p>
+              <p>Ціна за пальне : {fuelPrice} грн/л</p>
+              <p>Ціна за електроенергію : {energyPrice} грн/кВт</p>
+              <p>Заробітня плата : {paymentPrice} грн/год</p>
             </div> : null}
           {this.state.showFarm ?
             <div className="output-cows flash">
               <h4>Структура ферми</h4>
-              <p>Кількість корів : {this.state.cows} голів</p>
-              <p>Кількість корів родильного відділення : {this.state.pregrant_cows} голів</p>
-              <p>Кількість сухостійних корів : {this.state.dry_cows} голів</p>
-              <p>Кількість хворих корів : {this.state.ill_cows} голів</p>
-              <p>Кількість телят : {this.state.cow_before_20days} голів</p>
-              <p>Спосіб утримання тварин : {this.state.type === 'attachable' ? "прив'зний" : "безприв'язний" }</p>
+              <p>Кількість корів : {cows} голів</p>
+              <p>Кількість корів родильного відділення : {pregrant_cows} голів</p>
+              <p>Кількість сухостійних корів : {dry_cows} голів</p>
+              <p>Кількість хворих корів : {ill_cows} голів</p>
+              <p>Кількість телят : {cow_before_20days} голів</p>
+              <p>Спосіб утримання тварин : {type === 'attachable' ? "прив'зний" : "безприв'язний" }</p>
             </div> : null}
         </div>
       </div>
