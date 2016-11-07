@@ -10,7 +10,7 @@ class WaterCalculations extends React.Component {
   }
 
   addWaterNorms = water => {
-
+    
   }
   choosePumpType = type => {
     this.state.pumpType === type ?
@@ -22,12 +22,16 @@ class WaterCalculations extends React.Component {
   }
 
   calculateWater = () => {
+    if (this.state.pumpType === null) {
+      this.setState({pumpType: 'pumps_rotary'})
+    }
     const {cow_before_20days, cows}= this.props.entries
     const pureNeed = cow_before_20days * 30 + cows * 100
     const maxNeed = pureNeed * 1.3
     const needPerHour = maxNeed * 2.3 / 24
     const water = {pureNeed, maxNeed, needPerHour}
     this.setState({water})
+    this.props.dispatch(addWaterNorm())
   }
 
   render() {

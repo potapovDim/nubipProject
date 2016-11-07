@@ -16,6 +16,7 @@ import InformationButton from '../helpers/informationButton'
 import _ from 'lodash'
 import {EntrieTutorial} from '../tutorials/entrieToturial'
 import {addEntry, resetAll} from '../../reducers/entries/actions'
+import {BuildingsForFarm} from './buidingsForFarm'
 
 class Entries extends Component {
   state = {
@@ -141,7 +142,6 @@ class Entries extends Component {
 
   render() {
     const {cows, fuelPrice, energyPrice, paymentPrice, pregrant_cows, dry_cows, ill_cows, cow_before_20days, type, season_stall} = this.state
-    console.log(cows && fuelPrice && energyPrice && paymentPrice)
     return (
       <div>
         {this.state.alert ?
@@ -247,6 +247,15 @@ class Entries extends Component {
               <p>Спосіб утримання тварин : {type === 'attachable' ? "прив'зний" : "безприв'язний" }</p>
             </div> : null}
         </div>
+        {this.state.showFarm &&
+        <BuildingsForFarm
+          cows={cows}
+          cow_before_20days={cow_before_20days}
+          building_for_calves={this.props.building_for_calves}
+          buildings_for_calves_before_20days={this.props.buildings_for_calves_before_20days}
+          buildings_for_cows={this.props.buildings_for_cows}
+          type={type}
+        />}
       </div>
     );
   }

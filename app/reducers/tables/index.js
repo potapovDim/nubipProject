@@ -469,8 +469,26 @@ const initialState = {
     {supply_of_water: '12-20', D: 0.15, V: 1},
     {supply_of_water: '20-30', D: 0.2, V: 1.2},
   ],
-  building_for_cows:[],
-  
+  buildings_for_farm: {
+    buildings_for_cows: [
+      {name: 'Корівник', type: "безприв'язний", heads: 408, L: 96, W: 18, stern_given: 'Мобільним'},
+      {name: 'Корівник', type: "прив'язний", heads: 200, L: 72, W: 18, stern_given: 'Транспортером'},
+      {name: 'Корівник', type: "-", heads: 100, L: 72, W: 12, stern_given: '-'},
+      {name: 'Корівник', type: "-", heads: 200, L: 72, W: 21, stern_given: '-'}
+    ],
+    buildings_for_calves_before_20days: [
+      {name: 'Родильне відділення', type: "-", heads: 96, L: 60, W: 21, stern_given: 'Транспортером'},
+      {name: 'Родильне відділення з профілакторієм', type: "-", heads: 160, L: 72, W: 21, stern_given: 'Транспортером'},
+      {name: 'Телятник з родильне відділення', type: "-", heads: 342, L: 90, W: 18, stern_given: '-'},
+      {name: 'Телятник з родильне відділення', type: "-", heads: 228, L: 60, W: 18, stern_given: '-'},
+      {name: 'Телятник з родильне відділення', type: "-", heads: 120, L: 60, W: 12, stern_given: '-'}
+    ],
+    building_for_calves: [
+      {name: 'Приміщення для молодняку', type: "-", heads: 300, L: 48, W: 18, stern_given: 'Мобільним'},
+      {name: 'Приміщення для молодняку', type: "-", heads: 170, L: 36, W: 18, stern_given: 'Мобільним'},
+      {name: 'Приміщення для молодняку', type: "-", heads: 263, L: 60, W: 18, stern_given: 'Мобільним'}
+    ]
+  }
 }
 
 export default(state = initialState, action)=> {

@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import Entries from '../components/enterdata/entries'
 
-class EntryData extends Component{
-  render(){
-    return(
+class EntryData extends Component {
+  render() {
+    return (
       <div>
         <Entries {...this.props}/>
       </div>
@@ -12,6 +12,6 @@ class EntryData extends Component{
   }
 }
 
-export default connect(state=>{
-  return{...state.entries}
+export default connect(state=> {
+  return {...state.entries, ...state.tables.buildings_for_farm}
 })(EntryData)

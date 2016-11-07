@@ -15,17 +15,17 @@
 .entries {
     flex-grow: 1;
     flex-basis: 620px;
-    min-height: 620px;
+    min-height: 400px;
 }
 
 .stern-first-table {
     flex-grow: 1;
-    width: 47%;
+    width: 40%;
 }
 
 .stern-second-table {
     flex-grow: 1;
-    width: 47%;
+    width: 40%;
 }
 
 .stern-separator {
