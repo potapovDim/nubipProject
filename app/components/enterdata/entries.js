@@ -5,18 +5,15 @@ import {
   FormGroup,
   FormControl,
   Alert,
-  OverlayTrigger,
-  Popover,
-  ProgressBar,
   Checkbox
 } from 'react-bootstrap'
 import {Link} from 'react-router'
 import LoadingButton from '../helpers/loadingButton'
 import InformationButton from '../helpers/informationButton'
-import _ from 'lodash'
 import {EntrieTutorial} from '../tutorials/entrieToturial'
 import {addEntry, resetAll} from '../../reducers/entries/actions'
 import {BuildingsForFarm} from './buidingsForFarm'
+import _ from 'lodash'
 
 class Entries extends Component {
   state = {
@@ -35,7 +32,9 @@ class Entries extends Component {
     cow_before_20days: null,
     season_stall: null
   }
-
+  addBuildings = (key, data) => {
+    this.setState({}[key] = data)
+  }
   moneyRegEx = /(^[0-9]{1,2})$|(^[0-9]{1,2})([.]{1,1})([0-9]{0,2}$)/
   cowsRegEx = /^[0-9]{2,4}$/
   handleChange = (e, key)=> {
@@ -65,34 +64,10 @@ class Entries extends Component {
       this.handleCalculateFarm()
       setTimeout(()=> {
       }, 500)
-      const quantity = {
-        cows: this.state.cows,
-        fuelPrice: this.state.fuelPrice,
-        energyPrice: this.state.energyPrice,
-        paymentPrice: this.state.paymentPrice,
-        pregrant_cows: this.state.pregrant_cows,
-        dry_cows: this.state.dry_cows,
-        ill_cows: this.state.ill_cows,
-        cow_before_20days: this.state.cow_before_20days,
-        type: this.state.type,
-        season_stall: this.state.season_stall
-      }
-      dispatch(addEntry(quantity))
+      dispatch(addEntry(_.omit(this.state, ['alert', 'alertSuccess', 'showFarm', 'message'])))
     }
     else {
-      const quantity = {
-        cows: this.state.cows,
-        fuelPrice: this.state.fuelPrice,
-        energyPrice: this.state.energyPrice,
-        paymentPrice: this.state.paymentPrice,
-        pregrant_cows: this.state.pregrant_cows,
-        dry_cows: this.state.dry_cows,
-        ill_cows: this.state.ill_cows,
-        cow_before_20days: this.state.cow_before_20days,
-        type: this.state.type,
-        season_stall: this.state.season_stall
-      }
-      dispatch(addEntry(quantity))
+      dispatch(addEntry(_.omit(this.state, ['alert', 'alertSuccess', 'showFarm', 'message'])))
     }
   }
 
@@ -206,18 +181,18 @@ class Entries extends Component {
               <InputGroup>
                 <InputGroup.Addon style={{width: "300px"}}>Спосіб утримання</InputGroup.Addon>
                 <Checkbox inline onChange={()=>this.chooseWayMaintenance('attachable')}
-                          disabled={this.state.type!==null}>
+                          disabled={this.state.type !== null}>
                   Прив'язний
                 </Checkbox>
                 <Checkbox inline onChange={()=>this.chooseWayMaintenance('without_attachable')}
-                          disabled={this.state.type!==null}>
+                          disabled={this.state.type !== null}>
                   Безприв'зний
                 </Checkbox>
               </InputGroup>
             </FormGroup>
             <LoadingButton action={this.handleAddQuantity}/>
             <Button onClick={this.handleCalculateFarm} type='button'
-                    disabled={(cows && fuelPrice && energyPrice && paymentPrice&&type)===null}>Розрахувати
+                    disabled={(cows && fuelPrice && energyPrice && paymentPrice && type) === null}>Розрахувати
               ферму</Button>
             <Link to="/stern">
               <Button onClick={this.initData}
@@ -249,6 +224,7 @@ class Entries extends Component {
         </div>
         {this.state.showFarm &&
         <BuildingsForFarm
+          addBuildings={this.addBuildings}
           cows={cows}
           cow_before_20days={cow_before_20days}
           building_for_calves={this.props.building_for_calves}

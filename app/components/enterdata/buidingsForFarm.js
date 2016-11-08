@@ -26,7 +26,7 @@ const Build = ({name, type, heads, L, W, stern_given}) => {
 }
 
 
-export const BuildingsForFarm = ({cows, cow_before_20days, building_for_calves, buildings_for_calves_before_20days, buildings_for_cows, type}) => {
+export const BuildingsForFarm = ({addBuildings, cows, cow_before_20days, building_for_calves, buildings_for_calves_before_20days, buildings_for_cows, type}) => {
 
   const recomentBuildForCows = () => {
     let value
