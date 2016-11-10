@@ -4,13 +4,15 @@ import classNames from 'classnames'
 import {addTubes, addWaterNorm} from '../../reducers/water/actions'
 import {CalculateWaterPerDay} from './calculateWaterPerDay'
 import {Link} from 'react-router'
+import WaterEquipment from './calculateWaterEquipment'
 class WaterCalculations extends React.Component {
   state = {
-    pumpType: null
+    pumpType: null,
+    showEquip: false
   }
 
   addWaterNorms = water => {
-    
+
   }
   choosePumpType = type => {
     this.state.pumpType === type ?
@@ -38,15 +40,12 @@ class WaterCalculations extends React.Component {
     return (<div>
       <div className="btn-group">
         <button className={
-            classNames('btn ', {'btn-default': this.state.pumpType !== 'pumps_rotary'}, {'btn-success': this.state.pumpType === 'pumps_rotary'})}
+          classNames('btn ', {'btn-default': this.state.pumpType !== 'pumps_rotary'}, {'btn-success': this.state.pumpType === 'pumps_rotary'})}
                 onClick={()=>this.choosePumpType('pumps_rotary')}>Відцентрові насоси
         </button>
         <button className={
-            classNames('btn ', {'btn-default': this.state.pumpType !== 'pumps_submersible'}, {'btn-success': this.state.pumpType === 'pumps_submersible'})}
+          classNames('btn ', {'btn-default': this.state.pumpType !== 'pumps_submersible'}, {'btn-success': this.state.pumpType === 'pumps_submersible'})}
                 onClick={()=>this.choosePumpType('pumps_submersible')}>Заглибні відцентрові насоси
-        </button>
-        <button className="btn btn-info"
-                onClick={()=>this.choosePumpType(null)}>Переглянути насоси
         </button>
         <button className="btn btn-info"
                 onClick={this.calculateWater}> Розрахувати потребу в воді
@@ -62,9 +61,13 @@ class WaterCalculations extends React.Component {
       {(this.state.water && this.state.pumpType !== null) &&
       <div>
         <CalculateWaterPerDay props={{...this.props.entries, ...this.state}}/>
-        <Link to="/tubes">
-          <button className="btn btn-default">Перейти до розрахунку водонапірної мережі</button>
-        </Link>
+        <button className="btn btn-default" onClick={()=> {
+          this.setState({showEquip: !this.state.showEquip})
+        }}>Розрахувати обладнання
+        </button>
+        {
+          this.state.showEquip && <WaterEquipment/>
+        }
       </div>
       }
     </div>)
