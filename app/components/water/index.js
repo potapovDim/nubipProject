@@ -5,6 +5,7 @@ import {addTubes, addWaterNorm} from '../../reducers/water/actions'
 import {CalculateWaterPerDay} from './calculateWaterPerDay'
 import {Link} from 'react-router'
 import WaterEquipment from './calculateWaterEquipment'
+import DragChains from './calculateChain'
 class WaterCalculations extends React.Component {
   state = {
     pumpType: null,
@@ -70,6 +71,7 @@ class WaterCalculations extends React.Component {
         }
       </div>
       }
+     
     </div>)
   }
 }

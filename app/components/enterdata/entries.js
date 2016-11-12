@@ -30,10 +30,11 @@ class Entries extends Component {
     dry_cows: null,
     ill_cows: null,
     cow_before_20days: null,
-    season_stall: null
+    season_stall: null,
+    buildingsADD: false
   }
-  addBuildings = (key, data) => {
-    this.setState({}[key] = data)
+  addBuildings = (data) => {
+    this.setState({buildingsForFarm: data, buildingsADD: true})
   }
   moneyRegEx = /(^[0-9]{1,2})$|(^[0-9]{1,2})([.]{1,1})([0-9]{0,2}$)/
   cowsRegEx = /^[0-9]{2,4}$/
@@ -64,10 +65,10 @@ class Entries extends Component {
       this.handleCalculateFarm()
       setTimeout(()=> {
       }, 500)
-      dispatch(addEntry(_.omit(this.state, ['alert', 'alertSuccess', 'showFarm', 'message'])))
+      dispatch(addEntry(_.omit(this.state, ['alert', 'alertSuccess', 'showFarm', 'message', 'buildingsADD'])))
     }
     else {
-      dispatch(addEntry(_.omit(this.state, ['alert', 'alertSuccess', 'showFarm', 'message'])))
+      dispatch(addEntry(_.omit(this.state, ['alert', 'alertSuccess', 'showFarm', 'message', 'buildingsADD'])))
     }
   }
 
@@ -116,7 +117,8 @@ class Entries extends Component {
   };
 
   render() {
-    const {cows, fuelPrice, energyPrice, paymentPrice, pregrant_cows, dry_cows, ill_cows, cow_before_20days, type, season_stall} = this.state
+    console.log(this.state.buildingsForFarm)
+    const {cows, fuelPrice, energyPrice, paymentPrice, pregrant_cows, dry_cows, ill_cows, cow_before_20days, type, season_stall, buildingsADD} = this.state
     return (
       <div>
         {this.state.alert ?
@@ -226,6 +228,7 @@ class Entries extends Component {
         <BuildingsForFarm
           addBuildings={this.addBuildings}
           cows={cows}
+          buildingsADD={buildingsADD}
           cow_before_20days={cow_before_20days}
           building_for_calves={this.props.building_for_calves}
           buildings_for_calves_before_20days={this.props.buildings_for_calves_before_20days}

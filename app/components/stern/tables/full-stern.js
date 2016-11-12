@@ -2,11 +2,11 @@ import React from 'react'
 
 export const FullStern = ({stern}) => {
   const table = Object.keys(stern).map((value) => {
-    return <tr>
-      <td style={{width: '20%'}} className="active">{value}</td>
-      <td style={{width: '20%'}} className="active">{stern[value]} кг</td>
-    </tr>
+    return <div className="flex-wrap between block-center">
+      <div className="table-right">{value}</div>
+      <div className="table-left">{stern[value]} кг</div>
+    </div>
   })
 
-  return <div>{table}</div>
+  return <div className="text-center">{table}</div>
 }
