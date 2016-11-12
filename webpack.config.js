@@ -6,7 +6,7 @@ module.exports = {
   },
   devServer: {
     port: 3333,
-    historyApiFallback: true,
+    historyApiFallback: true
   },
 
   module: {
@@ -17,6 +17,7 @@ module.exports = {
         loader: 'babel',
         query: {
           presets: ['react', 'es2015', 'stage-0'],
+          plugins: ['babel-plugin-transform-decorators-legacy']
         }
       }
     ]

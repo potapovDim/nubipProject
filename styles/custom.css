@@ -6,7 +6,22 @@
     width: 100%;
     box-sizing: border-box;
 }
-
+.between{
+    justify-content: space-between;
+}
+.block-center{
+    margin: 0 auto;
+}
+.table-left{
+    text-align: left;
+    padding: 0 5px;
+    width: 50%;
+}
+.table-right{
+    text-align: right;
+    padding: 0 5px;
+    width: 50%;
+}
 .flex-wrap{
     display: flex;
     align-items: center;
@@ -15,17 +30,17 @@
 .entries {
     flex-grow: 1;
     flex-basis: 620px;
-    min-height: 620px;
+    min-height: 400px;
 }
 
 .stern-first-table {
     flex-grow: 1;
-    width: 47%;
+    width: 40%;
 }
 
 .stern-second-table {
     flex-grow: 1;
-    width: 47%;
+    width: 40%;
 }
 
 .stern-separator {
@@ -39,7 +54,7 @@
 }
 
 .output-cows {
-    line-height: 2.5;
+    line-height: 1.9;
     flex-grow: 1;
 }
 

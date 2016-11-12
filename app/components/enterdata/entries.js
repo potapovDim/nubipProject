@@ -1,23 +1,43 @@
 import React, {Component} from 'react'
-import {InputGroup, Button, FormGroup, FormControl, Alert, OverlayTrigger, Popover, ProgressBar} from 'react-bootstrap'
+import {
+  InputGroup,
+  Button,
+  FormGroup,
+  FormControl,
+  Alert,
+  Checkbox
+} from 'react-bootstrap'
 import {Link} from 'react-router'
 import LoadingButton from '../helpers/loadingButton'
 import InformationButton from '../helpers/informationButton'
-import _ from 'lodash'
 import {EntrieTutorial} from '../tutorials/entrieToturial'
-import {addEntry,resetAll} from '../../reducers/entries/actions'
+import {addEntry, resetAll} from '../../reducers/entries/actions'
+import {BuildingsForFarm} from './buidingsForFarm'
+import _ from 'lodash'
 
 class Entries extends Component {
   state = {
     alert: false,
     alertSuccess: false,
     showFarm: false,
-    message: ''
+    message: '',
+    type: null,
+    cows: null,
+    fuelPrice: null,
+    energyPrice: null,
+    paymentPrice: null,
+    pregrant_cows: null,
+    dry_cows: null,
+    ill_cows: null,
+    cow_before_20days: null,
+    season_stall: null,
+    buildingsADD: false
   }
-
+  addBuildings = (data) => {
+    this.setState({buildingsForFarm: data, buildingsADD: true})
+  }
   moneyRegEx = /(^[0-9]{1,2})$|(^[0-9]{1,2})([.]{1,1})([0-9]{0,2}$)/
   cowsRegEx = /^[0-9]{2,4}$/
-  assertDayValue = value => _.min([value || 0, 255])
   handleChange = (e, key)=> {
     e.preventDefault()
     this.setState({alert: false, showFarm: false})
@@ -43,30 +63,12 @@ class Entries extends Component {
     const {dispatch} = this.props
     if (this.state.pregrant_cows === null) {
       this.handleCalculateFarm()
-      const quantity = {
-        cows: this.state.cows,
-        fuelPrice: this.state.fuelPrice,
-        energyPrice: this.state.energyPrice,
-        paymentPrice: this.state.paymentPrice,
-        pregrant_cows: this.state.pregrant_cows,
-        dry_cows: this.state.dry_cows,
-        ill_cows: this.state.ill_cows,
-        cow_before_20days: this.state.cow_before_20days
-      }
-      dispatch(addEntry(quantity))
+      setTimeout(()=> {
+      }, 500)
+      dispatch(addEntry(_.omit(this.state, ['alert', 'alertSuccess', 'showFarm', 'message', 'buildingsADD'])))
     }
     else {
-      const quantity = {
-        cows: this.state.cows,
-        fuelPrice: this.state.fuelPrice,
-        energyPrice: this.state.energyPrice,
-        paymentPrice: this.state.paymentPrice,
-        pregrant_cows: this.state.pregrant_cows,
-        dry_cows: this.state.dry_cows,
-        ill_cows: this.state.ill_cows,
-        cow_before_20days: this.state.cow_before_20days
-      }
-      dispatch(addEntry(quantity))
+      dispatch(addEntry(_.omit(this.state, ['alert', 'alertSuccess', 'showFarm', 'message', 'buildingsADD'])))
     }
   }
 
@@ -106,12 +108,17 @@ class Entries extends Component {
       })
   }
 
+  chooseWayMaintenance = type => {
+    this.state.type === type ? this.setState({type: null}) : this.setState({type})
+  }
+
   handleRemoveQuantity = ()=> {
     this.props.resetAll();
   };
 
   render() {
-    let {cows, fuelPrice, energyPrice, paymentPrice} = this.props
+    console.log(this.state.buildingsForFarm)
+    const {cows, fuelPrice, energyPrice, paymentPrice, pregrant_cows, dry_cows, ill_cows, cow_before_20days, type, season_stall, buildingsADD} = this.state
     return (
       <div>
         {this.state.alert ?
@@ -172,39 +179,62 @@ class Entries extends Component {
               </InputGroup>
             </FormGroup>
 
+            <FormGroup >
+              <InputGroup>
+                <InputGroup.Addon style={{width: "300px"}}>Спосіб утримання</InputGroup.Addon>
+                <Checkbox inline onChange={()=>this.chooseWayMaintenance('attachable')}
+                          disabled={this.state.type !== null}>
+                  Прив'язний
+                </Checkbox>
+                <Checkbox inline onChange={()=>this.chooseWayMaintenance('without_attachable')}
+                          disabled={this.state.type !== null}>
+                  Безприв'зний
+                </Checkbox>
+              </InputGroup>
+            </FormGroup>
             <LoadingButton action={this.handleAddQuantity}/>
-            <Button onClick={this.handleCalculateFarm} type='button'>Розрахувати ферму</Button>
+            <Button onClick={this.handleCalculateFarm} type='button'
+                    disabled={(cows && fuelPrice && energyPrice && paymentPrice && type) === null}>Розрахувати
+              ферму</Button>
             <Link to="/stern">
               <Button onClick={this.initData}
-                      disabled={(cows == 0 && fuelPrice == 0 && paymentPrice == 0 && energyPrice == 0)}
+                      disabled={this.state.alertSuccess !== true}
                       type='button'>Перейти
                 до
                 таблиць</Button>
             </Link>
           </form>
-          {(this.cowsRegEx.test(this.state.cows) && this.moneyRegEx.test(
-            this.state.energyPrice) && this.moneyRegEx.test(
-            this.state.fuelPrice) && this.moneyRegEx.test(
-            this.state.paymentPrice)) && (this.state.cows != 0 && this.state.energyPrice != 0 && this.state.fuelPrice != 0
-          && this.state.paymentPrice != 0) ?
+          {((cows && fuelPrice && energyPrice && paymentPrice && type) !== null) ?
             <div className="output-data flash">
               <h4>Данні які будуть внесені для розрахунку</h4>
-              <p>Стійловий період : {this.state.season_stall}</p>
-              <p>Кількість корів : {this.state.cows}</p>
-              <p>Ціна за пальне : {this.state.fuelPrice} грн/л</p>
-              <p>Ціна за електроенергію : {this.state.energyPrice} грн/кВт</p>
-              <p>Заробітня плата : {this.state.paymentPrice} грн/год</p>
+              <p>Стійловий період : {season_stall}</p>
+              <p>Кількість корів : {cows}</p>
+              <p>Ціна за пальне : {fuelPrice} грн/л</p>
+              <p>Ціна за електроенергію : {energyPrice} грн/кВт</p>
+              <p>Заробітня плата : {paymentPrice} грн/год</p>
             </div> : null}
           {this.state.showFarm ?
             <div className="output-cows flash">
               <h4>Структура ферми</h4>
-              <p>Кількість корів : {this.state.cows} голів</p>
-              <p>Кількість корів родильного відділення : {this.state.pregrant_cows} голів</p>
-              <p>Кількість сухостійних корів : {this.state.dry_cows} голів</p>
-              <p>Кількість хворих корів : {this.state.ill_cows} голів</p>
-              <p>Кількість телят : {this.state.cow_before_20days} голів</p>
+              <p>Кількість корів : {cows} голів</p>
+              <p>Кількість корів родильного відділення : {pregrant_cows} голів</p>
+              <p>Кількість сухостійних корів : {dry_cows} голів</p>
+              <p>Кількість хворих корів : {ill_cows} голів</p>
+              <p>Кількість телят : {cow_before_20days} голів</p>
+              <p>Спосіб утримання тварин : {type === 'attachable' ? "прив'зний" : "безприв'язний" }</p>
             </div> : null}
         </div>
+        {this.state.showFarm &&
+        <BuildingsForFarm
+          addBuildings={this.addBuildings}
+          cows={cows}
+          buildingsADD={buildingsADD}
+          cow_before_20days={cow_before_20days}
+          building_for_calves={this.props.building_for_calves}
+          buildings_for_calves_before_20days={this.props.buildings_for_calves_before_20days}
+          buildings_for_cows={this.props.buildings_for_cows}
+          type={type}
+        />}
       </div>
     );
   }

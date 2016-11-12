@@ -147,8 +147,6 @@ export class SternRepo extends Component {
           <button className="btn btn-default" onClick={this.calculateFullNeedingOfStern}>Розрахувати загальну потребу
           </button>
           <div className="entries-data">
-          </div>
-          <div className="entries-data">
             {getMilkPerYear === null ? <div className="stern-first-table">{this.renderSternNorms()}</div> :
               <div className="stern-first-table">
                 {sternCows ? <CowStern stern={sternCows}/> : null}
@@ -161,7 +159,7 @@ export class SternRepo extends Component {
           </div>
           <div>{(typeFeeding !== null && getMilkPerYear !== null && allStern) ?
             <div>
-              <h1>ЗАГАЛЬНА ПОТРЕБА В КОРМАХ</h1>
+              <h1 className="text-center">ЗАГАЛЬНА ПОТРЕБА В КОРМАХ</h1>
               <FullStern stern={allStern}/>
             </div> : null}</div>
         </div> : <div>
