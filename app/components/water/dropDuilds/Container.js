@@ -7,6 +7,9 @@ import {DropTarget} from 'react-dnd';
 import _ from 'lodash'
 import uuid from 'node-uuid'
 
+import {buildNewBuildingsPositions} from './calculateBuildings'
+import {findBuildPosition} from './findBuildPosition'
+import {calculateTubes} from './calculateTubes'
 const styles = {
   width: 10000,
   height: 800,
@@ -24,7 +27,6 @@ const boxTarget = {
     if (props.snapToGrid) {
       [left, top] = snapToGrid(left, top);
     }
-    console.log(item)
     component.moveBox(item.id, left, top);
   }
 };
@@ -41,13 +43,16 @@ export default class Container extends Component {
 
   state = {
     boxes: {
-      'a': {top: 20, left: 80, title: 'Насосна станція'},
-      'b': {top: 20, left: 80, title: 'Водонапірна башта', parentId: 'a'}
+      'насос': {top: 10, left: 50, title: 'Насосна станція'},
+      'башта': {top: 80, left: 50, title: 'Водонапірна башта', parentId: 'насос', waterNeedingForThisBuild: 0.0001}
     }
   }
 
   componentWillMount() {
-    
+    const {buildings} = this.props
+    const boxes = {...this.state.boxes}
+    const newBoxes = buildNewBuildingsPositions(boxes, buildings)
+    this.setState({boxes: newBoxes})
   }
 
   moveBox(id, left, top) {
@@ -64,7 +69,6 @@ export default class Container extends Component {
   }
 
   addBox = (parentId, top, left, newBoxTitle) => {
-    console.log(newBoxTitle)
     const id = uuid.v1()
     const _state = this.state
     _state.boxes[id] = {top: top + 5, left: left + 5, title: newBoxTitle, parentId}
@@ -78,28 +82,33 @@ export default class Container extends Component {
   }
 
   calculateRoadToFatherComponent = (id, parentId, top, left) => {
-    let leftToFather
-    let topToFather
+
+    const RoadToPatent = {}
     const boxes = this.state.boxes
     if (boxes[parentId]) {
       const {top:fatherTop, left:fatherLeft} = boxes[parentId]
-      if (fatherTop > top && fatherLeft > left) {
-        leftToFather = fatherLeft - left
-        topToFather = fatherTop - top
+      if (fatherTop >= top && fatherLeft >= left) {
+        RoadToPatent.leftToFather = (fatherLeft - left) / 10
+        RoadToPatent.topToFather = (fatherTop - top) / 10
+        RoadToPatent.words = 'вниз вправо'
       }
-      else if (fatherTop > top && fatherLeft < left) {
-        leftToFather = left - fatherLeft
-        topToFather = fatherTop - top
+      else if (fatherTop >= top && fatherLeft <= left) {
+        RoadToPatent.leftToFather = (left - fatherLeft) / 10
+        RoadToPatent.topToFather = (fatherTop - top) / 10
+        RoadToPatent.words = 'вниз вліво'
       }
-      else if (fatherTop < top && fatherLeft > left) {
-        leftToFather = fatherLeft - left
-        topToFather = top - fatherTop
+      else if (fatherTop <= top && fatherLeft >= left) {
+        RoadToPatent.leftToFather = (fatherLeft - left) / 10
+        RoadToPatent.topToFather = (top - fatherTop) / 10
+        RoadToPatent.words = 'вверх вправо'
       }
-      else if (fatherTop < top && fatherLeft < left) {
-        leftToFather = left - fatherLeft
-        topToFather = top - fatherTop
+      else if (fatherTop <= top && fatherLeft <= left) {
+        RoadToPatent.leftToFather = (left - fatherLeft) / 10
+        RoadToPatent.topToFather = (top - fatherTop) / 10
+        RoadToPatent.words = 'вверх вліво'
       }
-      boxes[id].roadToParent = {leftToFather, topToFather}
+      boxes[id].roadToParent = RoadToPatent
+      console.log(boxes)
       this.setState({boxes: boxes})
     }
     else return
@@ -121,7 +130,8 @@ export default class Container extends Component {
   render() {
     const {connectDropTarget} = this.props;
     const {boxes} = this.state;
-
+    findBuildPosition(boxes)
+    const tubes = calculateTubes(findBuildPosition(boxes))
     return connectDropTarget(
       <div style={styles}>
         {Object
