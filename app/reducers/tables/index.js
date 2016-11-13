@@ -188,10 +188,10 @@ const initialState = {
     {name: 'tractor_fourth_Name', power: '36', rotate: '800', pov: "32", price: "43"},
   ],
   water_norms: [
-    {kind_of_animal: 'Корови дійні', norm_per_day: '100'},
-    {kind_of_animal: 'Бики і нетелі', norm_per_day: '60'},
-    {kind_of_animal: 'Молодняк ВРХ', norm_per_day: '30'},
-    {kind_of_animal: 'Телята', norm_per_day: '20'},
+    {kind_of_animal: 'Корови дійні', norm_per_day: 100},
+    {kind_of_animal: 'Бики і нетелі', norm_per_day: 60},
+    {kind_of_animal: 'Молодняк ВРХ', norm_per_day: 30},
+    {kind_of_animal: 'Телята', norm_per_day: 20}
   ],
   stern_norms: [
     {view_feed: 'Сіно', get_milk_year2000: 4, get_milk_year3000: 4.5, get_milk_year4000: 6, price: 1},

@@ -23,8 +23,11 @@ export default class Box extends Component {
     return (
       <div style={{...styles, backgroundColor ,borderRadius}}>
         {title}
-        <div>{roadToParent && roadToParent.leftToFather} метрів ліворуч</div>
-        <div>{roadToParent && roadToParent.topToFather} метрів вверх</div>
+        {(roadToParent && roadToParent.leftToFather && roadToParent.leftToFather > 1) ?
+          <div>{roadToParent.leftToFather}
+            метрів {roadToParent && roadToParent.words.split(' ')[1]}</div> : null}
+        {(roadToParent && roadToParent.topToFather && roadToParent.topToFather > 1) ?
+          <div>{roadToParent.topToFather} метрів {roadToParent && roadToParent.words.split(' ')[0]} </div> : null}
       </div>
     );
   }

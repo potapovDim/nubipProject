@@ -186,7 +186,7 @@ export const BuildingsForFarm = ({addBuildings, cows, cow_before_20days, buildin
         <Build {...building_for_calves[2]} />
       </div>
     }
-    else if ((400 < cow_before_20days) && ( cow_before_20days <= 500)) {
+    else if ((400 < cow_before_20days) && ( cow_before_20days <= 800)) {
       buildings['calves'] = [{...building_for_calves[0]}, {...building_for_calves[2]}]
       value = <div>
         <Build {...building_for_calves[2]} />
