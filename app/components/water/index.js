@@ -5,7 +5,8 @@ import {addTubes, addWaterNorm} from '../../reducers/water/actions'
 import {CalculateWaterPerDay} from './calculateWaterPerDay'
 import {Link} from 'react-router'
 import WaterEquipment from './calculateWaterEquipment'
-import DragChains from './calculateChain'
+import DropBuilds from './dropDuilds/'
+
 class WaterCalculations extends React.Component {
   state = {
     pumpType: null,
@@ -38,6 +39,7 @@ class WaterCalculations extends React.Component {
   }
 
   render() {
+    const {buildingsForFarm} = this.props.entries
     return (<div>
       <div className="btn-group">
         <button className={
@@ -71,7 +73,7 @@ class WaterCalculations extends React.Component {
         }
       </div>
       }
-     
+      <DropBuilds buildingsForFarm={buildingsForFarm}/>
     </div>)
   }
 }

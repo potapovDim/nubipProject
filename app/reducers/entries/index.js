@@ -10,7 +10,8 @@ const initialState = {
   dry_cows: 0,
   ill_cows: 0,
   cow_before_20days: 0,
-  type: 'without_attachable'
+  type: 'without_attachable',
+  buildingsForFarm: null
 }
 
 export default(state = initialState, action)=> {

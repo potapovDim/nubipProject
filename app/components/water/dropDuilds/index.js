@@ -5,19 +5,11 @@ import {DragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
 @DragDropContext(HTML5Backend)
-export default class DragAroundCustomDragLayer extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handleSnapToGridAfterDropChange = this.handleSnapToGridAfterDropChange.bind(this);
-    this.handleSnapToGridWhileDraggingChange = this.handleSnapToGridWhileDraggingChange.bind(this);
-
-    this.state = {
-      snapToGridAfterDrop: false,
-      snapToGridWhileDragging: false
-    };
-  }
-
+export default class DropBuilds extends Component {
+  state = {
+    snapToGridAfterDrop: false,
+    snapToGridWhileDragging: false
+  };
   buildings = {
     cows: [{name: 'Корівник', heads: 200}, {name: 'Корівник', heads: 100}],
     calves: [{name: 'Приміщення для молодняку', heads: 300}],
@@ -26,11 +18,11 @@ export default class DragAroundCustomDragLayer extends Component {
   }
 
   render() {
+    const builds = this.props.buildingsForFarm || this.buildings
     const {snapToGridAfterDrop, snapToGridWhileDragging} = this.state;
-
     return (
       <div>
-        <Container snapToGrid={snapToGridAfterDrop} buildings={this.buildings}/>
+        <Container snapToGrid={snapToGridAfterDrop} buildings={builds}/>
         <CustomDragLayer snapToGrid={snapToGridWhileDragging}/>
         <p>
           <label>
@@ -51,13 +43,13 @@ export default class DragAroundCustomDragLayer extends Component {
     );
   }
 
-  handleSnapToGridAfterDropChange() {
+  handleSnapToGridAfterDropChange = () => {
     this.setState({
       snapToGridAfterDrop: !this.state.snapToGridAfterDrop
     });
   }
 
-  handleSnapToGridWhileDraggingChange() {
+  handleSnapToGridWhileDraggingChange = () => {
     this.setState({
       snapToGridWhileDragging: !this.state.snapToGridWhileDragging
     });

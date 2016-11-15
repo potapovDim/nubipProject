@@ -126,7 +126,7 @@ export const buildNewBuildingsPositions = (prevBoxes, buildings) => {
       waterNeedingForThisBuild: ( buildings.cows_before_20days[0].heads * 100 * 1.3 * 2.5) / (24 * 3600 * 1000),
       parentId: buildings.cows[1].name + 1
     }
-    prevBoxes[buildings.cows_before_20days[1].name] = {
+    prevBoxes[buildings.cows_before_20days[1].name + 2] = {
       top: 100,
       left: 220,
       title: buildings.cows_before_20days[1].name,
@@ -140,7 +140,7 @@ export const buildNewBuildingsPositions = (prevBoxes, buildings) => {
       title: buildings.calves[0].name,
       heads: buildings.calves[0].heads,
       waterNeedingForThisBuild: ( buildings.calves[0].heads * 100 * 1.3 * 2.5) / (24 * 3600 * 1000),
-      parentId: buildings.cows_before_20days[1].name + 1
+      parentId: buildings.cows_before_20days[1].name + 2
     }
     prevBoxes[buildings.calves[1].name] = {
       top: 100,
@@ -216,7 +216,7 @@ export const buildNewBuildingsPositions = (prevBoxes, buildings) => {
       top: 500,
       left: 100,
       title: buildings.cows_before_20days[0].name,
-      parentId: Object.keys(prevBoxes)[1]
+      parentId: buildings.cows[1].name + 2
     }
     prevBoxes[buildings.cows_before_20days[1].name + 1] = {
       top: 500,
@@ -244,31 +244,31 @@ export const buildNewBuildingsPositions = (prevBoxes, buildings) => {
       title: buildings.cows[0].name,
       parentId: Object.keys(prevBoxes)[1]
     }
-    prevBoxes[buildings.cows[1].name] = {
+    prevBoxes[buildings.cows[1].name + 1] = {
       top: 50,
       left: 100,
       title: buildings.cows[1].name,
-      parentId: buildings.cows[0].name
+      parentId: buildings.cows[0].name + 1
     }
-    prevBoxes[buildings.cows[2].name] = {
+    prevBoxes[buildings.cows[2].name + 2] = {
       top: 50,
       left: 100,
       title: buildings.cows[2].name,
-      parentId: buildings.cows[1].name
+      parentId: buildings.cows[1].name + 1
     }
-    prevBoxes[buildings.cows[3].name] = {
+    prevBoxes[buildings.cows[3].name + 3] = {
       top: 50,
       left: 100,
       title: buildings.cows[3].name,
-      parentId: buildings.cows[2].name
+      parentId: buildings.cows[2].name + 2
     }
     prevBoxes[buildings.cows_before_20days[0].name] = {
       top: 80,
       left: 80,
       title: buildings.cows_before_20days[0].name,
-      parentId: Object.keys(prevBoxes)[1]
+      parentId: buildings.cows[3].name + 3
     }
-    prevBoxes[buildings.cows_before_20days[1].name] = {
+    prevBoxes[buildings.cows_before_20days[1].name + 1] = {
       top: 80,
       left: 100,
       title: buildings.cows_before_20days[1].name,
@@ -278,15 +278,15 @@ export const buildNewBuildingsPositions = (prevBoxes, buildings) => {
       top: 80,
       left: 120,
       title: buildings.cows_before_20days[2].name,
-      parentId: buildings.cows_before_20days[1].name
+      parentId: buildings.cows_before_20days[1].name + 1
     }
     prevBoxes[buildings.calves[0].name] = {
       top: 130,
       left: 80,
       title: buildings.calves[0].name,
-      parentId: Object.keys(prevBoxes)[1]
+      parentId: buildings.cows_before_20days[1].name + 2
     }
-    prevBoxes[buildings.calves[1].name] = {
+    prevBoxes[buildings.calves[1].name + 1] = {
       top: 130,
       left: 80,
       title: buildings.calves[1].name,
