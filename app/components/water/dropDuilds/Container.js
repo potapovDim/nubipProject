@@ -9,7 +9,7 @@ import uuid from 'node-uuid'
 
 import {buildNewBuildingsPositions} from './calculateBuildings'
 import {findBuildPosition} from './findBuildPosition'
-import {calculateTubes} from './calculateTubes'
+import {calculateTubes, calculateTubesWithLength} from './calculateTubes'
 const styles = {
   width: 10000,
   height: 800,
@@ -108,7 +108,6 @@ export default class Container extends Component {
         RoadToPatent.words = 'вверх вліво'
       }
       boxes[id].roadToParent = RoadToPatent
-      console.log(boxes)
       this.setState({boxes: boxes})
     }
     else return
@@ -128,17 +127,21 @@ export default class Container extends Component {
 
 
   render() {
-    const {connectDropTarget} = this.props;
+    const {connectDropTarget, addFullBuilds} = this.props
     const {boxes} = this.state;
-    findBuildPosition(boxes)
     const tubes = calculateTubes(findBuildPosition(boxes))
-    return connectDropTarget(
+    const tt = calculateTubesWithLength(tubes, boxes)
+
+
+
+    return (<div>{connectDropTarget(
       <div style={styles}>
         {Object
           .keys(boxes)
           .map(key => this.renderBox(boxes[key], key))
         }
-      </div>
-    );
+      </div>)}
+      <button onClick={()=>addFullBuilds(tt)}>Прийняти будівлі</button>
+    </div>)
   }
 }

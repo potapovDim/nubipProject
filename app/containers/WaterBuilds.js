@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import WaterCalculations from '../components/water/index'
+import WaterBuilds from '../components/water/index'
 
-class Water extends Component {
+class WaterBuild extends Component {
   render() {
     return (
       <div>
-        <WaterCalculations {...this.props}/>
+        <WaterBuilds {...this.props}/>
       </div>
     )
   }
@@ -18,4 +18,4 @@ export default connect(state=> ({
     pumps_rotary: state.tables.pumps_rotary,
     pumps_submersible: state.tables.pumps_submersible
   })
-)(Water)
+)(WaterBuild)

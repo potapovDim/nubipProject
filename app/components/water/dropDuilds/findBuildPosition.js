@@ -59,13 +59,14 @@ export const findBuildPosition = (buildings) => {
   }
   else if (Object.keys(buildings).length === 8) {
     let eightBuild
-    let sevenBuild
-    let sixtBuild
+    let seventhBuild
+    let sixthBuild
     let fifthBuild
     let fourthBuild
     let thirdBuid
     let secondBuild
     let firstBuild
+    console.log('here 010101101010101')
     firstBuild = buildings[_.findKey(buildings, key =>
       !key.parentId && key
     )]
@@ -75,16 +76,16 @@ export const findBuildPosition = (buildings) => {
     }, {});
     _.map(buildings, (value, key) => {
       if (key === eightBuild.parentId) {
-        sevenBuild = value
+        seventhBuild = value
       }
     })
     _.map(buildings, (value, key) => {
-      if (key === sevenBuild.parentId) {
-        sixtBuild = value
+      if (key === seventhBuild.parentId) {
+        sixthBuild = value
       }
     })
     _.map(buildings, (value, key) => {
-      if (key === sixtBuild.parentId) {
+      if (key === sixthBuild.parentId) {
         fifthBuild = value
       }
     })
@@ -110,8 +111,8 @@ export const findBuildPosition = (buildings) => {
     })
     sesultForCalculateChain = {
       eightBuild,
-      sevenBuild,
-      sixtBuild,
+      seventhBuild,
+      sixthBuild,
       fifthBuild,
       fourthBuild,
       thirdBuid,
@@ -190,6 +191,75 @@ export const findBuildPosition = (buildings) => {
       }
     })
     sesultForCalculateChain = {
+      sixthBuild,
+      fifthBuild,
+      fourthBuild,
+      thirdBuid,
+      secondBuild,
+      firstBuild
+    }
+  }
+  else if (Object.keys(buildings).length === 9) {
+    let ninthBuild
+    let eightBuild
+    let seventhBuild
+    let sixthBuild
+    let fifthBuild
+    let fourthBuild
+    let thirdBuid
+    let secondBuild
+    let firstBuild
+    firstBuild = buildings[_.findKey(buildings, key =>
+      !key.parentId && key
+    )]
+    ninthBuild = _.reduce(buildings, (result, value, key) => {
+      value.title === key;
+      return value
+    }, {});
+    _.map(buildings, (value, key) => {
+      if (key === ninthBuild.parentId) {
+        eightBuild = value
+      }
+    })
+    _.map(buildings, (value, key) => {
+      if (key === eightBuild.parentId) {
+        seventhBuild = value
+      }
+    })
+    _.map(buildings, (value, key) => {
+      if (key === seventhBuild.parentId) {
+        sixthBuild = value
+      }
+    })
+    _.map(buildings, (value, key) => {
+      if (key === sixthBuild.parentId) {
+        fifthBuild = value
+      }
+    })
+    _.map(buildings, (value, key) => {
+      if (key === fifthBuild.parentId) {
+        fourthBuild = value
+      }
+    })
+    _.map(buildings, (value, key) => {
+      if (key === fifthBuild.parentId) {
+        fourthBuild = value
+      }
+    })
+    _.map(buildings, (value, key) => {
+      if (key === fourthBuild.parentId) {
+        thirdBuid = value
+      }
+    })
+    _.map(buildings, (value, key) => {
+      if (key === thirdBuid.parentId) {
+        secondBuild = value
+      }
+    })
+    sesultForCalculateChain = {
+      ninthBuild,
+      eightBuild,
+      seventhBuild,
       sixthBuild,
       fifthBuild,
       fourthBuild,
