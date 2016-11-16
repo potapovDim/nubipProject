@@ -2,31 +2,42 @@
     display: flex;
     justify-content: flex-start;
 }
+
 .inputs input {
     width: 100%;
     box-sizing: border-box;
 }
-.between{
+
+.between {
     justify-content: space-between;
 }
-.block-center{
+
+.block-center {
     margin: 0 auto;
 }
-.table-left{
+
+.table-left {
     text-align: left;
     padding: 0 5px;
     width: 50%;
 }
-.table-right{
+
+.table-right {
     text-align: right;
     padding: 0 5px;
     width: 50%;
 }
-.flex-wrap{
+
+.group-btn  button:not(:last-child){
+    margin-right:7px;
+}
+
+.flex-wrap {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
 .entries {
     flex-grow: 1;
     flex-basis: 620px;

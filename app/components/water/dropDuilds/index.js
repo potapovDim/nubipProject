@@ -22,7 +22,7 @@ export default class DropBuilds extends Component {
     const {snapToGridAfterDrop, snapToGridWhileDragging} = this.state;
     return (
       <div>
-        <Container snapToGrid={snapToGridAfterDrop} buildings={builds}/>
+        <Container snapToGrid={snapToGridAfterDrop} buildings={builds} addFullBuilds={this.props.addFullBuilds}/>
         <CustomDragLayer snapToGrid={snapToGridWhileDragging}/>
         <p>
           <label>

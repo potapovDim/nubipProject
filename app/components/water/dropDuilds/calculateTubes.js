@@ -246,7 +246,8 @@ export const calculateTubes = buildingsWithPositions => {
     tubes['seven'] = 2 * Math.sqrt(
         _.reduce(
           _.omit(buildingsWithPositions,
-            ['firstBuild', 'secondBuild', 'thirdBuid', 'fourthBuild', 'fifthBuild', 'sixthBuild', 'seventhBuild','eigthBuild']),
+            ['firstBuild', 'secondBuild', 'thirdBuid', 'fourthBuild', 'fifthBuild', 'sixthBuild', 'seventhBuild',
+             'eigthBuild']),
           (result, value, key)=> {
             result += value.waterNeedingForThisBuild
             return result
@@ -267,4 +268,14 @@ export const calculateTubes = buildingsWithPositions => {
     })
     return tubesAfterAssert
   }
+}
+
+export const calculateTubesWithLength = (tubels, builds) => {
+  const buildsWithTubes = {...builds}
+  const keyBuilds = Object.keys(_.omit(buildsWithTubes, ['насос']))
+  const keysTubes = Object.keys(tubels)
+  for (let i = 0; i < keysTubes.length; i++) {
+    buildsWithTubes[keyBuilds[i]].tubeD = tubels[keysTubes[i]]
+  }
+  return buildsWithTubes
 }

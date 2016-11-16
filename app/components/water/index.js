@@ -2,12 +2,13 @@ import React from 'react'
 import {PumpRotateTable, PumpSubmersibleTable} from '../tables/entriesTabses/pumpsTable'
 import classNames from 'classnames'
 import {addTubes, addWaterNorm} from '../../reducers/water/actions'
-import {CalculateWaterPerDay} from './calculateWaterPerDay'
 import {Link} from 'react-router'
-import WaterEquipment from './calculateWaterEquipment'
 import DropBuilds from './dropDuilds/'
+import InformationButton from '../helpers/informationButton'
+import {BuildingsTutorial} from '../tutorials/dndTutorial'
+import {BuildingsSpecifications} from './showBuildSpecifications'
 
-class WaterCalculations extends React.Component {
+class WaterBuilds extends React.Component {
   state = {
     pumpType: null,
     showEquip: false
@@ -17,8 +18,8 @@ class WaterCalculations extends React.Component {
 
   }
   choosePumpType = type => {
-    this.state.pumpType === type ?
-      this.setState({pumpType: null}) : this.setState({pumpType: type})
+    this.state.pumpTypeShow === type ?
+      this.setState({pumpTypeShow: null}) : this.setState({pumpTypeShow: type})
   }
 
   componentWillUnmount() {
@@ -35,48 +36,51 @@ class WaterCalculations extends React.Component {
     const needPerHour = maxNeed * 2.3 / 24
     const water = {pureNeed, maxNeed, needPerHour}
     this.setState({water})
-    this.props.dispatch(addWaterNorm())
+  }
+  addFullBuilds = builds => {
+    this.setState({showFullBuilds: true, builds})
   }
 
   render() {
     const {buildingsForFarm} = this.props.entries
     return (<div>
-      <div className="btn-group">
-        <button className={
-          classNames('btn ', {'btn-default': this.state.pumpType !== 'pumps_rotary'}, {'btn-success': this.state.pumpType === 'pumps_rotary'})}
-                onClick={()=>this.choosePumpType('pumps_rotary')}>Відцентрові насоси
-        </button>
-        <button className={
-          classNames('btn ', {'btn-default': this.state.pumpType !== 'pumps_submersible'}, {'btn-success': this.state.pumpType === 'pumps_submersible'})}
-                onClick={()=>this.choosePumpType('pumps_submersible')}>Заглибні відцентрові насоси
-        </button>
+      <InformationButton name={'Інформація полів вводу данних'}>
+        <BuildingsTutorial/>
+      </InformationButton>
+      <div className="flex-wrap between">
         <button className="btn btn-info"
                 onClick={this.calculateWater}> Розрахувати потребу в воді
         </button>
+        <div className="group-btn">
+          <button className={
+          classNames('btn ', {'btn-default': this.state.pumpType !== 'pumps_rotary'}, {'btn-success': this.state.pumpType === 'pumps_rotary'})}
+                  onClick={()=>this.choosePumpType('pumps_rotary')}>Відцентрові насоси
+          </button>
+          <button className={
+          classNames('btn ', {'btn-default': this.state.pumpType !== 'pumps_submersible'}, {'btn-success': this.state.pumpType === 'pumps_submersible'})}
+                  onClick={()=>this.choosePumpType('pumps_submersible')}>Заглибні відцентрові насоси
+          </button>
+        </div>
       </div>
       {
-        this.state.pumpType === null &&
+        this.state.pumpTypeShow === 'pumps_rotary' &&
         <div>
           <PumpRotateTable {...this.props} />
+        </div>
+      }
+      {
+        this.state.pumpTypeShow === 'pumps_submersible' &&
+        <div>
           <PumpSubmersibleTable {...this.props} />
         </div>
       }
-      {(this.state.water && this.state.pumpType !== null) &&
+      <DropBuilds buildingsForFarm={buildingsForFarm} addFullBuilds={this.addFullBuilds}/>
       <div>
-        <CalculateWaterPerDay props={{...this.props.entries, ...this.state}}/>
-        <button className="btn btn-default" onClick={()=> {
-          this.setState({showEquip: !this.state.showEquip})
-        }}>Розрахувати обладнання
-        </button>
-        {
-          this.state.showEquip && <WaterEquipment/>
-        }
+        {this.state.builds && <BuildingsSpecifications builds={this.state.builds}/>}
       </div>
-      }
-      <DropBuilds buildingsForFarm={buildingsForFarm}/>
     </div>)
   }
 }
 
 
-export default WaterCalculations
+export default WaterBuilds
