@@ -9,6 +9,7 @@ import EntryData from './containers/Entries'
 import Stern from './containers/stern/Stern'
 import SternCoocking from './containers/stern/SternCoocking'
 import WaterBuilds from './containers/WaterBuilds'
+import WaterEquipment from './containers/WaterEquipmentForFarm'
 
 export default(
   <Router history={browserHistory}>
@@ -20,6 +21,7 @@ export default(
         <Route path="/stern" component={Stern}/>
         <Route path="/coocking" component={SternCoocking}/>
         <Route path="/waterbuilds" component={WaterBuilds}/>
+        <Route path="/waterequip" component={WaterEquipment}/>
       </Route>
     </Route>
   </Router>

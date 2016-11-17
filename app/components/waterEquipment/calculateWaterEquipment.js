@@ -1,9 +1,18 @@
 import React from 'react'
 import _ from 'lodash'
+
+import {calculateLostPressure, placeResistans} from './calculatePressure'
+
 class WaterEquipment extends React.Component {
   state = {
     height: 1
   }
+
+  componentWillMount() {
+    const {waterBuilds, waterNorm} = this.props.water
+    //const waterResistans = 
+  }
+
 
   assertHeightValue = event => {
     /[\d]$/.test(event.target.value) ? this.setState({
@@ -16,6 +25,21 @@ class WaterEquipment extends React.Component {
     }) :
       this.setState({height: 1})
   }
+  calculateLostAtRoad = (builds) => {
+    const tube = {}
+    let resistance
+    Object.keys(_.omit(builds, ['насос'])).map(item=> {
+      tube[item].title = builds[item].title
+      tube[item].D = builds[item].tubeD
+      tube[item].lostPressure = calculateLostPressure(builds[item].tubeD,
+        (builds[item].roadToParent.leftToFather + builds[item].roadToParent.topToFather))
+      tube[item].length = (builds[item].roadToParent.leftToFather + builds[item].roadToParent.topToFather)
+    })
+    tube['насос'].lostPressure = placeResistans([0.1, 2, 5, 5, 0.5])
+    return tube
+    
+  }
+
 
   render() {
     return (
@@ -31,3 +55,7 @@ class WaterEquipment extends React.Component {
 }
 
 export default WaterEquipment
+
+
+//<td >{builds[item].tubeD} </td>
+//<td >{builds[item].roadToParent.leftToFather + builds[item].roadToParent.topToFather}</td>
