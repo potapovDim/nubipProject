@@ -129,6 +129,7 @@ export default class Container extends Component {
   render() {
     const {connectDropTarget, addFullBuilds} = this.props
     const {boxes} = this.state;
+    console.log('!!!!!!!!',Object.keys(boxes).length)
     const tubes = calculateTubes(findBuildPosition(boxes))
     const tt = calculateTubesWithLength(tubes, boxes)
 

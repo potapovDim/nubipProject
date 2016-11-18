@@ -10,6 +10,7 @@ export const findBuildPosition = (buildings) => {
     let thirdBuid
     let secondBuild
     let firstBuild
+    console.log('12131208949128409128958012905901205890129581902582108512005821098')
     firstBuild = buildings[_.findKey(buildings, key =>
       !key.parentId && key
     )]

@@ -442,23 +442,12 @@ const initialState = {
     },
   ],
   building_for_stern: [
-    {kind_of_building: 'Траншея для сінажу', volume: 250, B: 6, L: '15', H: '3', lost_stern: '5', KKD: '0.98'},
-    {kind_of_building: 'Траншея для сінажу', volume: 500, B: 9, L: '31.5', H: '3', lost_stern: '5', KKD: '0.98'},
-    {kind_of_building: 'Траншея для сінажу', volume: 750, B: 12, L: '31.5', H: '3', lost_stern: '5', KKD: '0.98'},
-    {kind_of_building: 'Траншея для сінажу', volume: 1500, B: 12, L: '49.5', H: '3', lost_stern: '5', KKD: '0.98'},
-    {kind_of_building: 'Траншея для сінажу', volume: 2000, B: 12, L: 67.5, H: 3, lost_stern: '5', KKD: '0.98'},
-    {
-      kind_of_building: 'Коронебульбоплодні сховища',
-      volume: 4000,
-      B: '27',
-      L: '78',
-      H: '3.6',
-      lost_stern: '3',
-      KKD: '0.98'
-    },
-    {kind_of_building: 'Гноєсховища', volume: '300', B: '28', L: 30, H: '3.6', lost_stern: '0', KKD: '1'},
-    {kind_of_building: 'Гноєсховища', volume: '500', B: '28', L: 42, H: '3.6', lost_stern: '0', KKD: '1'},
-    {kind_of_building: 'Гноєсховища', volume: '2000', B: '25', L: 65, H: '3.6', lost_stern: '0', KKD: '1'},
+    {kind_of_building: 'Траншея для сінажу', volume: 250, B: 6, L: 15, H: 3, lost_stern: 5, KKD: '0.98'},
+    {kind_of_building: 'Траншея для сінажу', volume: 500, B: 9, L: 31.5, H: 3, lost_stern: 5, KKD: '0.98'},
+    {kind_of_building: 'Траншея для сінажу', volume: 750, B: 12, L: 31.5, H: 3, lost_stern: 5, KKD: '0.98'},
+    {kind_of_building: 'Траншея для сінажу', volume: 1500, B: 12, L: 49.5, H: 3, lost_stern: 5, KKD: '0.98'},
+    {kind_of_building: 'Траншея для сінажу', volume: 2000, B: 12, L: 67.5, H: 3, lost_stern: 5, KKD: '0.98'},
+    {kind_of_building: 'Коронебульбоплодні сховища', volume: 4000, B: 27, L: 78, H: 3.6, lost_stern: 3, KKD: 0.98}
   ],
   tubes_specifications: [
     {supply_of_water: '0.75-1', D: 0.04, V: 0.35},
@@ -488,6 +477,18 @@ const initialState = {
       {name: 'Приміщення для молодняку', type: "-", heads: 170, L: 36, W: 18, stern_given: 'Мобільним'},
       {name: 'Приміщення для молодняку', type: "-", heads: 263, L: 60, W: 18, stern_given: 'Мобільним'}
     ]
+  },
+  buildings_for_shit: [
+    {kind_of_building: 'Гноєсховища', volume: 300, B: 28, L: 30, lost_stern: 0, KKD: 1},
+    {kind_of_building: 'Гноєсховища', volume: 500, B: 18, L: 42, lost_stern: 0, KKD: 1},
+    {kind_of_building: 'Гноєсховища', volume: 2000, B: 25, L: 65, lost_stern: 0, KKD: 1},
+    {kind_of_building: 'Гноєсховища', volume: 4500, B: 25, L: 85, lost_stern: 0, KKD: 1},
+    {kind_of_building: 'Гноєсховища', volume: 8000, B: 21, L: 270, lost_stern: 0, KKD: 1}
+  ],
+  shit_norms: {
+    cows: 55,
+    cows_before_20days: 7.5,
+    calves: 14
   }
 }
 

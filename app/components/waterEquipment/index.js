@@ -17,16 +17,3 @@ class WaterEquip extends React.Component {
 }
 
 export default WaterEquip
-
-//{
-//  this.state.pumpTypeShow === 'pumps_rotary' &&
-//  <div>
-//    <PumpRotateTable {...this.props} />
-//  </div>
-//}
-//{
-//  this.state.pumpTypeShow === 'pumps_submersible' &&
-//  <div>
-//    <PumpSubmersibleTable {...this.props} />
-//  </div>
-//}

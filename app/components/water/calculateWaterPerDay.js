@@ -1,7 +1,6 @@
 import React from 'react'
 
 export const CalculateWaterPerDay = (props) => {
-  console.log(props)
   const {cows, cow_before_20days, water} = props
   return (<div className="bg-primary">
     <h3 className="bg-primary text-left">Потреба води для корів на добу :{cows * 100} літрів</h3>

@@ -59,20 +59,22 @@ export default class DraggableBox extends Component {
              roadToParent={roadToParent}/>
         {!buttonRender && <div>
           <div>
-            <button className="box-button" onClick={()=>removeBox(id)}>Видалити</button>
-          </div>
-          <div>
-            <button className="box-button" onClick={()=>addBloc(id,top,left ,newTitle)}>Додати ланку</button>
-          </div>
-          <div>
             <button className="box-button" onClick={()=>calculateRoad(id,parentId,top,left)}>
               Розрахувати довжину труби
             </button>
           </div>
-          <input className="box-button" placeholder="Назва ланки"
-                 onChange={(e)=>{this.setState({newTitle:e.target.value})}}/>
+
         </div>}
       </div>
     );
   }
 }
+
+//<input className="box-button" placeholder="Назва ланки"
+//onChange={(e)=>{this.setState({newTitle:e.target.value})}}/>
+//<div>
+//  <button className="box-button" onClick={()=>removeBox(id)}>Видалити</button>
+//</div>
+//<div>
+//<button className="box-button" onClick={()=>addBloc(id,top,left ,newTitle)}>Додати ланку</button>
+//</div>

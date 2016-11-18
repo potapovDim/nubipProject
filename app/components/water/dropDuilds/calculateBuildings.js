@@ -126,13 +126,13 @@ export const buildNewBuildingsPositions = (prevBoxes, buildings) => {
       waterNeedingForThisBuild: ( buildings.cows_before_20days[0].heads * 100 * 1.3 * 2.5) / (24 * 3600 * 1000),
       parentId: buildings.cows[1].name + 1
     }
-    prevBoxes[buildings.cows_before_20days[1].name + 2] = {
+    prevBoxes[buildings.cows_before_20days[1].name + 1] = {
       top: 100,
       left: 220,
       title: buildings.cows_before_20days[1].name,
       heads: buildings.cows_before_20days[1].heads,
       waterNeedingForThisBuild: ( buildings.cows_before_20days[1].heads * 100 * 1.3 * 2.5) / (24 * 3600 * 1000),
-      parentId: buildings.cows_before_20days[0].name + 1
+      parentId: buildings.cows_before_20days[0].name
     }
     prevBoxes[buildings.calves[0].name] = {
       top: 100,
@@ -140,15 +140,15 @@ export const buildNewBuildingsPositions = (prevBoxes, buildings) => {
       title: buildings.calves[0].name,
       heads: buildings.calves[0].heads,
       waterNeedingForThisBuild: ( buildings.calves[0].heads * 100 * 1.3 * 2.5) / (24 * 3600 * 1000),
-      parentId: buildings.cows_before_20days[1].name + 2
+      parentId: buildings.cows_before_20days[1].name + 1
     }
-    prevBoxes[buildings.calves[1].name] = {
+    prevBoxes[buildings.calves[1].name + 1] = {
       top: 100,
       left: 300,
       title: buildings.calves[1].name,
       heads: buildings.calves[1].heads,
       waterNeedingForThisBuild: ( buildings.calves[1].heads * 100 * 1.3 * 2.5) / (24 * 3600 * 1000),
-      parentId: buildings.calves[1].name + 1
+      parentId: buildings.calves[1].name
     }
   }
   else if (buildings.cows.length == 2 && buildings.cows_before_20days.length == 2 && buildings.calves.length == 1) {

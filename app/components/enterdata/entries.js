@@ -13,6 +13,7 @@ import InformationButton from '../helpers/informationButton'
 import {EntrieTutorial} from '../tutorials/entrieToturial'
 import {addEntry, resetAll} from '../../reducers/entries/actions'
 import {BuildingsForFarm} from './buidingsForFarm'
+import {BuildingsForShit} from './shitAndBuildingsForShit'
 import _ from 'lodash'
 
 class Entries extends Component {
@@ -117,7 +118,6 @@ class Entries extends Component {
   };
 
   render() {
-    console.log(this.state.buildingsForFarm)
     const {cows, fuelPrice, energyPrice, paymentPrice, pregrant_cows, dry_cows, ill_cows, cow_before_20days, type, season_stall, buildingsADD} = this.state
     return (
       <div>
@@ -225,19 +225,28 @@ class Entries extends Component {
             </div> : null}
         </div>
         {this.state.showFarm &&
-        <BuildingsForFarm
-          addBuildings={this.addBuildings}
-          cows={cows}
-          buildingsADD={buildingsADD}
-          cow_before_20days={cow_before_20days}
-          building_for_calves={this.props.building_for_calves}
-          buildings_for_calves_before_20days={this.props.buildings_for_calves_before_20days}
-          buildings_for_cows={this.props.buildings_for_cows}
-          type={type}
-        />}
+        <div>
+          <BuildingsForFarm
+            addBuildings={this.addBuildings}
+            cows={cows}
+            buildingsADD={buildingsADD}
+            cow_before_20days={cow_before_20days}
+            building_for_calves={this.props.building_for_calves}
+            buildings_for_calves_before_20days={this.props.buildings_for_calves_before_20days}
+            buildings_for_cows={this.props.buildings_for_cows}
+            type={type}
+          />
+          <br>
+          </br>
+          <div></div>
+          <BuildingsForShit cows={cows}
+                            cow_before_20days={cow_before_20days}
+                            shit_norms={this.props.shit_norms}
+                            buildings_for_shit={this.props.buildings_for_shit}/>
+        </div>}
       </div>
     );
-  }
+  }//cows, cow_before_20days, shit_norms, buildings_for_shit
 }
 
 export default Entries
