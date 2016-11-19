@@ -15,6 +15,7 @@ class WaterEquipment extends React.Component {
 export default connect(state=> ({
     pumps_rotary: state.tables.pumps_rotary,
     pumps_submersible: state.tables.pumps_submersible,
+    water_towers: state.tables.water_towers,
     water: {...state.water}
   })
 )(WaterEquipment)

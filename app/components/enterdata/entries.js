@@ -119,6 +119,7 @@ class Entries extends Component {
 
   render() {
     const {cows, fuelPrice, energyPrice, paymentPrice, pregrant_cows, dry_cows, ill_cows, cow_before_20days, type, season_stall, buildingsADD} = this.state
+    const {litter_norm} = this.props
     return (
       <div>
         {this.state.alert ?
@@ -242,7 +243,9 @@ class Entries extends Component {
           <BuildingsForShit cows={cows}
                             cow_before_20days={cow_before_20days}
                             shit_norms={this.props.shit_norms}
-                            buildings_for_shit={this.props.buildings_for_shit}/>
+                            buildings_for_shit={this.props.buildings_for_shit}
+                            stallPeriod={season_stall}
+                            litter_norm={litter_norm}/>
         </div>}
       </div>
     );

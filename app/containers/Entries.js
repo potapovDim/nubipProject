@@ -16,6 +16,7 @@ export default connect(state=> {
   return {
     ...state.entries, ...state.tables.buildings_for_farm,
     buildings_for_shit: state.tables.buildings_for_shit,
-    shit_norms: state.tables.shit_norms
+    shit_norms: state.tables.shit_norms,
+    litter_norm: state.tables.litter_norm,
   }
 })(EntryData)

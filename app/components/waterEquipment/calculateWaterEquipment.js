@@ -1,25 +1,38 @@
 import React from 'react'
 import _ from 'lodash'
-
-import {calculateLostPressure, placeResistans} from './calculatePressure'
+import {addWaterEquip} from '../../reducers/water/actions'
+import {calculateLostPressure, placeResistans, calculateFullLostPressure} from './calculatePressure'
+import {ChoosedPump} from './chossingsPump'
+import {WaterTower} from './waterTower'
 
 class WaterEquipment extends React.Component {
-  state = {
-    height: 1
-  }
-
   componentWillMount() {
-    const a = this.calculateLostAtRoad(this.props.water.waterBuilds)
-//    console.log(a)
+    const {water: { waterNorm: {maxNeed, needPerHour}}} = this.props
+    const fullLostPressure = calculateFullLostPressure(this.calculateLostAtRoad(this.props.water.waterBuilds))
+    const pumpWaterNeed = maxNeed / 16 
+    this.setState({pressureLost: fullLostPressure, maxNeed, needPerHour, pumpWaterNeed})
   }
-
-
-  assertHeightValue = event => {
-    /[\d]$/.test(event.target.value) ? this.setState({
-      height: _.min([event.target.value || 1, 50]),
-      heightPressure: (_.min([event.target.value || 1, 50]) * 9.807 / 1000).toFixed(2),
-    }) :
-      this.setState({height: 1})
+  state = {      
+    heightVs: 1,
+    heightNg: 1
+  }
+  assertHeightValue = (type,event) => {
+    if(type==='vs'){
+      /[\d]$/.test(event.target.value) ? this.setState({
+        heightVs: _.min([parseInt(event.target.value) || 1, 50]),
+        heightPressure: ((_.min([parseInt(event.target.value) || 1, 50]) + this.state.heightNg) * 9.807 ).toFixed(2),
+        fullNeedPressure : ((_.min([parseInt(event.target.value) || 1, 50]) + this.state.heightNg) * 9.807) + this.state.pressureLost
+      }) :
+        this.setState({heightVs: 1, heightPressure: ((this.state.heightNg + 1) * 9.807 ).toFixed(2)})
+    }
+    else {
+      /[\d]$/.test(event.target.value) ? this.setState({
+          heightNg: _.min([parseInt(event.target.value) || 1, 50]),
+          heightPressure: ((_.min([parseInt(event.target.value) || 1, 50]) + this.state.heightVs) * 9.807 ).toFixed(2),
+          fullNeedPressure : (((_.min([parseInt(event.target.value) || 1, 50]) + this.state.heightVs) * 9.807) ) + this.state.pressureLost
+      }) :
+        this.setState({heightVs: 1, heightPressure: ((this.state.heightVs  + 1) * 9.807 ).toFixed(2)})
+    }
   }
   calculateLostAtRoad = (builds) => {
     Object.keys(_.omit(builds, ['насос'])).map((item, index)=> {
@@ -30,23 +43,46 @@ class WaterEquipment extends React.Component {
     builds['насос'].lostPressure = placeResistans([0.1, 2, 5, 5, 0.5])
     return builds
   }
-
+  addPump = (type,pump) => {
+    this.props.dispatch(addWaterEquip( type, pump ))
+  }
 
   render() {
+    const {pumps_submersible, pumps_rotary,water_towers, water:{waterNorm}} = this.props
+    console.log(this.props)
     return (
       <div className="form-group">
-
+      <div className="bg-primary">{this.state.pressureLost} кПа втрата тиску в трубах </div>
+      <div className="bg-primary">{this.state.maxNeed} літрів максимальна потреба витрати води на добу </div>
+      <div className="bg-primary">{this.state.pumpWaterNeed } літрів необхідна продуктивність водопідіймального обладнання </div>
+      <label htmlFor="Height">Висота всмоктування </label>
+        <input onChange={(event)=>this.assertHeightValue('vs',event)} className="form-control" id="HeightVs" value={this.state.heightVs}/>
+          <label htmlFor="Height">Висота нагнітання </label>
+        <input onChange={(event)=>this.assertHeightValue('ng',event)} className="form-control" id="HeightNg" value={this.state.heightNg}/>
+        <div className="bg-primary">{this.state.heightPressure} кПа тиск на підіймання </div>
+        <button onClick={()=>this.setState({showPump:true})}>Прийняти</button>
+        {this.state.showPump &&
+           <div><div>
+              <h3>Насоси ,які задовольняють потреби , для вибору насосу натисні на кнопку вибрати насос</h3>
+                  <ChoosedPump 
+                      pumps={{pumps_rotary,pumps_submersible}}
+                      height={this.state.heightVs}
+                      needPressure={this.state.fullNeedPressure}
+                      needPerHour={this.state.needPerHour}
+                      choosePump={this.addPump}
+                  />
+            </div>
+              <h3>Водонапірна ,які задовольняє потреби , для підтвердження натисні клавішу прийняти</h3>
+                <WaterTower 
+                  addEquip={this.addPump}
+                  waterNorm={waterNorm}
+                  water_towers={water_towers}
+                />
+          </div>
+            
+        }
       </div>)
   }
 }
 
 export default WaterEquipment
-
-//<label htmlFor="Height">Для розрахунку водонапірного обладнання необхідно ввести значення
-//висоти підйому води від джерела(водойми) до нагнітальної башти,максимум 50 метрів</label>
-//<input onChange={this.assertHeightValue} className="form-control" id="Height" value={this.state.height}/>
-//<div className="bg-primary">{this.state.heightPressure} мПа тиск всмоктування</div>
-//<div className="bg-primary">{this.state} мПа тиск на втрати на опори втрубопроводах</div>
-//<div className="bg-primary">{this.state} мПа повний тиск в ситсемі</div>
-//<td >{builds[item].tubeD} </td>
-//<td >{builds[item].roadToParent.leftToFather + builds[item].roadToParent.topToFather}</td>

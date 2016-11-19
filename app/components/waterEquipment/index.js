@@ -3,11 +3,6 @@ import WaterEquipment from './calculateWaterEquipment'
 
 class WaterEquip extends React.Component {
 
-  choosePumpType = type => {
-    this.state.pumpTypeShow === type ?
-      this.setState({pumpTypeShow: null}) : this.setState({pumpTypeShow: type})
-  }
-
   render() {
     return (
       <div>
