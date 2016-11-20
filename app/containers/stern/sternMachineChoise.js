@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import SternMachine from '../../components/stern/sternMachine'
+import SternMachine from '../../components/sternMachine/'
 
 import {connect} from 'react-redux'
 
@@ -12,6 +12,8 @@ class SternMachineChoise extends Component {
 
 export default connect(state => {
   return {
-    sternOneTime:state.sternStocks.params.sternOneTime
+    machines: state.tables.stern_machines,
+    sternVolume: state.sternStocks.sternVolume,
+    stallPeriod: state.entries.season_stall
   }
-})(SternCoocking)
+})(SternMachineChoise)
