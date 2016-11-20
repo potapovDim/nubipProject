@@ -2,13 +2,16 @@ import {
   ADD_STERN_STORE,
   REMOVE_STERN_STORE,
   RESET_STORE_STATE,
-  ADD_STERN_PARAMS
+  ADD_STERN_PARAMS,
+  ADD_STERN_MACHINE,
+  ADD_STERN_VOLUME
 } from './action_types'
 
 const initialState = {
   sternStocks: [],
   sternStore: [],
-  quantityStores: []
+  quantityStores: [],
+  sternVolume:{}
 }
 
 export default (state = initialState, action) => {
@@ -26,6 +29,12 @@ export default (state = initialState, action) => {
     }
     case RESET_STORE_STATE: {
       return {...initialState}
+    }
+    case ADD_STERN_MACHINE: {
+      return {...state, sternMachine:{machine: action.machine,quantity: action.quantity}}
+    }
+    case ADD_STERN_VOLUME :{
+      return {...state, sternVolume: action.stern}
     }
     default :
       return state

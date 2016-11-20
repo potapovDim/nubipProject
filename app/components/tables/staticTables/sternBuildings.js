@@ -2,6 +2,7 @@ import React from 'react'
 import Infinity from 'react-infinite'
 import {sternStore, quantityStores} from '../../../calculations/planFarm'
 import {addToTable, removeFromTable} from '../../../reducers/tables/actions'
+import {addSternVolume} from '../../../reducers/calculation/stern/actions'
 import {Link} from 'react-router'
 
 export default class extends React.Component {
@@ -40,6 +41,10 @@ export default class extends React.Component {
     stern["Об'ем солома"] = sternStore(stern['Сіно та солома'], 40)
     stern["Об'ем Коренеплоди"] = sternStore(stern['Коренеплоди'], 650)
     this.setState({stern})
+   
+  }
+  componentWillUnmount(){
+    this.props.dispatch(addSternVolume(this.state.stern))
   }
 
   render() {

@@ -1,19 +1,12 @@
 import React from 'react'
+import WaterEquipment from './calculateWaterEquipment'
 
-class WaterEquip extends Reac.Component {
-
+class WaterEquip extends React.Component {
 
   render() {
     return (
       <div>
-        <CalculateWaterPerDay props={{...this.props.entries, ...this.state}}/>
-        <button className="btn btn-default" onClick={()=> {
-          this.setState({showEquip: !this.state.showEquip})
-        }}>Розрахувати обладнання
-        </button>
-        {
-          this.state.showEquip && <WaterEquipment/>
-        }
+        <WaterEquipment {...this.props}/>
       </div>)
   }
 }

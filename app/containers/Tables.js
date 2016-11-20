@@ -2,16 +2,13 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Tabs, Tab} from 'react-bootstrap'
 
-
 import {PumpRotateTable, PumpSubmersibleTable} from '../components/tables/entriesTabses/pumpsTable'
 import TractorTable from '../components/tables/entriesTabses/tractorsTable'
 import SternTable from '../components/tables/staticTables/sternTable'
 import MachineTable from '../components/tables/entriesTabses/machineTable'
 import {DrinkingbowCalvesTable, DrinkingbowCowsTable} from '../components/tables/entriesTabses/drinkingbowTable'
 import {MilkingMachinesStallTable, MilkingMachinesHallTable} from '../components/tables/entriesTabses/milkingMachines'
-
-
-import {addToTable, removeFromTable} from '../reducers/tables/actions'
+import {SternMachineTable} from '../components/tables/entriesTabses/sternMachines'
 
 class Table extends React.Component {
   render() {
@@ -28,8 +25,8 @@ class Table extends React.Component {
           {/*<Tab eventKey={3} title="Кормові норми">*/}
           {/*<SternTable {...this.props} />*/}
           {/*</Tab>*/}
-          <Tab eventKey={4} title="Сг машини">
-            <MachineTable {...this.props} />
+          <Tab eventKey={4} title="Машини для роздавання кормів">
+            <SternMachineTable {...this.props} />
           </Tab>
           <Tab eventKey={5} title="Автонапувалки">
             <DrinkingbowCowsTable {...this.props}/>
