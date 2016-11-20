@@ -2,7 +2,8 @@ import {
   ADD_STERN_STORE,
   REMOVE_STERN_STORE,
   RESET_STORE_STATE,
-  ADD_STERN_PARAMS
+  ADD_STERN_PARAMS,
+  ADD_STERN_MACHINE
 } from './action_types'
 
 const initialState = {
@@ -26,6 +27,9 @@ export default (state = initialState, action) => {
     }
     case RESET_STORE_STATE: {
       return {...initialState}
+    }
+    case ADD_STERN_MACHINE: {
+      return {...state, sternMachine:{machine: action.machine,quantity: action.quantity}}
     }
     default :
       return state

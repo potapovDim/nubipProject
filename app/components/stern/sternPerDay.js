@@ -1,13 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router'
+import _ from 'lodash'
 
 class SternPerDay extends React.Component {
-
-
-  calculateSternCowPerDay = () => {
-
-  }
-  
   calculation = () =>(
     <div className="flex-wrap">
       <div>dsamf;lajfajs;fj;las;</div>
@@ -16,6 +11,7 @@ class SternPerDay extends React.Component {
   )
 
   render() {
+    let oneCycleStern ={} 
     const {
       params:{typeFeeding, getMilkPerYear, allStern},
       entries:{cow_before_20days, cows, season_stall},
@@ -47,12 +43,13 @@ class SternPerDay extends React.Component {
         <div>{value[typeFeeding] * cow_before_20days} кг</div>
       </div>)
     )
-    const sternPerDayAndPedOneGo = Object.keys(allStern).map(value=>(
-      (<div className="flex-wrap">
+    const sternPerDayAndPedOneGo = Object.keys(allStern).map(value=>{
+      oneCycleStern[value] = (allStern[value] / season_stall / 3).toFixed(2)
+      return (<div className="flex-wrap">
         <div>{value}</div>
         <div>{(allStern[value] / season_stall / 3).toFixed(2)} кг</div>
       </div>)
-    ))
+    })
     return (
       <div>
         <div><h2>Кількість корів {cows}</h2></div>
