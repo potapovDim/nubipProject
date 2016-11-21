@@ -19,7 +19,6 @@ export default class DropBuilds extends Component {
 
   render() {
     const builds = this.props.buildingsForFarm || this.buildings
-    console.log(this.props.buildingsForFarm)
     const {snapToGridAfterDrop, snapToGridWhileDragging} = this.state;
     return (
       <div>

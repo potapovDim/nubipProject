@@ -50,11 +50,33 @@ export default class Container extends Component {
 
   componentWillMount() {
     const {buildings} = this.props
+    const buffer = [this.state.boxes['насос'],this.state.boxes['башта'], ...buildings.calves, ...buildings.cows, ...buildings.cows_before_20days].map(build=> {
+        build.id = uuid()
+        return build
+    })
+    this.allBuildings = {}
+    this.connectionMap = {}
+    _.forEach(buffer,(build, index) => {
+      this.allBuildings[build.id] = build
+      this.connectionMap[build.id] = buffer.length -1 === index ? [] : [buffer[index + 1].id]
+    })
+    console.log(this.calcTubes(Object.keys(this.allBuildings)[0]))
     const boxes = {...this.state.boxes}
     const newBoxes = buildNewBuildingsPositions(boxes, buildings)
     this.setState({boxes: newBoxes})
   }
-
+  calcTubes = (id) => {
+    // const heads = _.reduce(ids,(result,id) => {
+    //     result += allBuildings[id]
+    // },0)
+    debugger
+    let heads = this.allBuildings[id].heads
+    _.forEach(this.connectionMap[id], _id => {
+      heads += this.calcTubes(_id)
+    })
+    
+    return heads
+  }
   moveBox(id, left, top) {
     this.setState(update(this.state, {
       boxes: {
