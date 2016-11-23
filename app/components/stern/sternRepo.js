@@ -111,7 +111,7 @@ export class SternRepo extends Component {
             : <button className="btn btn-primary" onClick={()=>::this.setState({showSternBuildings:true})}
                       disabled={disabled}>Перейти до
             розрахунку потреби
-          </button >}
+          </button>}
         </div>
         {!this.state.showSternBuildings ? <div>
           <div>Вибір середньорічного надою молока</div>

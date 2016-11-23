@@ -27,6 +27,10 @@ class WaterBuilds extends React.Component {
     this.setState({showFullBuilds: true, builds})
   }
 
+  componentWillMount(){
+    console.log(this.props.entries.buildingsForFarm)
+  }
+
   confirmWater = ()=> {
     this.props.dispatch(addWaterNorm(this.state.water, this.state.builds))
   }
