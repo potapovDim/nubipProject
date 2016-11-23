@@ -91,7 +91,6 @@ const Build = ({item}) => {
 export const BuildingsForShit = ({buildings_for_shit, cow_before_20days, cows, litter_norm, shit_norms, stallPeriod}) => {
 
   const {shitInKg, shitVolume, yearLitter, builds} = calculateShit(cows, cow_before_20days, litter_norm, stallPeriod, shit_norms, buildings_for_shit)
-  console.log(builds)
   const buildsRecomended = builds.map(item =>
     <Build item={item} />
   )
@@ -106,7 +105,3 @@ export const BuildingsForShit = ({buildings_for_shit, cow_before_20days, cows, l
     </div>
   )
 }
-
-
-//об'ємна маса гною, кг / м 3 (стійловий гній-700-900 кг / м 3.
-//{kind_of_building: 'Гноєсховища', volume: 2000, B: 25, L: 65, H: 3.6}

@@ -34,8 +34,23 @@ class Entries extends Component {
     season_stall: null,
     buildingsADD: false
   }
+
+  changeBuildingsStructure = (data) => {
+    const buildings =  [
+      {top: 10, left: 50, title: 'Насосна станція',heads:0,water_one_head:0},
+      {top: 80, left: 50, title: 'Водонапірна башта', heads:0,water_one_head:0 },
+      {top: 80, left: 50, title: 'Кормоцехч ', heads:1000, water_one_head:1 },
+      ,...data.cows,...data.cows_before_20days,...data.calves]
+    let hashBuldings  = {}
+    buildings.forEach((build,index)=> {
+      hashBuldings[index] = build
+    }) 
+    return hashBuldings
+  }
+
+
   addBuildings = (data) => {
-    this.setState({ buildingsForFarm: data, buildingsADD: true })
+    this.setState({buildingsForFarm: this.changeBuildingsStructure(data), buildingsADD: true })
   }
   moneyRegEx = /(^[0-9]{1,2})$|(^[0-9]{1,2})([.]{1,1})([0-9]{0,2}$)/
   cowsRegEx = /^[0-9]{2,4}$/

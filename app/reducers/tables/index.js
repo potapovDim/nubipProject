@@ -278,12 +278,6 @@ const initialState = {
     {name: 'tractor_third_Name', power: '35', rotate: '1400', pov: "32", price: "43"},
     {name: 'tractor_fourth_Name', power: '36', rotate: '800', pov: "32", price: "43"},
   ],
-  water_norms: [
-    {kind_of_animal: 'Корови дійні', norm_per_day: 100},
-    {kind_of_animal: 'Бики і нетелі', norm_per_day: 60},
-    {kind_of_animal: 'Молодняк ВРХ', norm_per_day: 30},
-    {kind_of_animal: 'Телята', norm_per_day: 20}
-  ],
   stern_norms: [
     {view_feed: 'Сіно', get_milk_year2000: 4, get_milk_year3000: 4.5, get_milk_year4000: 6, price: 1},
     {view_feed: 'Солома', get_milk_year2000: 1, get_milk_year3000: 1, get_milk_year4000: 1, price: 1},
@@ -551,22 +545,22 @@ const initialState = {
   ],
   buildings_for_farm: {
     buildings_for_cows: [
-      {name: 'Корівник',  buildingType:'cow' , type: "безприв'язний", heads: 408, L: 96, W: 18, stern_given: 'Мобільним'},
-      {name: 'Корівник',  buildingType:'cow' ,type: "прив'язний", heads: 200, L: 72, W: 18, stern_given: 'Транспортером'},
-      {name: 'Корівник',  buildingType:'cow',type: "-", heads: 100, L: 72, W: 12, stern_given: '-'},
-      {name: 'Корівник',  buildingType:'cow' ,type: "-", heads: 200, L: 72, W: 21, stern_given: '-'}
+      {name: 'Корівник',  water_one_head:100, buildingType:'cow' , type: "безприв'язний", heads: 408, L: 96, W: 18, stern_given: 'Мобільним'},
+      {name: 'Корівник',   water_one_head:100,buildingType:'cow' ,type: "прив'язний", heads: 200, L: 72, W: 18, stern_given: 'Транспортером'},
+      {name: 'Корівник',  water_one_head:100 ,buildingType:'cow',type: "-", heads: 100, L: 72, W: 12, stern_given: '-'},
+      {name: 'Корівник',  water_one_head:100, buildingType:'cow' ,type: "-", heads: 200, L: 72, W: 21, stern_given: '-'}
     ],
     buildings_for_calves_before_20days: [
-      {name: 'Родильне відділення',  buildingType:'cow',type: "-", heads: 96, L: 60, W: 21, stern_given: 'Транспортером'},
-      {name: 'Родильне відділення з профілакторієм', buildingType:'cow', type: "-", heads: 160, L: 72, W: 21, stern_given: 'Транспортером'},
-      {name: 'Телятник з родильне відділення', buildingType:'20daycow' ,type: "-", heads: 342, L: 90, W: 18, stern_given: '-'},
-      {name: 'Телятник з родильне відділення', buildingType:'20daycow',type: "-", heads: 228, L: 60, W: 18, stern_given: '-'},
-      {name: 'Телятник з родильне відділення', buildingType:'20daycow', type: "-", heads: 120, L: 60, W: 12, stern_given: '-'}
+      {name: 'Родильне відділення', water_one_head:20, buildingType:'cow',type: "-", heads: 96, L: 60, W: 21, stern_given: 'Транспортером'},
+      {name: 'Родильне відділення з профілакторієм',water_one_head:20 ,buildingType:'cow', type: "-", heads: 160, L: 72, W: 21, stern_given: 'Транспортером'},
+      {name: 'Телятник з родильне відділення',water_one_head:20, buildingType:'20daycow' ,type: "-", heads: 342, L: 90, W: 18, stern_given: '-'},
+      {name: 'Телятник з родильне відділення',water_one_head:20, buildingType:'20daycow',type: "-", heads: 228, L: 60, W: 18, stern_given: '-'},
+      {name: 'Телятник з родильне відділення', water_one_head:20,buildingType:'20daycow', type: "-", heads: 120, L: 60, W: 12, stern_given: '-'}
     ],
     building_for_calves: [
-      {name: 'Приміщення для молодняку',  buildingType: 'calves', type: "-", heads: 300, L: 48, W: 18, stern_given: 'Мобільним'},
-      {name: 'Приміщення для молодняку',  buildingType: 'calves', type: "-", heads: 170, L: 36, W: 18, stern_given: 'Мобільним'},
-      {name: 'Приміщення для молодняку',  buildingType: 'calves', type: "-", heads: 263, L: 60, W: 18, stern_given: 'Мобільним'}
+      {name: 'Приміщення для молодняку',   water_one_head:30 ,buildingType: 'calves', type: "-", heads: 300, L: 48, W: 18, stern_given: 'Мобільним'},
+      {name: 'Приміщення для молодняку',  water_one_head:30, buildingType: 'calves', type: "-", heads: 170, L: 36, W: 18, stern_given: 'Мобільним'},
+      {name: 'Приміщення для молодняку',   water_one_head:30 ,buildingType: 'calves', type: "-", heads: 263, L: 60, W: 18, stern_given: 'Мобільним'}
     ]
   },
   buildings_for_shit: [

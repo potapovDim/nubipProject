@@ -3,6 +3,7 @@ import Container from './Container';
 import CustomDragLayer from './CustomDragLayer';
 import {DragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import {buildConnectionMap} from './calculateBuildings'
 
 @DragDropContext(HTML5Backend)
 export default class DropBuilds extends Component {
@@ -18,7 +19,9 @@ export default class DropBuilds extends Component {
   }
 
   render() {
-    const builds = this.props.buildingsForFarm || this.buildings
+    const builds =this.buildings
+    console.log(this.props.buildingsForFarm)
+    console.log(buildConnectionMap(this.props.buildingsForFarm))
     const {snapToGridAfterDrop, snapToGridWhileDragging} = this.state;
     return (
       <div>
