@@ -6,7 +6,7 @@ import {addSternVolume} from '../../../reducers/calculation/stern/actions'
 import {Link} from 'react-router'
 
 export default class extends React.Component {
-  handleCollectData = ()=> {
+  handleCollectData = () => {
     let kind_of_building = this.refs.kind_of_building.value
     let volume = this.refs.volume.value
     let B = this.refs.B.value

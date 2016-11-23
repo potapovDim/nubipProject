@@ -4,22 +4,22 @@ import classNames from 'classnames'
 const Build = ({name, type, heads, L, W, stern_given}) => {
   return (
     <div className="flex-wrap">
-      <div>
+      <div style={{width:'17%'}}>
         Споруда : {name}
       </div>
-      <div>
+      <div style={{width:'17%'}} >
         Тип утримання тварин : {type}
       </div>
-      <div>
+      <div style={{width:'17%'}} >
         Кількість голів : {heads}
       </div>
-      <div>
+      <div style={{width:'17%'}} >
         Довжина : {L}
-      </div>
-      <div>
+      </div >
+      <div style={{width:'17%'}}>
         Ширина : {W}
       </div>
-      <div>
+      <div style={{width:'17%'}}>
         Роздавання корму : {stern_given}
       </div>
     </div>

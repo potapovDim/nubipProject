@@ -69,7 +69,6 @@ export default class Container extends Component {
     // const heads = _.reduce(ids,(result,id) => {
     //     result += allBuildings[id]
     // },0)
-    debugger
     let heads = this.allBuildings[id].heads
     _.forEach(this.connectionMap[id], _id => {
       heads += this.calcTubes(_id)
