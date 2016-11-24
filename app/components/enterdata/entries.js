@@ -36,15 +36,18 @@ class Entries extends Component {
   }
 
   changeBuildingsStructure = (data) => {
-    const buildings =  [
-      {top: 10, left: 50, title: 'Насосна станція',heads:0,water_one_head:0},
-      {top: 80, left: 50, title: 'Водонапірна башта', heads:0,water_one_head:0 },
-      {top: 80, left: 50, title: 'Кормоцехч ', heads:1000, water_one_head:1 },
-      ,...data.cows,...data.cows_before_20days,...data.calves]
+    const buildings = _.flattenDeep( [
+      {top: 10, left: 50, name: 'Насосна станція',heads:0,water_one_head:0},
+      {top: 80, left: 50, name: 'Водонапірна башта', heads:0,water_one_head:0 },
+      {top: 80, left: 50, name: 'Кормоцехч ', heads:1000, water_one_head:1 },
+      {top: 80, left: 50, name: 'Кормоцехч ', heads:1000, water_one_head:1 },
+      ,data.cows,data.cows_before_20days,data.calves])
+    console.log(buildings)
     let hashBuldings  = {}
     buildings.forEach((build,index)=> {
       hashBuldings[index] = build
     }) 
+    console.log(hashBuldings)
     return hashBuldings
   }
 

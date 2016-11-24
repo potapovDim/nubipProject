@@ -6,8 +6,8 @@ import {getEmptyImage} from 'react-dnd-html5-backend';
 
 const boxSource = {
   beginDrag(props) {
-    const {id, title, left, top} = props;
-    return {id, title, left, top};
+    const {id, name, left, top} = props;
+    return {id, name, left, top};
   }
 };
 
@@ -51,11 +51,11 @@ export default class DraggableBox extends Component {
 
   render() {
     const {newTitle} = this.state
-    const {title, connectDragSource, id, removeBox, addBloc, left, top, parentId, roadToParent, calculateRoad} = this.props;
-    const buttonRender = title === 'Насосна станція'
+    const {name, connectDragSource, id, removeBox, addBloc, left, top, parentId, roadToParent, calculateRoad} = this.props;
+    const buttonRender = name === 'Насосна станція'
     return connectDragSource(
       <div style={getStyles(this.props)}>
-        <Box title={title}
+        <Box title={name}
              roadToParent={roadToParent}/>
         {!buttonRender && <div>
           <div>

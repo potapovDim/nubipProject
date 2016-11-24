@@ -1,20 +1,20 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import update from 'react/lib/update';
 import ItemTypes from './ItemTypes';
 import DraggableBox from './DraggableBox';
 import snapToGrid from './snapToGrid';
-import {DropTarget} from 'react-dnd';
+import { DropTarget } from 'react-dnd';
 import _ from 'lodash'
 import uuid from 'node-uuid'
 
-import {buildNewBuildingsPositions} from './calculateBuildings'
-import {findBuildPosition} from './findBuildPosition'
-import {calculateTubes, calculateTubesWithLength} from './calculateTubes'
+import { buildNewBuildingsPositions, buildConnectionMap, calcTube } from './calculateBuildings'
+import { findBuildPosition } from './findBuildPosition'
+import { calculateTubes, calculateTubesWithLength } from './calculateTubes'
 const styles = {
-  width: 10000,
+  width: 1000,
   height: 800,
   border: '1px solid black',
-  position: 'relative'
+  position: 'absolute'
 };
 
 const boxTarget = {
@@ -43,27 +43,18 @@ export default class Container extends Component {
 
   state = {
     boxes: {
-      'насос': {top: 10, left: 50, title: 'Насосна станція'},
-      'башта': {top: 80, left: 50, title: 'Водонапірна башта', parentId: 'насос', waterNeedingForThisBuild: 0.0001}
+      'насос': { top: 10, left: 50, title: 'Насосна станція' },
+      'башта': { top: 80, left: 50, title: 'Водонапірна башта', parentId: 'насос', waterNeedingForThisBuild: 0.0001 }
     }
   }
 
   componentWillMount() {
     const {buildings} = this.props
-    const buffer = [this.state.boxes['насос'],this.state.boxes['башта'], ...buildings.calves, ...buildings.cows, ...buildings.cows_before_20days].map(build=> {
-        build.id = uuid()
-        return build
-    })
-    this.allBuildings = {}
-    this.connectionMap = {}
-    _.forEach(buffer,(build, index) => {
-      this.allBuildings[build.id] = build
-      this.connectionMap[build.id] = buffer.length -1 === index ? [] : [buffer[index + 1].id]
-    })
-    console.log(this.calcTubes(Object.keys(this.allBuildings)[0]))
-    const boxes = {...this.state.boxes}
-    const newBoxes = buildNewBuildingsPositions(boxes, buildings)
-    this.setState({boxes: newBoxes})
+    this.setState({ buildings })
+    //const boxes = {...this.state.boxes}
+    //const newBoxes = buildNewBuildingsPositions(boxes, buildings)
+
+    //this.setState({boxes: newBoxes})
   }
   calcTubes = (id) => {
     // const heads = _.reduce(ids,(result,id) => {
@@ -73,12 +64,13 @@ export default class Container extends Component {
     _.forEach(this.connectionMap[id], _id => {
       heads += this.calcTubes(_id)
     })
-    
+
     return heads
   }
   moveBox(id, left, top) {
+    console.log(id, left, top)
     this.setState(update(this.state, {
-      boxes: {
+      buildings: {
         [id]: {
           $merge: {
             left: left,
@@ -92,14 +84,14 @@ export default class Container extends Component {
   addBox = (parentId, top, left, newBoxTitle) => {
     const id = uuid.v1()
     const _state = this.state
-    _state.boxes[id] = {top: top + 5, left: left + 5, title: newBoxTitle, parentId}
+    _state.boxes[id] = { top: top + 5, left: left + 5, title: newBoxTitle, parentId }
     this.setState(_state)
   }
 
   removeBox = (id) => {
     const boxes = this.state.boxes
     const newBox = _.omit(boxes, [id])
-    this.setState({boxes: newBox})
+    this.setState({ boxes: newBox })
   }
 
   calculateRoadToFatherComponent = (id, parentId, top, left) => {
@@ -107,7 +99,7 @@ export default class Container extends Component {
     const RoadToPatent = {}
     const boxes = this.state.boxes
     if (boxes[parentId]) {
-      const {top:fatherTop, left:fatherLeft} = boxes[parentId]
+      const {top: fatherTop, left: fatherLeft} = boxes[parentId]
       if (fatherTop >= top && fatherLeft >= left) {
         RoadToPatent.leftToFather = (fatherLeft - left) / 10
         RoadToPatent.topToFather = (fatherTop - top) / 10
@@ -129,7 +121,7 @@ export default class Container extends Component {
         RoadToPatent.words = 'вверх вліво'
       }
       boxes[id].roadToParent = RoadToPatent
-      this.setState({boxes: boxes})
+      this.setState({ boxes: boxes })
     }
     else return
   }
@@ -142,27 +134,39 @@ export default class Container extends Component {
         id={key}
         removeBox={this.removeBox}
         addBloc={this.addBox}
-        calculateRoad={this.calculateRoadToFatherComponent}/>
+        calculateRoad={this.calculateRoadToFatherComponent} />
     );
   }
 
 
   render() {
     const {connectDropTarget, addFullBuilds} = this.props
-    const {boxes} = this.state;
-    const tubes = calculateTubes(findBuildPosition(boxes))
-    const tt = calculateTubesWithLength(tubes, boxes)
+    const {buildings} = this.state;
+    const connectionMap = buildConnectionMap(buildings)
+    const calcTube = (id) => {
+      console.log(id)
+      console.log(buildings)
+      console.log(buildings[id])
+      let result = buildings[id].heads
+      connectionMap[id].forEach(childId => {
+        result += calcTube(childId)
+      })
+    }
+    console.log(calcTube(0))
+    // const tubes = calculateTubes(findBuildPosition(boxes))
+    // const tt = calculateTubesWithLength(tubes, boxes)
 
 
 
     return (<div>{connectDropTarget(
       <div style={styles}>
         {Object
-          .keys(boxes)
-          .map(key => this.renderBox(boxes[key], key))
+          .keys(buildings)
+          .map(key => this.renderBox(buildings[key], key))
         }
       </div>)}
-      <button onClick={()=>addFullBuilds(tt)}>Прийняти будівлі</button>
     </div>)
   }
 }
+
+//<button onClick={()=>addFullBuilds(tt)}>Прийняти будівлі</button>

@@ -29,6 +29,7 @@ class WaterBuilds extends React.Component {
 
   componentWillMount(){
     console.log(this.props.entries.buildingsForFarm)
+    
   }
 
   confirmWater = ()=> {

@@ -5,12 +5,27 @@ import {DragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import {buildConnectionMap} from './calculateBuildings'
 
+const layerStyles = {
+  width: '100%',
+  height: '100%'
+};
+
+
 @DragDropContext(HTML5Backend)
 export default class DropBuilds extends Component {
   state = {
     snapToGridAfterDrop: false,
     snapToGridWhileDragging: false
   };
+  componentWillMount(){
+      var c = document.createElement('canvas')
+      c.height = '100%'
+      c.width = '100%'
+      var ctx = c.getContext('2d')
+      ctx.moveTo(0,0);
+      ctx.lineTo(200,100);
+      ctx.stroke();
+  }
   buildings = {
     cows: [{name: 'Корівник', heads: 200}, {name: 'Корівник', heads: 100}],
     calves: [{name: 'Приміщення для молодняку', heads: 300}],
@@ -19,13 +34,16 @@ export default class DropBuilds extends Component {
   }
 
   render() {
-    const builds =this.buildings
-    console.log(this.props.buildingsForFarm)
-    console.log(buildConnectionMap(this.props.buildingsForFarm))
+    const builds = this.props.buildingsForFarm || this.buildings
+    const connectionMap = buildConnectionMap(this.props.buildingsForFarm)
     const {snapToGridAfterDrop, snapToGridWhileDragging} = this.state;
     return (
       <div>
-        <Container snapToGrid={snapToGridAfterDrop} buildings={builds} addFullBuilds={this.props.addFullBuilds}/>
+        <Container 
+              snapToGrid={snapToGridAfterDrop} 
+              buildings={builds}
+              connectionMap = {connectionMap}
+              addFullBuilds={this.props.addFullBuilds}/>
         <CustomDragLayer snapToGrid={snapToGridWhileDragging}/>
         <p>
           <label>

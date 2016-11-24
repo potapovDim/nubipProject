@@ -545,22 +545,22 @@ const initialState = {
   ],
   buildings_for_farm: {
     buildings_for_cows: [
-      {name: 'Корівник',  water_one_head:100, buildingType:'cow' , type: "безприв'язний", heads: 408, L: 96, W: 18, stern_given: 'Мобільним'},
-      {name: 'Корівник',   water_one_head:100,buildingType:'cow' ,type: "прив'язний", heads: 200, L: 72, W: 18, stern_given: 'Транспортером'},
-      {name: 'Корівник',  water_one_head:100 ,buildingType:'cow',type: "-", heads: 100, L: 72, W: 12, stern_given: '-'},
-      {name: 'Корівник',  water_one_head:100, buildingType:'cow' ,type: "-", heads: 200, L: 72, W: 21, stern_given: '-'}
+      {name: 'Корівник',  top: 10, left: 50, water_one_head:100, buildingType:'cow' , type: "безприв'язний", heads: 408, L: 96, W: 18, stern_given: 'Мобільним'},
+      {name: 'Корівник',  top: 10, left: 50,  water_one_head:100,buildingType:'cow' ,type: "прив'язний", heads: 200, L: 72, W: 18, stern_given: 'Транспортером'},
+      {name: 'Корівник',  top: 10, left: 50, water_one_head:100 ,buildingType:'cow',type: "-", heads: 100, L: 72, W: 12, stern_given: '-'},
+      {name: 'Корівник',  top: 10, left: 50, water_one_head:100, buildingType:'cow' ,type: "-", heads: 200, L: 72, W: 21, stern_given: '-'}
     ],
     buildings_for_calves_before_20days: [
-      {name: 'Родильне відділення', water_one_head:20, buildingType:'cow',type: "-", heads: 96, L: 60, W: 21, stern_given: 'Транспортером'},
-      {name: 'Родильне відділення з профілакторієм',water_one_head:20 ,buildingType:'cow', type: "-", heads: 160, L: 72, W: 21, stern_given: 'Транспортером'},
-      {name: 'Телятник з родильне відділення',water_one_head:20, buildingType:'20daycow' ,type: "-", heads: 342, L: 90, W: 18, stern_given: '-'},
-      {name: 'Телятник з родильне відділення',water_one_head:20, buildingType:'20daycow',type: "-", heads: 228, L: 60, W: 18, stern_given: '-'},
-      {name: 'Телятник з родильне відділення', water_one_head:20,buildingType:'20daycow', type: "-", heads: 120, L: 60, W: 12, stern_given: '-'}
+      {name: 'Родильне відділення', water_one_head:20, top: 10, left: 50, buildingType:'cow',type: "-", heads: 96, L: 60, W: 21, stern_given: 'Транспортером'},
+      {name: 'Родильне відділення з профілакторієм',water_one_head:20 ,top: 10, left: 50, buildingType:'cow', type: "-", heads: 160, L: 72, W: 21, stern_given: 'Транспортером'},
+      {name: 'Телятник з родильне відділення',water_one_head:20, top: 10, left: 50, buildingType:'20daycow' ,type: "-", heads: 342, L: 90, W: 18, stern_given: '-'},
+      {name: 'Телятник з родильне відділення',water_one_head:20, top: 10, left: 50, buildingType:'20daycow',type: "-", heads: 228, L: 60, W: 18, stern_given: '-'},
+      {name: 'Телятник з родильне відділення', water_one_head:20,top: 10, left: 50, buildingType:'20daycow', type: "-", heads: 120, L: 60, W: 12, stern_given: '-'}
     ],
     building_for_calves: [
-      {name: 'Приміщення для молодняку',   water_one_head:30 ,buildingType: 'calves', type: "-", heads: 300, L: 48, W: 18, stern_given: 'Мобільним'},
-      {name: 'Приміщення для молодняку',  water_one_head:30, buildingType: 'calves', type: "-", heads: 170, L: 36, W: 18, stern_given: 'Мобільним'},
-      {name: 'Приміщення для молодняку',   water_one_head:30 ,buildingType: 'calves', type: "-", heads: 263, L: 60, W: 18, stern_given: 'Мобільним'}
+      {name: 'Приміщення для молодняку',  top: 10, left: 50,  water_one_head:30 ,buildingType: 'calves', type: "-", heads: 300, L: 48, W: 18, stern_given: 'Мобільним'},
+      {name: 'Приміщення для молодняку', top: 10, left: 50,  water_one_head:30, buildingType: 'calves', type: "-", heads: 170, L: 36, W: 18, stern_given: 'Мобільним'},
+      {name: 'Приміщення для молодняку',  top: 10, left: 50,  water_one_head:30 ,buildingType: 'calves', type: "-", heads: 263, L: 60, W: 18, stern_given: 'Мобільним'}
     ]
   },
   buildings_for_shit: [
