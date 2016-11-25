@@ -4,10 +4,10 @@ import _ from 'lodash'
 export const BuildingsSpecifications = ({builds}) => {
   const table = Object.keys(_.omit(builds, ['насос'])).map(item=> {
     return (<tr>
-      <td >{builds[item].title}</td>
-      <td >{(builds[item].waterNeedingForThisBuild).toFixed(4)}</td>
-      <td >{builds[item].tubeD} </td>
-      <td >{builds[item].roadToParent.leftToFather + builds[item].roadToParent.topToFather}</td>
+      <td >{builds[item].name}</td>
+      <td >{(builds[item].waterNeedingForThisBuild).toFixed(1)}</td>
+      <td >{builds[item].tube} </td>
+      <td >{builds[item].tubeLength}</td>
     </tr>)
   })
   return <div>

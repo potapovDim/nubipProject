@@ -59,7 +59,7 @@ export default class DraggableBox extends Component {
              roadToParent={roadToParent}/>
         {!buttonRender && <div>
           <div>
-            <button className="box-button" onClick={()=>calculateRoad(id,parentId,top,left)}>
+            <button className="box-button" onClick={()=>calculateRoad(id)}>
               Розрахувати довжину труби
             </button>
           </div>

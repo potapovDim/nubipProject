@@ -17,15 +17,18 @@ export default class DropBuilds extends Component {
     snapToGridAfterDrop: false,
     snapToGridWhileDragging: false
   };
-  componentWillMount(){
-      var c = document.createElement('canvas')
-      c.height = '100%'
-      c.width = '100%'
-      var ctx = c.getContext('2d')
-      ctx.moveTo(0,0);
-      ctx.lineTo(200,100);
-      ctx.stroke();
-  }
+  // componentWillMount(){
+  //     var c = document.createElement('canvas')
+  //     console.log(c)
+  //     c.height = 1000
+  //     c.width = 1000
+  //     c.co
+  //     var ctx = c.getContext('2d')
+  //     ctx.fillRect(50, 25, 150, 100);
+  //     ctx.moveTo(0,0);
+  //     ctx.lineTo(3000,100);
+  //     ctx.stroke();
+  // }
   buildings = {
     cows: [{name: 'Корівник', heads: 200}, {name: 'Корівник', heads: 100}],
     calves: [{name: 'Приміщення для молодняку', heads: 300}],
@@ -39,12 +42,14 @@ export default class DropBuilds extends Component {
     const {snapToGridAfterDrop, snapToGridWhileDragging} = this.state;
     return (
       <div>
-        <Container 
+       <div>
+       <Container 
               snapToGrid={snapToGridAfterDrop} 
               buildings={builds}
               connectionMap = {connectionMap}
               addFullBuilds={this.props.addFullBuilds}/>
         <CustomDragLayer snapToGrid={snapToGridWhileDragging}/>
+        </div>
         <p>
           <label>
             <input type='checkbox'

@@ -9,7 +9,6 @@ const calculateShit = (cows, cow_before_20days, litter_norm, stallPeriod, shit_n
   const shitInKg = allShit * (stallPeriod + 0.5 * (365 - stallPeriod))
   const yearLitter = litter * (stallPeriod + 0.5 * (365 - stallPeriod))
   const shitVolume = shitInKg / 850
-  console.log(shitVolume)
   if (shitVolume <= 300) {
     builds = [buildings_for_shit[0]]
   }
