@@ -1,0 +1,1 @@
+export const ADD_MILK_MACHINE= 'ADD_MILK_MACHINE'

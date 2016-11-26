@@ -42,7 +42,7 @@ class Main extends Component {
                 {tutorial}
                 <NavDropdown eventKey={3} title='НАВІГАЦІЯ ПО ПРОЕКТУ' id="basic-nav-dropdown">
                   <MenuItem eventKey={3.1}><Link to="/waterbuilds">ВОДОПОСТАЧАННЯ</Link></MenuItem>
-                  <MenuItem eventKey={3.2}>Дія 2</MenuItem>
+                  <MenuItem eventKey={3.2}><Link to="/milk">Доїння</Link></MenuItem>
                   <MenuItem eventKey={3.3}>Дія 3</MenuItem>
                   <MenuItem divider/>
                   <MenuItem eventKey={3.3}>Головна</MenuItem>

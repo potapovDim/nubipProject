@@ -53,13 +53,12 @@ class WaterEquipment extends React.Component {
 
   render() {
     const {drinking_bowl_calves, drinking_bowl_cows, pumps_submersible, pumps_rotary, water_towers, water:{waterNorm},entries: {cows, cow_before_20days, }} = this.props
-    console.log(this.props)
     return (
       <div> 
         {!this.state.showDrinkingBow &&    <div className="form-group">
             <div className="bg-primary">{this.state.pressureLost} кПа втрата тиску в трубах </div>
-            <div className="bg-primary">{this.state.maxNeed} літрів максимальна потреба витрати води на добу </div>
-            <div className="bg-primary">{this.state.pumpWaterNeed } літрів необхідна продуктивність водопідіймального обладнання </div>
+            <div className="bg-primary">{this.state.maxNeed.toFixed(2)} літрів максимальна потреба витрати води на добу </div>
+            <div className="bg-primary">{this.state.pumpWaterNeed.toFixed(2) } літрів необхідна продуктивність водопідіймального обладнання </div>
             <label htmlFor="Height">Висота всмоктування </label>
             <input onChange={(event)=>this.assertHeightValue('vs',event)} className="form-control" id="HeightVs" value={this.state.heightVs}/>
             <label htmlFor="Height">Висота нагнітання </label>

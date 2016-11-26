@@ -41,7 +41,7 @@ export class SternMachineTable extends React.Component {
       return (
         <tr key={index}>
           <td style={{width:'14%'}} className="active">{item.brand}</td>
-          <td style={{width:'14%'}} className="active">{item.work_vlolume}</td>
+          <td style={{width:'14%'}} className="active">{item.work_volume}</td>
           <td style={{width:'14%'}} className="active">{item.L}</td>
           <td style={{width:'14%'}} className="active">{item.W}</td>
           <td style={{width:'14%'}} className="active">{item.weight}</td>

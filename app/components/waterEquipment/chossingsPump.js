@@ -9,17 +9,18 @@ const choosedPumpByWaterNeed = (pumps, vaterNeed) => {
 
 const calculatePumpByPressure = (height,needPressure,pumps) => {
     const mPaPressure = needPressure/1000
+    console.log(mPaPressure)
     let recomendedPumns 
     const {pumps_rotary,pumps_submersible} = pumps
     if(height<10){
         recomendedPumns = pumps_rotary.filter((pump)=>{
             return pump.full_pressure>mPaPressure
-        })
+        }).filter(pump => pump.full_pressure / mPaPressure  <= 1.3 )
     }
     else if(height>10){
          recomendedPumns = pumps_submersible.filter((pump)=>{
             return pump.full_pressure>mPaPressure
-        })
+        }).filter(pump => pump.full_pressure / mPaPressure <=1.3)
     }
     return recomendedPumns
 }

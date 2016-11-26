@@ -78,6 +78,7 @@ export default class Container extends Component {
   }
 
   calculateTube = (val) => {
+    console.log(val)
     if (val <= 0.04) {
       return 0.04
     }

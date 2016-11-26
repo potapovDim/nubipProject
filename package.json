@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --hot",
     "test": "babel-node ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha --  --bail --recursive"
   },
   "author": "",
