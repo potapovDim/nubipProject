@@ -51,7 +51,7 @@ export default class DraggableBox extends Component {
 
   render() {
     const {newTitle} = this.state
-    const {name, connectDragSource, id, removeBox, addBloc, left, top, parentId, roadToParent, calculateRoad} = this.props;
+    const {name, connectDragSource, id, removeBox, addBloc ,roadToParent, calculateRoad} = this.props;
     const buttonRender = name === 'Насосна станція'
     return connectDragSource(
       <div style={getStyles(this.props)}>

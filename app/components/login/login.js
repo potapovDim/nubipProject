@@ -8,7 +8,7 @@ class Login extends Component {
   
   handleLogin = ()=> {
     let name = ReactDOM.findDOMNode(this.refs.formcontrol).value
-    if (name != '') {
+    if (name !== '') {
       this.props.dispatch(login(name))
     }
   }
@@ -18,7 +18,7 @@ class Login extends Component {
         <Form horizontal>
           <FormGroup controlId="formHorizontalEmail">
             <Col componentClass={ControlLabel} sm={2}>
-              Name
+              Ім'я
             </Col>
             <Col sm={5}>
               <FormControl ref="formcontrol" type="name" placeholder="Name"/>
@@ -28,7 +28,7 @@ class Login extends Component {
             <Col smOffset={2} sm={8}>
               <Link to="/entries">
                 <Button onClick={this.handleLogin} type="submit">
-                  Login
+                  Ввійти
                 </Button>
               </Link>
             </Col>

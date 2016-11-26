@@ -23,17 +23,11 @@ class WaterBuilds extends React.Component {
     const water = {pureNeed, maxNeed, needPerHour}
     this.setState({water})
   }
-  addFullBuilds = builds => {
-    this.setState({showFullBuilds: true, builds})
+  addFullBuilds = buildings => {
+    this.setState({showFullBuilds: true, buildings})
   }
-
-  componentWillMount(){
-    console.log(this.props.entries.buildingsForFarm)
-    
-  }
-
   confirmWater = ()=> {
-    this.props.dispatch(addWaterNorm(this.state.water, this.state.builds))
+    this.props.dispatch(addWaterNorm(this.state.water, this.state.buildings))
   }
 
   render() {
@@ -51,10 +45,10 @@ class WaterBuilds extends React.Component {
       {!this.state.showFullBuilds &&
       <DropBuilds buildingsForFarm={buildingsForFarm} addFullBuilds={this.addFullBuilds}/>}
       <div>
-        {this.state.builds &&
+        {this.state.buildings &&
         <div>
           <CalculateWaterPerDay {...{water, cow_before_20days, cows}}/>
-          <BuildingsSpecifications builds={this.state.builds}/>
+          <BuildingsSpecifications builds={this.state.buildings}/>
           <Link to="/waterequip">
             <button className="btn btn-info" onClick={this.confirmWater}>Перейти до розрахунку обладнання</button>
           </Link>

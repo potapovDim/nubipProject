@@ -8,8 +8,8 @@ import {DrinkinBow} from './drinkinBow'
 
 class WaterEquipment extends React.Component {
   componentWillMount() {
-    const {water: { waterNorm: {maxNeed, needPerHour}}} = this.props
-    const fullLostPressure = calculateFullLostPressure(this.calculateLostAtRoad(this.props.water.waterBuilds))
+    const {water: {waterBuilds, waterNorm: {maxNeed, needPerHour}}} = this.props
+    const fullLostPressure = calculateFullLostPressure(this.calculateLostAtRoad(waterBuilds))
     const pumpWaterNeed = maxNeed / 16 
     this.setState({pressureLost: fullLostPressure, maxNeed, needPerHour, pumpWaterNeed})
   }
@@ -38,12 +38,10 @@ class WaterEquipment extends React.Component {
     }
   }
   calculateLostAtRoad = (builds) => {
-    Object.keys(_.omit(builds, ['насос'])).map((item, index)=> {
-      builds[item].lostPressure = calculateLostPressure(builds[item].tubeD,
-        (builds[item].roadToParent.leftToFather + builds[item].roadToParent.topToFather))
-      builds[item].length = (builds[item].roadToParent.leftToFather + builds[item].roadToParent.topToFather)
+    Object.keys(_.omit(builds, ['0'])).map((item, index)=> {
+      builds[item].lostPressure = calculateLostPressure(builds[item].tube,builds[item].tubeLength)
     })
-    builds['насос'].lostPressure = placeResistans([0.1, 2, 5, 5, 0.5])
+    builds['0'].lostPressure = placeResistans([0.1, 2, 5, 5, 0.5])
     return builds
   }
   addPump = (type,pump) => {

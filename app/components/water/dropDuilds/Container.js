@@ -71,7 +71,7 @@ export default class Container extends Component {
       buildings[key].waterNeedingForThisBuild = buildings[key].heads*buildings[key].water_one_head
     })
     Object.keys(buildings).forEach((key, index) => {
-      buildings[key].tube = this.calculateTube(2 * Math.sqrt(((buildings[key].vaterNeed * 1.3 * 2.2) / (24 * 3600)) / Math.PI))
+      buildings[key].tube = this.calculateTube(2 * Math.sqrt(((buildings[key].vaterNeed * 2.86) / 86400000) / Math.PI))
       buildings[key].parentId = parentIdAssert(key)
     })
     this.setState({ buildings })
@@ -155,7 +155,7 @@ export default class Container extends Component {
         RoadToPatent.words = 'вверх вліво'
       }
       buildings[id].roadToParent = RoadToPatent
-      buildings[id].tubeLength  = RoadToPatent.leftToFather - RoadToPatent.topToFather
+      buildings[id].tubeLength  = RoadToPatent.leftToFather + RoadToPatent.topToFather
       this.setState({ buildings })
     }
     else return

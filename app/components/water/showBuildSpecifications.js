@@ -2,12 +2,12 @@ import React from 'react'
 import _ from 'lodash'
 
 export const BuildingsSpecifications = ({builds}) => {
-  const table = Object.keys(_.omit(builds, ['насос'])).map(item=> {
+  const table = Object.keys(_.omit(builds, ['0'])).map(item=> {
     return (<tr>
       <td >{builds[item].name}</td>
-      <td >{(builds[item].waterNeedingForThisBuild).toFixed(1)}</td>
-      <td >{builds[item].tube} </td>
-      <td >{builds[item].tubeLength}</td>
+      <td >{(builds[item].waterNeedingForThisBuild*2.6 / 86400000).toFixed(5)}</td>
+      <td >{builds[item].tube.toFixed(2)} </td>
+      <td >{builds[item].tubeLength.toFixed(2)}</td>
     </tr>)
   })
   return <div>
