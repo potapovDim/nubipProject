@@ -14,6 +14,7 @@ export default connect(state => {
   return {
     machines: state.tables.stern_machines,
     sternVolume: state.sternStocks.sternVolume,
-    stallPeriod: state.entries.season_stall
+    stallPeriod: state.entries.season_stall,
+    peymantPerOur:state.entries.paymentPrice
   }
 })(SternMachineChoise)
