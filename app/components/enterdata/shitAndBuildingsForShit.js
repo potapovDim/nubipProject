@@ -99,7 +99,7 @@ export const BuildingsForShit = ({buildings_for_shit, cow_before_20days, cows, l
       <h3>Гній від тварин та рекомендовані будівлі</h3>
       <h4>Масса гною за стійловий період  : {shitInKg}кілограмів</h4>
       <h4>Масса підстилки за стійловий період  : {yearLitter}кілограмів </h4>
-      <h4>Об'єм гною  за стійловий період в: {shitVolume}метрів кубічнич </h4>
+      <h4>Об'єм гною  за стійловий період в: {shitVolume.toFixed(2)}метрів кубічнич </h4>
       <h4>Рекомендована приміщень для зберігання гною </h4>
       <div>{buildsRecomended}</div>
     </div>

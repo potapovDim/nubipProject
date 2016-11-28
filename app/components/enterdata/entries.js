@@ -32,7 +32,8 @@ class Entries extends Component {
     ill_cows: null,
     cow_before_20days: null,
     season_stall: null,
-    buildingsADD: false
+    buildingsADD: false,
+    farm_direction:null
   }
 
 
@@ -217,6 +218,25 @@ render() {
                 </Checkbox>
             </InputGroup>
           </FormGroup>
+          <div>
+              <h3>Вибір напрямку ферми </h3>
+              <Checkbox inline onChange={() => this.chooseWayMaintenance('attachable')}
+                disabled={this.state.farm_direction !== null}>
+                Молочний з утримання телят до 20 днів
+                </Checkbox>
+                <div>
+              <Checkbox inline onChange={() => this.chooseWayMaintenance('without_attachable')}
+                disabled={this.state.farm_direction !== null}>
+                 Молочний з утримання телят до 6 місяців
+                </Checkbox>
+                </div>
+                <div>
+                <Checkbox inline onChange={() => this.chooseWayMaintenance('without_attachable')}
+                disabled={this.state.tyfarm_directionpe !== null}>
+                 Молочний-м'ясний з закінченим оборотом
+                </Checkbox>
+                </div>
+        </div>
           <LoadingButton action={this.handleAddQuantity} />
           <Button onClick={this.handleCalculateFarm} type='button'
             disabled={(cows && fuelPrice && energyPrice && paymentPrice && type) === null}>Розрахувати
@@ -233,7 +253,7 @@ render() {
           <div className="output-data flash">
             <h4>Данні які будуть внесені для розрахунку</h4>
             <p>Стійловий період : {season_stall}</p>
-            <p>Кількість корів : {cows}</p>
+            <p>Загальна кількість корів : {cows}</p>
             <p>Ціна за пальне : {fuelPrice}грн/л</p>
             <p>Ціна за електроенергію : {energyPrice}грн/кВт</p>
             <p>Заробітня плата : {paymentPrice}грн/год</p>
@@ -241,7 +261,7 @@ render() {
         {this.state.showFarm ?
           <div className="output-cows flash">
             <h4>Структура ферми</h4>
-            <p>Кількість корів : {cows}голів</p>
+            <p>Загальна кількість корів : {cows}голів</p>
             <p>Кількість корів родильного відділення : {pregrant_cows}голів</p>
             <p>Кількість сухостійних корів : {dry_cows}голів</p>
             <p>Кількість хворих корів : {ill_cows}голів</p>
