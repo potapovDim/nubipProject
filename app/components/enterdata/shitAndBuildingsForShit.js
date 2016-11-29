@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {addShit} from '../../reducers/calculation/shit/actions'
 const calculateShit = (cows, cow_before_20days, litter_norm, stallPeriod, shit_norms, buildings_for_shit) => {
   let allShit = (cow_before_20days * shit_norms['cow_before_20days'] + cow_before_20days * litter_norm['cow_before_20days'])
     + (cows * shit_norms['cows'] + cows * litter_norm['cows']) + (100 * shit_norms['calves'] + 100 * litter_norm['calves'])
@@ -43,28 +43,28 @@ const calculateShit = (cows, cow_before_20days, litter_norm, stallPeriod, shit_n
     builds = [buildings_for_shit[3]]
   }
   else if (4500 <= shitVolume && shitVolume <= 5000) {
-    builds = [buildings_for_shit[2], buildings_for_shit[1] ]
+    builds = [buildings_for_shit[2], buildings_for_shit[1]]
   }
-   else if (5000 <= shitVolume && shitVolume <= 5500) {
+  else if (5000 <= shitVolume && shitVolume <= 5500) {
     builds = [buildings_for_shit[2], buildings_for_shit[1], buildings_for_shit[1]]
   }
-   else if (5500 <= shitVolume && shitVolume <= 7000) {
+  else if (5500 <= shitVolume && shitVolume <= 7000) {
     builds = [buildings_for_shit[2], buildings_for_shit[2], buildings_for_shit[1]]
   }
-   else if (7000 <= shitVolume && shitVolume <= 8000) {
+  else if (7000 <= shitVolume && shitVolume <= 8000) {
     builds = [buildings_for_shit[4]]
   }
-   else if (8000 <= shitVolume && shitVolume <= 9000) {
-    builds = [buildings_for_shit[4],  buildings_for_shit[1],  buildings_for_shit[1]]
+  else if (8000 <= shitVolume && shitVolume <= 9000) {
+    builds = [buildings_for_shit[4], buildings_for_shit[1], buildings_for_shit[1]]
   }
-   else if (9000 <= shitVolume && shitVolume <= 10000) {
-    builds = [buildings_for_shit[4],  buildings_for_shit[2]]
+  else if (9000 <= shitVolume && shitVolume <= 10000) {
+    builds = [buildings_for_shit[4], buildings_for_shit[2]]
   }
-   else if (10000 <= shitVolume && shitVolume <= 12500) {
-    builds = [buildings_for_shit[4] , buildings_for_shit[3]]
+  else if (10000 <= shitVolume && shitVolume <= 12500) {
+    builds = [buildings_for_shit[4], buildings_for_shit[3]]
   }
-   else if (12500 <= shitVolume && shitVolume <= 250000) {
-    builds = [buildings_for_shit[4] , buildings_for_shit[4]]
+  else if (12500 <= shitVolume && shitVolume <= 250000) {
+    builds = [buildings_for_shit[4], buildings_for_shit[4]]
   }
   return { shitInKg, shitVolume, yearLitter, builds }
 }
@@ -88,20 +88,33 @@ const Build = ({item}) => {
   )
 }
 
-export const BuildingsForShit = ({buildings_for_shit, cow_before_20days, cows, litter_norm, shit_norms, stallPeriod}) => {
+export class BuildingsForShit extends React.Component {
+  //({ buildings_for_shit, cow_before_20days, cows, litter_norm, shit_norms, stallPeriod })
 
-  const {shitInKg, shitVolume, yearLitter, builds} = calculateShit(cows, cow_before_20days, litter_norm, stallPeriod, shit_norms, buildings_for_shit)
-  const buildsRecomended = builds.map(item =>
-    <Build item={item} />
-  )
-  return (
-    <div>
-      <h3>Гній від тварин та рекомендовані будівлі</h3>
-      <h4>Масса гною за стійловий період  : {shitInKg}кілограмів</h4>
-      <h4>Масса підстилки за стійловий період  : {yearLitter}кілограмів </h4>
-      <h4>Об'єм гною  за стійловий період в: {shitVolume.toFixed(2)}метрів кубічнич </h4>
-      <h4>Рекомендована приміщень для зберігання гною </h4>
-      <div>{buildsRecomended}</div>
-    </div>
-  )
+  componentWillMount() {
+    const {buildings_for_shit, cow_before_20days, cows, litter_norm, shit_norms, stallPeriod} = this.props
+    const {shitInKg, shitVolume, yearLitter, builds} = calculateShit(cows, cow_before_20days, litter_norm, stallPeriod, shit_norms, buildings_for_shit)
+    this.setState({shitInKg, shitVolume, yearLitter, builds})
+  }
+  //const {shitInKg, shitVolume, yearLitter, builds} = calculateShit(cows, cow_before_20days, litter_norm, stallPeriod, shit_norms, buildings_for_shit)
+  componentWillUnmount(){
+    const {shitInKg, shitVolume, yearLitter, builds} = this.state
+    this.props.dispatch(addShit(shitInKg, shitVolume, yearLitter))
+  }
+  render() {
+    const {shitInKg, shitVolume, yearLitter, builds} = this.state
+    const buildsRecomended = builds.map(item =>
+      <Build item={item} />
+    )
+    return (
+      <div>
+        <h3>Гній від тварин та рекомендовані будівлі</h3>
+        <h4>Масса гною за стійловий період  : {shitInKg}кілограмів</h4>
+        <h4>Масса підстилки за стійловий період  : {yearLitter}кілограмів </h4>
+        <h4>Об'єм гною  за стійловий період в: {shitVolume.toFixed(2)}метрів кубічнич </h4>
+        <h4>Рекомендована приміщень для зберігання гною </h4>
+        <div>{buildsRecomended}</div>
+      </div>
+    )
+  }
 }

@@ -241,12 +241,10 @@ render() {
           <Button onClick={this.handleCalculateFarm} type='button'
             disabled={(cows && fuelPrice && energyPrice && paymentPrice && type) === null}>Розрахувати
               ферму</Button>
-          <Link to="/stern">
+          <Link to="/shit">
             <Button onClick={this.initData}
               disabled={this.state.alertSuccess !== true}
-              type='button'>Перейти
-                до
-                таблиць</Button>
+              type='button'>Перейти до розрахунків</Button>
           </Link>
         </form>
         {((cows && fuelPrice && energyPrice && paymentPrice && type) !== null) ?
@@ -284,7 +282,8 @@ render() {
           <br>
           </br>
           <div></div>
-          <BuildingsForShit cows={cows}
+          <BuildingsForShit cows={cows}  
+            {...this.props}
             cow_before_20days={cow_before_20days}
             shit_norms={this.props.shit_norms}
             buildings_for_shit={this.props.buildings_for_shit}

@@ -5,12 +5,13 @@ import entries from './entries/'
 import sternStocks from './calculation/stern/'
 import water from './water/'
 import milk from './milking'
-
+import shit from './calculation/shit'
 export default combineReducers({
   tables,
   login,
   entries,
   sternStocks,
   water,
-  milk
+  milk,
+  shit
 })

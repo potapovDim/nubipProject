@@ -11,8 +11,6 @@ const workingPayment = (payment, TO, amortization) =>(payment+ TO +amortization)
 const moneyForOneSqMeter = (workingPayment,volumePerYear) => workingPayment/volumePerYear // експлуатаційні затрати поділено на загальний об'єм для визначення вартості одного куба
 const specificInvestment = (capitalPayment,workingPayment) => workingPayment + capitalPayment*1.15//експлуатаційні затрати + капітало вкладення поділено *0.18
 
-
-
 export const EconomicEffect = ({quantity, machine, volumePerYear,peymantPerOur,persons}) => {
     return  <div>
             <h3>Економічні показники для кормороздавальної машини {machine.brand} в кількості {quantity}</h3>

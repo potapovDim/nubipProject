@@ -12,6 +12,7 @@ import SternMachineChoise from './containers/stern/sternMachineChoise'
 import WaterBuilds from './containers/WaterBuilds'
 import WaterEquipment from './containers/WaterEquipmentForFarm'
 import MilkMade from './containers/Milking'
+import Shit from './containers/Shit'
 
 export default (
   <Router history={browserHistory}>
@@ -25,6 +26,7 @@ export default (
         <Route path="/sternmachine" component={SternMachineChoise} />
         <Route path="/waterbuilds" component={WaterBuilds} />
         <Route path="/waterequip" component={WaterEquipment} />
+        <Route path="/shit" component={Shit} />
         <Route path ="/milk" component={MilkMade} />
       </Route>
     </Route>
