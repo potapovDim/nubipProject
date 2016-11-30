@@ -4,6 +4,8 @@ const calculateShit = (cows, cow_before_20days, litter_norm, stallPeriod, shit_n
   let allShit = (cow_before_20days * shit_norms['cow_before_20days'] + cow_before_20days * litter_norm['cow_before_20days'])
     + (cows * shit_norms['cows'] + cows * litter_norm['cows']) + (100 * shit_norms['calves'] + 100 * litter_norm['calves'])
   let builds = []
+  console.log(cows,shit_norms['cows'],litter_norm['cows'])
+  console.log(cows * shit_norms['cows'] + cows * litter_norm['cows'])
   let litter = (cow_before_20days * litter_norm['cow_before_20days'])
     + (cows * litter_norm['cows']) + (100 * litter_norm['calves'])
   const shitInKg = allShit * (stallPeriod + 0.5 * (365 - stallPeriod))
@@ -93,6 +95,7 @@ export class BuildingsForShit extends React.Component {
 
   componentWillMount() {
     const {buildings_for_shit, cow_before_20days, cows, litter_norm, shit_norms, stallPeriod} = this.props
+    console.log(this.props,'11!!!!!!!!',cows,'<<<<<<')
     const {shitInKg, shitVolume, yearLitter, builds} = calculateShit(cows, cow_before_20days, litter_norm, stallPeriod, shit_norms, buildings_for_shit)
     this.setState({shitInKg, shitVolume, yearLitter, builds})
   }

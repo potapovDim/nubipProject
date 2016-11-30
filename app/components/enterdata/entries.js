@@ -112,7 +112,7 @@ class Entries extends Component {
       _state.pregrant_cows = parseInt(_state.cows * 0.1)
       _state.dry_cows = parseInt(_state.cows * 0.1)
       _state.ill_cows = parseInt(_state.cows * 0.1)
-      _state.cow_before_20days = parseInt(_state.cows * 0.5);
+      _state.cow_before_20days = parseInt(_state.cows * 0.15);
       _state.showFarm = true
       this.setState(_state)
     }
@@ -145,6 +145,7 @@ handleRemoveQuantity = () => {
 render() {
   const {cows, fuelPrice, energyPrice, paymentPrice, pregrant_cows, dry_cows, ill_cows, cow_before_20days, type, season_stall, buildingsADD} = this.state
   const {litter_norm} = this.props
+  console.log(cows,'cows---------------')
   return (
     <div>
       {this.state.alert ?
@@ -282,8 +283,8 @@ render() {
           <br>
           </br>
           <div></div>
-          <BuildingsForShit cows={cows}  
-            {...this.props}
+          <BuildingsForShit cows={cows} 
+            dispatch={this.props.dispatch}
             cow_before_20days={cow_before_20days}
             shit_norms={this.props.shit_norms}
             buildings_for_shit={this.props.buildings_for_shit}

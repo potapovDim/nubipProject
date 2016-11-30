@@ -7,7 +7,8 @@ const yearProgramSternGiven = (productivityPerHour ,TperDay) =>365 * productivit
 const payment = (moneyPerHour,operators) => 365*1.3*1.9*moneyPerHour*operators//заробітня плата
 const amortization = capitalPayment =>capitalPayment*0.142 //відрахування на амортизацію  капіталовкладення 14.2 відсотка від них
 const TO = capitalPayment=> capitalPayment*0.18//відрахування на те і ремонти = 18 відсотків від капіталовкладення
-const fuelPayment = (fuelPerHour = 8,hourQuantity=1.9,machineQuantity,priceForFuel) => fuelPerHour*hourQuantity*machineQuantity*priceForFuel*365//вартість паливо що використовує трактор за рік роботи з кормозмішувачами
+const fuelPayment = (fuelPerHour = 8,hourQuantity=1.9,machineQuantity,priceForFuel) => {console.log(fuelPerHour,hourQuantity,machineQuantity,priceForFuel) 
+    return fuelPerHour*hourQuantity*machineQuantity*priceForFuel*365}//вартість паливо що використовує трактор за рік роботи з кормозмішувачами
 const workingPayment = (payment, TO, amortization, fuelPayment) =>(payment+ TO +amortization+fuelPayment)*1.05//експлуатаційні затрати визначаються по формулі сума тех обслуговування амортизації платні помножити на 1.05
 const moneyForOneSqMeter = (workingPayment,volumePerYear) => workingPayment/volumePerYear // експлуатаційні затрати поділено на загальний об'єм для визначення вартості одного куба
 const specificInvestment = (capitalPayment,workingPayment) => workingPayment + capitalPayment*1.15//експлуатаційні затрати + капітало вкладення поділено *0.18

@@ -69,7 +69,7 @@ class WaterEquipment extends React.Component {
             {(this.state.showPump && !this.state.showDrinkingBow) &&
               <div>
                 <div>
-                  <h3>Насоси ,які задовольняють потреби {this.state.needPerHour} л/год, для вибору насосу натисні на кнопку вибрати насос</h3>
+                  <h3>Насоси ,які задовольняють потреби {this.state.needPerHour.toFixed(2)} л/год, для вибору насосу натисні на кнопку вибрати насос</h3>
                       <ChoosedPump 
                           pumps={{pumps_rotary,pumps_submersible}}
                           height={this.state.heightVs}

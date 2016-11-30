@@ -11,5 +11,5 @@ class Shit extends Component {
 }
 
 export default connect(state=> {
-  return {...state.shit}
+  return {...state.shit,cows:state.entries.cows,cow_before_20days:state.entries.cow_before_20days}
 })(Shit)
