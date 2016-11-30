@@ -7,7 +7,6 @@ export default class SternMachine extends React.Component {
     componentWillMount() {
         const {sternVolume, stallPeriod, machines} = this.props
         const volumeForOneTime = (sternVolume["Об'ем силосу"] + sternVolume["Об'ем солома"] + sternVolume["Об'ем Коренеплоди"]) / (stallPeriod * 3)
-        console.log('!!!!!!!', volumeForOneTime)
         const machineByNorm = volumeForOneTime < 25
             ? machines.filter(machine => {
                 return 1.1 < machine.work_volume / volumeForOneTime && machine.work_volume / volumeForOneTime <= 1.3
@@ -26,7 +25,7 @@ export default class SternMachine extends React.Component {
     }
     render() {
         const {machineByNorm, volumeForOneTime, machine, quantity} = this.state
-        const {sternVolume, stallPeriod, machines ,peymantPerOur} = this.props
+        const {sternVolume, stallPeriod, machines ,peymantPerOur,fuelPrice} = this.props
         const sternVol = sternVolume["Об'ем силосу"] + sternVolume["Об'ем солома"] + sternVolume["Об'ем Коренеплоди"]
         return (
             <div>
@@ -41,6 +40,7 @@ export default class SternMachine extends React.Component {
                         peymantPerOur = {peymantPerOur}
                         persons={quantity}
                         machine={machine}
+                        fuelPrice={fuelPrice}
                         />}
             </div>
         )
