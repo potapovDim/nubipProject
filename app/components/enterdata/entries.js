@@ -33,34 +33,34 @@ class Entries extends Component {
     cow_before_20days: null,
     season_stall: null,
     buildingsADD: false,
-    farm_direction:null
+    farm_direction: null
   }
 
 
   changeBuildingsStructure = (data) => {
     const buildings = [
-      {top: 10, left: 50, name: 'Насосна станція',heads:0,water_one_head:0},
-      {top: 80, left: 50, name: 'Водонапірна башта', heads:0,water_one_head:0 },
-      {top: 80, left: 50, name: 'Кормоцехч ', heads:1000, water_one_head:1 }]
-      data.cows.forEach(build=>{
-        buildings.push(build)
-      })
-      data.cows_before_20days.forEach(build=>{
-        buildings.push(build)
-      })
-      data.calves.forEach(build=>{
-        buildings.push(build)
-      })
-    let hashBuldings  = {}
-    buildings.forEach((build,index)=> {
+      { top: 10, left: 50, name: 'Насосна станція', heads: 0, water_one_head: 0 },
+      { top: 80, left: 50, name: 'Водонапірна башта', heads: 0, water_one_head: 0 },
+      { top: 80, left: 50, name: 'Кормоцехч ', heads: 1000, water_one_head: 1 }]
+    data.cows.forEach(build => {
+      buildings.push(build)
+    })
+    data.cows_before_20days.forEach(build => {
+      buildings.push(build)
+    })
+    data.calves.forEach(build => {
+      buildings.push(build)
+    })
+    let hashBuldings = {}
+    buildings.forEach((build, index) => {
       hashBuldings[index] = build
-    }) 
+    })
     return hashBuldings
   }
 
 
   addBuildings = (data) => {
-    this.setState({buildingsForFarm: this.changeBuildingsStructure(data), buildingsADD: true })
+    this.setState({ buildingsForFarm: this.changeBuildingsStructure(data), buildingsADD: true })
   }
   moneyRegEx = /(^[0-9]{1,2})$|(^[0-9]{1,2})([.]{1,1})([0-9]{0,2}$)/
   cowsRegEx = /^[0-9]{2,4}$/
@@ -101,22 +101,51 @@ class Entries extends Component {
 
   handleCalculateFarm = () => {
     let _state = {...this.state }
-    if (_state.cows === 0) {
-      this.setState({
-        alert: true,
-        message: 'Ви не заповнили основні поля , для вводу скористайтесь підказкою (Інформація полів вводу данних)',
-        showFarm: false
-      })
-    }
-    else {
-      _state.pregrant_cows = parseInt(_state.cows * 0.1)
-      _state.dry_cows = parseInt(_state.cows * 0.1)
-      _state.ill_cows = parseInt(_state.cows * 0.1)
-      _state.cow_before_20days = parseInt(_state.cows * 0.15);
-      _state.showFarm = true
-      this.setState(_state)
+    if (_state.cows !== 0) {
+      console.log('212313131312312312', this.state.farm_direction)
+      switch (this.state.farm_direction) {
+        case '1': {
+          console.log('123132131231321313132----------------')
+          _state.pregrant_cows = parseInt(_state.cows * 0.1)
+          _state.dry_cows = parseInt(_state.cows * 0.1)
+          _state.ill_cows = parseInt(_state.cows * 0.1)
+          _state.cow_before_20days = parseInt(_state.cows * 0.40);
+          _state.showFarm = true
+          this.setState(_state)
+          return 
+        }
+        case '2': {
+          _state.pregrant_cows = parseInt(_state.cows * 0.1)
+          _state.dry_cows = parseInt(_state.cows * 0.1)
+          _state.ill_cows = parseInt(_state.cows * 0.1)
+          _state.cow_before_20days = parseInt(_state.cows * 0.2);
+          _state.calves = parseInt(_state.cows * 0.35)
+          _state.showFarm = true
+          this.setState(_state)
+          return 
+        }
+        case '3': {
+          _state.pregrant_cows = parseInt(_state.cows * 0.1)
+          _state.dry_cows = parseInt(_state.cows * 0.1)
+          _state.ill_cows = parseInt(_state.cows * 0.1)
+          _state.cow_before_20days = parseInt(_state.cows * 0.2);
+          _state.calves = parseInt(_state.cows * 0.5)
+          _state.showFarm = true
+          this.setState(_state)
+          return 
+        }
+      }
     }
   }
+
+
+  // _state.pregrant_cows = parseInt(_state.cows * 0.1)
+  // _state.dry_cows = parseInt(_state.cows * 0.1)
+  // _state.ill_cows = parseInt(_state.cows * 0.1)
+  // _state.cow_before_20days = parseInt(_state.cows * 0.15);
+  // _state.showFarm = true
+  // this.setState(_state)
+
 
   handleAddQuantity = () => {
     if ((this.cowsRegEx.test(this.state.cows) && this.moneyRegEx.test(this.state.energyPrice) && this.moneyRegEx.test(
@@ -128,24 +157,28 @@ class Entries extends Component {
       }))
     this.setState({ alertSuccess: true })
   }
-  else
-      this.setState({
+  else {
+  this.setState({
     alert: true,
     message: 'Ви намагаєтесь додати пусте поле, введіть будь-ласка валідні дані, для підказки скористайтесть інформацією'
-    })
+  })
+}
   }
 
-chooseWayMaintenance = type => {
+chooseWayMaintenance = type =>
   this.state.type === type ? this.setState({ type: null }) : this.setState({ type })
-}
+
+
+farmDirection = farm_direction =>
+  this.state.farm_direction === farm_direction ? this.setState({ farm_direction: null }) : this.setState({ farm_direction })
 
 handleRemoveQuantity = () => {
   this.props.resetAll();
 };
 render() {
-  const {cows, fuelPrice, energyPrice, paymentPrice, pregrant_cows, dry_cows, ill_cows, cow_before_20days, type, season_stall, buildingsADD} = this.state
+  const {cows, fuelPrice, energyPrice, paymentPrice, pregrant_cows, dry_cows, ill_cows, cow_before_20days, type, season_stall, buildingsADD, calves} = this.state
   const {litter_norm} = this.props
-  console.log(cows,'cows---------------')
+  console.log(this.state)
   return (
     <div>
       {this.state.alert ?
@@ -220,24 +253,24 @@ render() {
             </InputGroup>
           </FormGroup>
           <div>
-              <h3>Вибір напрямку ферми </h3>
-              <Checkbox inline onChange={() => this.chooseWayMaintenance('attachable')}
+            <h3>Вибір напрямку ферми </h3>
+            <Checkbox inline onChange={() => this.farmDirection("1")}
+              disabled={this.state.farm_direction !== null}>
+              Молочний з утримання телят до 20 днів
+                </Checkbox>
+            <div>
+              <Checkbox inline onChange={() => this.farmDirection("2")}
                 disabled={this.state.farm_direction !== null}>
-                Молочний з утримання телят до 20 днів
+                Молочний з утримання телят до 6 місяців
                 </Checkbox>
-                <div>
-              <Checkbox inline onChange={() => this.chooseWayMaintenance('without_attachable')}
+            </div>
+            <div>
+              <Checkbox inline onChange={() => this.farmDirection("3")}
                 disabled={this.state.farm_direction !== null}>
-                 Молочний з утримання телят до 6 місяців
+                Молочний-м'ясний з закінченим оборотом
                 </Checkbox>
-                </div>
-                <div>
-                <Checkbox inline onChange={() => this.chooseWayMaintenance('without_attachable')}
-                disabled={this.state.tyfarm_directionpe !== null}>
-                 Молочний-м'ясний з закінченим оборотом
-                </Checkbox>
-                </div>
-        </div>
+            </div>
+          </div>
           <LoadingButton action={this.handleAddQuantity} />
           <Button onClick={this.handleCalculateFarm} type='button'
             disabled={(cows && fuelPrice && energyPrice && paymentPrice && type) === null}>Розрахувати
@@ -252,7 +285,7 @@ render() {
           <div className="output-data flash">
             <h4>Данні які будуть внесені для розрахунку</h4>
             <p>Стійловий період : {season_stall}</p>
-            <p>Загальна кількість корів : {cows}</p>
+            <p>Кількість дійних корів : {cows}</p>
             <p>Ціна за пальне : {fuelPrice}грн/л</p>
             <p>Ціна за електроенергію : {energyPrice}грн/кВт</p>
             <p>Заробітня плата : {paymentPrice}грн/год</p>
@@ -264,7 +297,8 @@ render() {
             <p>Кількість корів родильного відділення : {pregrant_cows}голів</p>
             <p>Кількість сухостійних корів : {dry_cows}голів</p>
             <p>Кількість хворих корів : {ill_cows}голів</p>
-            <p>Кількість телят : {cow_before_20days}голів</p>
+            <p>Кількість телят до 20 днів: {cow_before_20days}голів</p>
+            <p>Кількість телят: {calves}голів</p>
             <p>Спосіб утримання тварин : {type === 'attachable' ? "прив'зний" : "безприв'язний"}</p>
           </div> : null}
       </div>
@@ -273,6 +307,7 @@ render() {
           <BuildingsForFarm
             addBuildings={this.addBuildings}
             cows={cows}
+            calves={calves}
             buildingsADD={buildingsADD}
             cow_before_20days={cow_before_20days}
             building_for_calves={this.props.building_for_calves}
@@ -283,7 +318,7 @@ render() {
           <br>
           </br>
           <div></div>
-          <BuildingsForShit cows={cows} 
+          <BuildingsForShit cows={cows}
             dispatch={this.props.dispatch}
             cow_before_20days={cow_before_20days}
             shit_norms={this.props.shit_norms}
@@ -293,7 +328,7 @@ render() {
         </div>}
     </div>
   );
- }
+}
 }
 
 export default Entries

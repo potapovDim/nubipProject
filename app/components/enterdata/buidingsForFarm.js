@@ -27,7 +27,7 @@ const Build = ({name, type, heads, L, W, stern_given}) => {
 }
 
 
-export const BuildingsForFarm = ({addBuildings, cows, cow_before_20days, building_for_calves, buildings_for_calves_before_20days, buildings_for_cows, type, buildingsADD}) => {
+export const BuildingsForFarm = ({addBuildings, cows, cow_before_20days, building_for_calves, buildings_for_calves_before_20days, buildings_for_cows, type, buildingsADD,calves}) => {
   const buildings = {}
   const recomentBuildForCows = () => {
     let value
@@ -163,30 +163,34 @@ export const BuildingsForFarm = ({addBuildings, cows, cow_before_20days, buildin
   }
   const BuildingsForCalves = () => {
     let value
-    if (cow_before_20days < 100) {
+    if(calves === undefined){
+       buildings['calves']=[]
+      value = false
+    }
+    else if (calves < 100) {
       buildings['calves'] = [{...building_for_calves[1]}]
       value = <Build {...building_for_calves[1]} />
     }
-    else if ((100 < cow_before_20days ) && (cow_before_20days < 200)) {
+    else if ((100 < calves ) && (calves < 200)) {
       buildings['calves'] = [{...building_for_calves[1]}]
       value = <div>
         <Build {...building_for_calves[1]} />
       </div>
     }
-    else if ((200 < cow_before_20days ) && (cow_before_20days <= 300)) {
+    else if ((200 < calves ) && (calves <= 300)) {
       buildings['calves'] = [{...building_for_calves[0]}]
       value = <div>
         <Build {...building_for_calves[0]} />
       </div>
     }
-    else if ((300 < cow_before_20days ) && (cow_before_20days <= 400)) {
+    else if ((300 < calves ) && (calves <= 400)) {
       buildings['calves'] = [{...building_for_calves[1]}, {...building_for_calves[2]}]
       value = <div>
         <Build {...building_for_calves[1]} />
         <Build {...building_for_calves[2]} />
       </div>
     }
-    else if ((400 < cow_before_20days) && ( cow_before_20days <= 800)) {
+    else if ((400 < calves) && ( calves <= 800)) {
       buildings['calves'] = [{...building_for_calves[0]}, {...building_for_calves[2]}]
       value = <div>
         <Build {...building_for_calves[2]} />
@@ -207,8 +211,10 @@ export const BuildingsForFarm = ({addBuildings, cows, cow_before_20days, buildin
       {recomentBuildForCows()}
       <h3>Рекомендована приміщень для телят до 20 днів :</h3>
       {buildingsForCowBefore20Days()}
-      <h3>Рекомендована приміщень для молодняку :</h3>
+      {BuildingsForCalves() && <div><h3>Рекомендована приміщень для молодняку :</h3>
       {BuildingsForCalves()}
+      </div>
+    }
     </div>
   )
 }
