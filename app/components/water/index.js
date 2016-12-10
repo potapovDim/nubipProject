@@ -33,7 +33,6 @@ class WaterBuilds extends React.Component {
   render() {
     const {buildingsForFarm, cow_before_20days, cows} = this.props.entries
     const {water} = this.state
-    console.log('builds --------------------------',buildingsForFarm)
     return (<div>
       <InformationButton name={'Інформація полів вводу данних'}>
         <BuildingsTutorial/>

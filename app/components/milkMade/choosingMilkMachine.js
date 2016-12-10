@@ -79,7 +79,6 @@ const ParlorMachine = ({cows, machines, chooceMachine}) => {
             <td style={{ width: '8%' }} className="active"> {item.vacuum_system_aggregate}</td>
             <td style={{ width: '8%' }} className="active"> {item.aggregate_power}</td>
             <td style={{ width: '8%' }} className="active"> {item.weight}</td>
-            <td style={{ width: '8%' }} className="active"> {item.price}</td>
             <td><button onClick={() => chooceMachine(quantityMachine(cows, item.productivity_per_hour), item)} className="btn btn-default">Вибрати машину в кількості {quantityMachine(cows, item.productivity_per_hour)}</button></td>
         </tr>)
     })
@@ -100,7 +99,6 @@ const ParlorMachine = ({cows, machines, chooceMachine}) => {
                     <td className="width-bl">Вакуум-силовий агрегат УВУ-60/45 ,шт</td>
                     <td className="width-bl">Потужність агрегату ,кВт</td>
                     <td className="width-bl">Маса</td>
-                    <td className="width-bl">Ціна</td>
                 </tr>
             </thead>
             <tbody>{table}</tbody>

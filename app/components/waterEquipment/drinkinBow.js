@@ -10,7 +10,6 @@ const DrinkingBowBuild = (table) => {
                 <td style={{width:'10%'}} >Кількість місць напування</td>
                 <td style={{width:'10%'}} >Кількість голів ,що обслуговує</td>
                 <td style={{width:'10%'}} >Маса ,кг</td>
-                <td style={{width:'10%'}} >Ціна </td>
             </tr>
             </thead>
             <tbody>
@@ -71,7 +70,6 @@ const ReturnDrinkingBow = (type,choosDrinkinBow,bow,quantity) => {
           <td style={{width:'10%'}} className="active"> {bow.seats}</td>
           <td style={{width:'10%'}} className="active"> {bow.heads}</td>
           <td style={{width:'10%'}} className="active"> {bow.weight}</td>
-          <td style={{width:'10%'}} className="active"> {bow.price}</td>
           <td style={{width:'40%'}}><button onClick={()=>choosDrinkinBow(type,quantity,bow)}>Вибрати данний вид автонапувалки {quantity} шт</button></td>
         </tr>
      )
