@@ -1,26 +1,26 @@
 import React from 'react'
 import classNames from 'classnames'
 
-const Build = ({name, type, heads, L, W, stern_given}) => {
+const Build = ({kind_of_building, volume, B, L, H, lost_stern }) => {
     return (
         <div className="flex-wrap">
             <div style={{ width: '17%' }}>
-                Споруда : {name}
+                Споруда : {kind_of_building}
             </div>
             <div style={{ width: '17%' }} >
-                Тип утримання тварин : {type}
+                Об'єм корму що зберігається  : {volume} метрів кубічних
             </div>
             <div style={{ width: '17%' }} >
-                Кількість голів : {heads}
+                Висота : {B} m
             </div>
             <div style={{ width: '17%' }} >
-                Довжина : {L}
+                Довжина : {L} m
             </div >
             <div style={{ width: '17%' }}>
-                Ширина : {W}
+                Ширина : {W} m
             </div>
             <div style={{ width: '17%' }}>
-                Роздавання корму : {stern_given}
+                Втрата корму : {stern_given} %
             </div>
         </div>
     )

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router'
+import { Link } from 'react-router'
 import _ from 'lodash'
 
 class SternPerDay extends React.Component {
@@ -15,43 +15,46 @@ class SternPerDay extends React.Component {
   //   })
   //   this.setState({oneCycleStern})
   // }
-
+  state = { showSternCookBuild: false }
+  showSternCookingInBuilding = () => {
+    this.setState({ showSternCookBuild: !this.state.showSternCookBuild })
+  }
   render() {
     const {
-      params:{typeFeeding, getMilkPerYear, allStern},
-      entries:{cow_before_20days, cows, season_stall},
+      params: {typeFeeding, getMilkPerYear, allStern},
+      entries: {cow_before_20days, cows, season_stall},
       sternNormCows,
       sternNormCalves
     } = this.props
     const tableCows = sternNormCows.map((value) =>
       (<div className="flex-wrap">
         <div>{value.view_feed}</div>
-        <div>{value[getMilkPerYear]} кг</div>
+        <div>{value[getMilkPerYear]}кг</div>
       </div>)
     )
     const tableCalses = sternNormCalves.map((value) =>
       (<div className="flex-wrap">
         <div>{value.view_feed}</div>
-        <div>{value[typeFeeding]} кг</div>
+        <div>{value[typeFeeding]}кг</div>
       </div>)
     )
 
     const tableCowsSternPerDay = sternNormCows.map((value) =>
       (<div className="flex-wrap">
         <div>{value.view_feed}</div>
-        <div>{value[getMilkPerYear] * cows} кг</div>
+        <div>{value[getMilkPerYear] * cows}кг</div>
       </div>)
     )
     const tableCalsesSternPerDay = sternNormCalves.map((value) =>
       (<div className="flex-wrap">
         <div>{value.view_feed}</div>
-        <div>{value[typeFeeding] * cow_before_20days} кг</div>
+        <div>{value[typeFeeding] * cow_before_20days}кг</div>
       </div>)
     )
-    const sternPerDayAndPedOneGo = Object.keys(allStern).map(value=>{
+    const sternPerDayAndPedOneGo = Object.keys(allStern).map(value => {
       return (<div className="flex-wrap">
         <div>{value}</div>
-        <div>{(allStern[value] / season_stall / 3).toFixed(2)} кг</div>
+        <div>{(allStern[value] / season_stall / 3).toFixed(2)}кг</div>
       </div>)
     })
     return (
@@ -84,6 +87,9 @@ class SternPerDay extends React.Component {
             {sternPerDayAndPedOneGo}
           </div>
         </div>
+        {this.state.showSternCookBuild && <div>
+          <SternCookBuild allStern = {allStern}/>
+          </div>}
         <Link to="sternmachine">
           <button>Перейти до вибору машини</button>
         </Link>
