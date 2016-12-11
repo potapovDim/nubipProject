@@ -30,6 +30,9 @@ export class EconomicEffect extends React.Component {
     componentWillReceiveProps(nextProps) {
         this.props.machine.brand !== nextProps.machine.brand ?
             this.setState({
+                machineBasic: this.props.machine,
+                quantityBasic: this.props.quantity,
+                basicMachinEconomic: this.calculateMachineEconomic(this.props),
                 newMachineEconomic: this.calculateMachineEconomic(nextProps),
                 newMachine: nextProps.machine,
                 newQuantity: nextProps.quantity,
@@ -86,8 +89,8 @@ export class EconomicEffect extends React.Component {
                         quantity={this.state.newQuantity}
                         machine={this.state.newMachine}
                         basicMachinEconomic={this.state.newMachineEconomic} />
-                    <h3>Різниця економічних показників між {machineBasic.brand} в кількості {quantityBasic}та {this.state.newMachine.brand}в кількості {this.state.newQuantity}</h3>
-                    <EconomicTable basicMachinEconomic = {this.state.differenceMachineEconomic}/>
+                    <h3>Різниця економічних показників між {machineBasic.brand}в кількості {quantityBasic}та {this.state.newMachine.brand}в кількості {this.state.newQuantity}</h3>
+                    <EconomicTable basicMachinEconomic={this.state.differenceMachineEconomic} />
                 </div>
             }
         </div>)
