@@ -4,5 +4,4 @@ const productivityEveryLine = (mass , time = 2) => mass / time  //продукт
 
 const SternCookBuild = ({allStern}) => {
     const oneCycleStern = _.mapValues(allStern , (value) => value/ season_stall / 3)
-
 }
