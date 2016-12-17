@@ -85,6 +85,22 @@ export const BuildingsForFarm = ({addBuildings, cows, cow_before_20days, buildin
           <Build {...buildings_for_cows[0]} />
         </div>
       }
+      else if ((800 < cows) && (cows <= 900)) {
+        buildings['cows'] = [{...buildings_for_cows[0]}, {...buildings_for_cows[0]}, {...buildings_for_cows[1]}]
+        value = <div>
+          <Build {...buildings_for_cows[0]} />
+          <Build {...buildings_for_cows[0]} />
+          <Build {...buildings_for_cows[1]} />
+        </div>
+      }
+      else if ((900 < cows) && (cows <= 1200)) {
+        buildings['cows'] = [{...buildings_for_cows[0]}, {...buildings_for_cows[0]} ,{...buildings_for_cows[0]}]
+        value = <div>
+          <Build {...buildings_for_cows[0]} />
+          <Build {...buildings_for_cows[0]} />
+          <Build {...buildings_for_cows[0]} />
+        </div>
+      }
     }
     else {
       buildings['cows'] = {build: {...buildings_for_cows[1]}, quantity: Math.ceil(cows / 200)}

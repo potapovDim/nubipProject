@@ -89,7 +89,7 @@ export class EconomicEffect extends React.Component {
                         quantity={this.state.newQuantity}
                         machine={this.state.newMachine}
                         basicMachinEconomic={this.state.newMachineEconomic} />
-                    <h3>Різниця економічних показників між {machineBasic.brand}в кількості {quantityBasic}та {this.state.newMachine.brand}в кількості {this.state.newQuantity}</h3>
+                    <h3>Різниця економічних показників між {machineBasic.brand} в кількості {quantityBasic} та {this.state.newMachine.brand} в кількості {this.state.newQuantity}</h3>
                     <EconomicTable basicMachinEconomic={this.state.differenceMachineEconomic} />
                 </div>
             }

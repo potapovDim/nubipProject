@@ -22,14 +22,13 @@ export default class SternMachine extends React.Component {
         const {sternVolume, stallPeriod, machines} = this.props
         const volumeForOneTime = sternGivenType === 'fullvolume' ?
             (sternVolume["Об'ем силосу"] + sternVolume["Об'ем солома"] + sternVolume["Об'ем Коренеплоди"]) / (stallPeriod * 3) :
-            ((sternVolume["Об'ем силосу"] + sternVolume["Об'ем солома"] + sternVolume["Об'ем Коренеплоди"])) * 0.45 / (stallPeriod * 3)
-
+            ((sternVolume["Об'ем силосу"] + sternVolume["Об'ем солома"] + sternVolume["Об'ем Коренеплоди"])) * 0.3 / (stallPeriod * 3)
         const machineByNorm = volumeForOneTime < 25
             ? machines.filter(machine => {
                 return 1.1 < machine.work_volume / volumeForOneTime && machine.work_volume / volumeForOneTime <= 1.3
             })
             : machines.filter(machine => {
-                console.log()
+                console.log(machine)
                 return Math.ceil(volumeForOneTime / machine.work_volume) >=2 || Math.ceil(volumeForOneTime / machine.work_volume) <= 8
             })
         this.setState({ machineByNorm, volumeForOneTime, sternGivenType })
