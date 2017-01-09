@@ -17,7 +17,7 @@ import Shit from './containers/Shit'
 export default (
   <Router history={browserHistory}>
     <Route component={Root}>
-      <Route path="/" component={Main}>
+      <Route path="/main" component={Main}>
         <IndexRoute component={Log} />
         <Route path="/entries" component={EntryData} />
         <Route path="/tables" component={Table} />
