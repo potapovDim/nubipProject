@@ -5,7 +5,10 @@ module.exports = {
   cache: true,
   devtool: 'source-map',
   entry: {
-    mainReact:'./appReactPart/main.js'
+    mainReact:'./appReactPart/main.js',
+    mainNg2: './appNg2Part/main.ts',
+    vendor: './appNg2Part/vendor.ts',
+    polyfills: './appNg2Part/polyfills.ts',
   },
   output: {
     path: path.join(__dirname,''),
