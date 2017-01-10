@@ -1,14 +1,25 @@
+const path = require('path')
+const webpack = require('webpack')
+
 module.exports = {
-  entry: './main.js',
+  cache: true,
+  devtool: 'source-map',
+  entry: {
+    mainReact:'./appReactPart/main.js'
+  },
   output: {
-    path: './',
-    filename: "index.js"
+    path: path.join(__dirname,''),
+    filename: '[name].bundle.js',
+    sourceMapFilename: '[name].map',
+    chunkFilename: '[id].chunk.js',
   },
   devServer: {
     port: 3333,
     historyApiFallback: true
   },
-
+  resolve: {
+    extensions: ['', '.js', '.ts', '.json']
+  },
   module: {
     loaders: [
       {
@@ -19,7 +30,10 @@ module.exports = {
           presets: ['react', 'es2015', 'stage-0'],
           plugins: ['babel-plugin-transform-decorators-legacy']
         }
-      }
+      },
+      {test: /\.ts$/, loader: 'awesome-typescript-loader'},
+      {test: /\.json$/, loader: 'json-loader'},
+      {test: /\.html$/, loader: 'raw-loader'}
     ]
   }
 }
