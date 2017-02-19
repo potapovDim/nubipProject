@@ -16,6 +16,8 @@ import { BuildingsForFarm } from './buidingsForFarm'
 import { BuildingsForShit } from './shitAndBuildingsForShit'
 import _ from 'lodash'
 
+
+
 class Entries extends Component {
   state = {
     alert: false,

@@ -38,7 +38,7 @@ class Main extends Component {
               <Nav>
                 <NavItem eventKey={2}
                          onClick={() => this.setState({ show: true})}
-                >Підказка по користуванню</NavItem>
+                >Інформація кафедри</NavItem>
                 {tutorial}
                 <NavDropdown eventKey={3} title='НАВІГАЦІЯ ПО ПРОЕКТУ' id="basic-nav-dropdown">
                   <MenuItem eventKey={3.1}><Link to="/waterbuilds">ВОДОПОСТАЧАННЯ</Link></MenuItem>
@@ -60,7 +60,7 @@ class Main extends Component {
         </div>
 
         <footer style={{clear:'both'}} className="text-center">
-          <h1>Потапов Дмитро</h1>
+          <h1>НУБІП Кафедра "Механізації тваринництва"</h1>
           <h2>Моделювання технологічних процесів для МТФ з долслідженням операції приготування кормів</h2>
         </footer>
       </div>
